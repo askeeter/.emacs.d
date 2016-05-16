@@ -1,0 +1,53 @@
+;; Object CC_T_CT_T/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "CC_T_CT_T/"
+  :tables
+  (list
+    (semanticdb-table "Control_Data13TeV_Im_TOFSpectrum.C"
+      :major-mode 'c++-mode
+      :tags 
+        '( ("Control_Data13TeV_Im_TOFSpectrum" function (:type "void") nil [1 15606]))          
+      :file "Control_Data13TeV_Im_TOFSpectrum.C"
+      :pointmax 15607
+      :fsize 15491
+      :lastmodtime '(22283 2163 897934 821000)
+      :unmatched-syntax nil)
+    (semanticdb-table "Control_Data13TeV_Is_TOFSpectrum.C"
+      :major-mode 'c++-mode
+      :tags 
+        '( ("Control_Data13TeV_Is_TOFSpectrum" function (:type "void") nil [1 20291]))          
+      :file "Control_Data13TeV_Is_TOFSpectrum.C"
+      :pointmax 20292
+      :fsize 20158
+      :lastmodtime '(22283 2164 565827 453000)
+      :unmatched-syntax nil)
+    (semanticdb-table "Prediction_Data13TeV_NPredVsNObs.C"
+      :major-mode 'c++-mode
+      :tags 
+        '( ("Prediction_Data13TeV_NPredVsNObs" function (:type "void") nil [1 12885]))          
+      :file "Prediction_Data13TeV_NPredVsNObs.C"
+      :pointmax 12886
+      :fsize 12826
+      :lastmodtime '(22283 2245 481459 41000)
+      :unmatched-syntax nil)
+    (semanticdb-table "HQExclusionLog.C"
+      :major-mode 'c++-mode
+      :tags 
+        '( ("HQExclusionLog" function (:type "void") nil [1 23013]))          
+      :file "HQExclusionLog.C"
+      :pointmax 23014
+      :fsize 23013
+      :lastmodtime '(22283 2225 894964 669000)
+      :unmatched-syntax nil)
+    (semanticdb-table "CutFlowPlot_Eff_41.C"
+      :major-mode 'c++-mode
+      :tags 
+        '( ("CutFlowPlot_Eff_41" function (:type "void") nil [1 23168]))          
+      :file "CutFlowPlot_Eff_41.C"
+      :pointmax 23169
+      :fsize 23168
+      :lastmodtime '(22283 3384 371152 941000)
+      :unmatched-syntax nil))
+  :file "!home!austin!Dropbox!Research!Adams_LabBook!Figs!Type4!CC_T_CT_T!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

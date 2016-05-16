@@ -1,0 +1,16 @@
+;; Object Downloads/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "Downloads/"
+  :tables
+  (list
+    (semanticdb-table "stackTest.C"
+      :major-mode 'c++-mode
+      :tags nil
+      :file "stackTest.C"
+      :pointmax 3036
+      :fsize 3035
+      :lastmodtime '(22267 53781 393770 175000)
+      :unmatched-syntax '((semantic-list 1 . 3035))))
+  :file "!home!austin!Downloads!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

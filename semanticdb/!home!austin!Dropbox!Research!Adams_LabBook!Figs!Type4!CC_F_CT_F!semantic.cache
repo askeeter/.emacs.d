@@ -1,0 +1,53 @@
+;; Object CC_F_CT_F/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "CC_F_CT_F/"
+  :tables
+  (list
+    (semanticdb-table "Control_Data13TeV_Im_TOFSpectrum.C"
+      :major-mode 'c++-mode
+      :tags 
+        '( ("Control_Data13TeV_Im_TOFSpectrum" function (:type "void") nil [1 13924]))          
+      :file "Control_Data13TeV_Im_TOFSpectrum.C"
+      :pointmax 13925
+      :fsize 13810
+      :lastmodtime '(22283 2387 9094 201000)
+      :unmatched-syntax nil)
+    (semanticdb-table "Control_Data13TeV_Is_TOFSpectrum.C"
+      :major-mode 'c++-mode
+      :tags 
+        '( ("Control_Data13TeV_Is_TOFSpectrum" function (:type "void") nil [1 18504]))          
+      :file "Control_Data13TeV_Is_TOFSpectrum.C"
+      :pointmax 18505
+      :fsize 18371
+      :lastmodtime '(22283 2388 77233 931000)
+      :unmatched-syntax nil)
+    (semanticdb-table "Prediction_Data13TeV_NPredVsNObs.C"
+      :major-mode 'c++-mode
+      :tags 
+        '( ("Prediction_Data13TeV_NPredVsNObs" function (:type "void") nil [1 12587]))          
+      :file "Prediction_Data13TeV_NPredVsNObs.C"
+      :pointmax 12588
+      :fsize 12528
+      :lastmodtime '(22283 2417 821826 972000)
+      :unmatched-syntax nil)
+    (semanticdb-table "HQExclusionLog.C"
+      :major-mode 'c++-mode
+      :tags 
+        '( ("HQExclusionLog" function (:type "void") nil [1 23016]))          
+      :file "HQExclusionLog.C"
+      :pointmax 23017
+      :fsize 23016
+      :lastmodtime '(22283 2399 214787 367000)
+      :unmatched-syntax nil)
+    (semanticdb-table "CutFlowPlot_Eff_41.C"
+      :major-mode 'c++-mode
+      :tags 
+        '( ("CutFlowPlot_Eff_41" function (:type "void") nil [1 23164]))          
+      :file "CutFlowPlot_Eff_41.C"
+      :pointmax 23165
+      :fsize 23164
+      :lastmodtime '(22283 3385 419165 44000)
+      :unmatched-syntax nil))
+  :file "!home!austin!Dropbox!Research!Adams_LabBook!Figs!Type4!CC_F_CT_F!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

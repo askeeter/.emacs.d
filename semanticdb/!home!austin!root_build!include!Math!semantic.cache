@@ -1,0 +1,402 @@
+;; Object Math/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "Math/"
+  :tables
+  (list
+    (semanticdb-table "ParamFunctor.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("ROOT_Math_ParamFunctor" variable (:constant-flag t) nil [626 648])
+            ("vector" include (:system-flag t) nil [840 857])
+            ("iostream" include (:system-flag t) nil [858 877])
+            ("ROOT" type
+               (:members 
+                  ( ("Math" type
+                       (:members 
+                          ( ("ParamFunctionBase" type
+                               (:members 
+                                  ( ("public" label nil (reparse-symbol classsubparts) [1048 1055])
+                                    ("ParamFunctionBase" function
+                                       (:destructor-flag t
+                                        :typemodifiers ("virtual")
+                                        :type "void")
+                                        (reparse-symbol classsubparts) [1059 1090])
+                                    ("()" function
+                                       (:pure-virtual-flag t
+                                        :prototype-flag t
+                                        :operator-flag t
+                                        :typemodifiers ("virtual")
+                                        :arguments 
+                                          ( ("x" variable
+                                               (:pointer 1
+                                                :type "double")
+                                                (reparse-symbol arg-sub-list) [1199 1210])
+                                            ("p" variable
+                                               (:pointer 1
+                                                :type "double")
+                                                (reparse-symbol arg-sub-list) [1211 1221]))                                          
+                                        :type "double")
+                                        (reparse-symbol classsubparts) [1172 1226])
+                                    ("Clone" function
+                                       (:pure-virtual-flag t
+                                        :prototype-flag t
+                                        :pointer 1
+                                        :typemodifiers ("virtual")
+                                        :type ("ParamFunctionBase" type (:type "class") nil nil))
+                                        (reparse-symbol classsubparts) [1230 1276]))                                  
+                                :type "class")
+                                (reparse-symbol namespacesubparts) [1020 1279])
+                            ("ParamFunctorHandler" type
+                               (:template 
+                                  ( ("ParentFunctor" type (:type "class") nil nil)
+                                    ("Func" type (:type "class") nil nil))                                  
+                                :type "class"
+                                :members 
+                                  ( ("Base" type
+                                       (:typedef ("ParentFunctor::Impl" type (:type "class") nil nil)
+                                        :type "typedef")
+                                        (reparse-symbol classsubparts) [1669 1711])
+                                    ("public" label nil (reparse-symbol classsubparts) [1713 1720])
+                                    ("ParamFunctorHandler" function
+                                       (:constructor-flag t
+                                        :arguments 
+                                          ( ("fun" variable
+                                               (:reference 1
+                                                :constant-flag t
+                                                :type ("Func" type (:type "class") nil nil))
+                                                (reparse-symbol arg-sub-list) [1763 1780]))                                          
+                                        :type ("ParamFunctorHandler" type (:type "class") nil nil))
+                                        (reparse-symbol classsubparts) [1743 1796])
+                                    ("ParamFunctorHandler" function
+                                       (:destructor-flag t
+                                        :typemodifiers ("virtual")
+                                        :type "void")
+                                        (reparse-symbol classsubparts) [1802 1835])
+                                    ("()" function
+                                       (:operator-flag t
+                                        :typemodifiers ("inline")
+                                        :arguments 
+                                          ( ("x" variable (:type "double") (reparse-symbol arg-sub-list) [1890 1899])
+                                            ("p" variable
+                                               (:pointer 1
+                                                :type "double")
+                                                (reparse-symbol arg-sub-list) [1900 1910]))                                          
+                                        :type "double")
+                                        (reparse-symbol classsubparts) [1864 1943])
+                                    ("()" function
+                                       (:operator-flag t
+                                        :typemodifiers ("inline")
+                                        :arguments 
+                                          ( ("x" variable
+                                               (:pointer 1
+                                                :type "double")
+                                                (reparse-symbol arg-sub-list) [2225 2236])
+                                            ("p" variable
+                                               (:pointer 1
+                                                :type "double")
+                                                (reparse-symbol arg-sub-list) [2237 2247]))                                          
+                                        :type "double")
+                                        (reparse-symbol classsubparts) [2199 2306])
+                                    ("Clone" function
+                                       (:pointer 1
+                                        :type ("ParamFunctorHandler" type (:type "class") nil nil))
+                                        (reparse-symbol classsubparts) [2342 2430])
+                                    ("private" label nil (reparse-symbol classsubparts) [2433 2442])
+                                    ("fFunc" variable (:type ("Func" type (:type "class") nil nil)) (reparse-symbol classsubparts) [2447 2458])
+                                    ("FuncEvaluator" type
+                                       (:template 
+                                          ( ("F" type (:type "class") nil nil))                                          
+                                        :type "struct"
+                                        :members 
+                                          ( ("Eval" function
+                                               (:typemodifiers ("inline" "static")
+                                                :arguments 
+                                                  ( ("f" variable
+                                                       (:reference 1
+                                                        :type ("F" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [2586 2592])
+                                                    ("x" variable
+                                                       (:pointer 1
+                                                        :type "double")
+                                                        (reparse-symbol arg-sub-list) [2593 2603])
+                                                    ("p" variable
+                                                       (:pointer 1
+                                                        :type "double")
+                                                        (reparse-symbol arg-sub-list) [2604 2615]))                                                  
+                                                :type "double")
+                                                (reparse-symbol classsubparts) [2559 2649]))                                          )
+                                        (reparse-symbol classsubparts) [2508 2655])
+                                    ("FuncEvaluator" type
+                                       (:template 
+                                          ( ("F" type (:type "class") nil nil))                                          
+                                        :type "struct"
+                                        :members 
+                                          ( ("Eval" function
+                                               (:typemodifiers ("inline" "static")
+                                                :arguments 
+                                                  ( ("f" variable
+                                                       (:pointer 1
+                                                        :type ("F" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [2741 2747])
+                                                    ("x" variable
+                                                       (:pointer 1
+                                                        :type "double")
+                                                        (reparse-symbol arg-sub-list) [2748 2758])
+                                                    ("p" variable
+                                                       (:pointer 1
+                                                        :type "double")
+                                                        (reparse-symbol arg-sub-list) [2759 2770]))                                                  
+                                                :type "double")
+                                                (reparse-symbol classsubparts) [2714 2807]))                                          
+                                        :template-specifier 
+                                          ( ("F" type (:pointer 1) nil nil))                                          )
+                                        (reparse-symbol classsubparts) [2659 2813])
+                                    ("FuncEvaluator" type
+                                       (:template 
+                                          ( ("F" type (:type "class") nil nil))                                          
+                                        :type "struct"
+                                        :members 
+                                          ( ("Eval" function
+                                               (:typemodifiers ("inline" "static")
+                                                :arguments 
+                                                  ( ("f" variable
+                                                       (:pointer 1
+                                                        :constant-flag t
+                                                        :type ("F" type (:type "class") nil nil))
+                                                        (reparse-symbol arg-sub-list) [2905 2917])
+                                                    ("x" variable
+                                                       (:pointer 1
+                                                        :type "double")
+                                                        (reparse-symbol arg-sub-list) [2918 2928])
+                                                    ("p" variable
+                                                       (:pointer 1
+                                                        :type "double")
+                                                        (reparse-symbol arg-sub-list) [2929 2940]))                                                  
+                                                :type "double")
+                                                (reparse-symbol classsubparts) [2878 2977]))                                          
+                                        :template-specifier 
+                                          ( ("F" type (:pointer 1) nil nil))                                          )
+                                        (reparse-symbol classsubparts) [2817 2983]))                                  
+                                :superclasses 
+                                  ( ("ParentFunctor::Impl" type
+                                       (:protection "public"
+                                        :type "class")
+                                        nil nil))                                  )
+                                (reparse-symbol namespacesubparts) [1565 3019])
+                            ("ParamMemFunHandler" type
+                               (:template 
+                                  ( ("ParentFunctor" type (:type "class") nil nil)
+                                    ("PointerToObj" type (:type "class") nil nil)
+                                    ("PointerToMemFn" type (:type "class") nil nil))                                  
+                                :type "class"
+                                :members 
+                                  ( ("Base" type
+                                       (:typedef ("ParentFunctor::Impl" type (:type "class") nil nil)
+                                        :type "typedef")
+                                        (reparse-symbol classsubparts) [3727 3769])
+                                    ("public" label nil (reparse-symbol classsubparts) [3772 3779])
+                                    ("ParamMemFunHandler" function
+                                       (:constructor-flag t
+                                        :arguments 
+                                          ( ("pObj" variable
+                                               (:reference 1
+                                                :constant-flag t
+                                                :type ("PointerToObj" type (:type "class") nil nil))
+                                                (reparse-symbol arg-sub-list) [3880 3905])
+                                            ("pMemFn" variable (:type ("PointerToMemFn" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [3906 3928]))                                          
+                                        :type ("ParamMemFunHandler" type (:type "class") nil nil))
+                                        (reparse-symbol classsubparts) [3861 3969])
+                                    ("ParamMemFunHandler" function
+                                       (:destructor-flag t
+                                        :typemodifiers ("virtual")
+                                        :type "void")
+                                        (reparse-symbol classsubparts) [3974 4006])
+                                    ("()" function
+                                       (:operator-flag t
+                                        :typemodifiers ("inline")
+                                        :arguments 
+                                          ( ("x" variable (:type "double") (reparse-symbol arg-sub-list) [4154 4163])
+                                            ("p" variable
+                                               (:pointer 1
+                                                :type "double")
+                                                (reparse-symbol arg-sub-list) [4164 4175]))                                          
+                                        :type "double")
+                                        (reparse-symbol classsubparts) [4128 4220])
+                                    ("()" function
+                                       (:operator-flag t
+                                        :typemodifiers ("inline")
+                                        :arguments 
+                                          ( ("x" variable
+                                               (:pointer 1
+                                                :type "double")
+                                                (reparse-symbol arg-sub-list) [4376 4387])
+                                            ("p" variable
+                                               (:pointer 1
+                                                :type "double")
+                                                (reparse-symbol arg-sub-list) [4388 4399]))                                          
+                                        :type "double")
+                                        (reparse-symbol classsubparts) [4350 4444])
+                                    ("Clone" function
+                                       (:pointer 1
+                                        :type ("ParamMemFunHandler" type (:type "class") nil nil))
+                                        (reparse-symbol classsubparts) [4480 4573])
+                                    ("private" label nil (reparse-symbol classsubparts) [4576 4585])
+                                    ("ParamMemFunHandler" function
+                                       (:prototype-flag t
+                                        :constructor-flag t
+                                        :arguments 
+                                          ( ("" variable
+                                               (:reference 1
+                                                :constant-flag t
+                                                :type ("ParamMemFunHandler" type (:type "class") nil nil))
+                                                (reparse-symbol arg-sub-list) [4608 4634]))                                          
+                                        :type ("ParamMemFunHandler" type (:type "class") nil nil))
+                                        (reparse-symbol classsubparts) [4589 4635])
+                                    ("=" function
+                                       (:prototype-flag t
+                                        :operator-flag t
+                                        :arguments 
+                                          ( ("" variable
+                                               (:reference 1
+                                                :constant-flag t
+                                                :type ("ParamMemFunHandler" type (:type "class") nil nil))
+                                                (reparse-symbol arg-sub-list) [4688 4714]))                                          
+                                        :type ("ParamMemFunHandler" type (:type "class") nil nil))
+                                        (reparse-symbol classsubparts) [4658 4715])
+                                    ("fObj" variable (:type ("PointerToObj" type (:type "class") nil nil)) (reparse-symbol classsubparts) [4739 4757])
+                                    ("fMemFn" variable (:type ("PointerToMemFn" type (:type "class") nil nil)) (reparse-symbol classsubparts) [4761 4783]))                                  
+                                :superclasses 
+                                  ( ("ParentFunctor::Impl" type
+                                       (:protection "public"
+                                        :type "class")
+                                        nil nil))                                  )
+                                (reparse-symbol namespacesubparts) [3579 4787])
+                            ("ParamFunctor" type
+                               (:members 
+                                  ( ("public" label nil (reparse-symbol classsubparts) [5176 5183])
+                                    ("Impl" type
+                                       (:typedef ("ParamFunctionBase" type (:type "class") nil nil)
+                                        :type "typedef")
+                                        (reparse-symbol classsubparts) [5188 5220])
+                                    ("ParamFunctor" function
+                                       (:constructor-flag t
+                                        :type ("ParamFunctor" type (:type "class") nil nil))
+                                        (reparse-symbol classsubparts) [5265 5295])
+                                    ("ParamFunctor" function
+                                       (:template 
+                                          ( ("PtrObj" type (:type "class") nil nil)
+                                            ("MemFn" type (:type "class") nil nil))                                          
+                                        :type ("ParamFunctor" type (:type "class") nil nil)
+                                        :arguments 
+                                          ( ("p" variable
+                                               (:reference 1
+                                                :constant-flag t
+                                                :type ("PtrObj" type (:type "class") nil nil))
+                                                (reparse-symbol arg-sub-list) [5439 5455])
+                                            ("memFn" variable (:type ("MemFn" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [5456 5468]))                                          
+                                        :constructor-flag t)
+                                        (reparse-symbol classsubparts) [5383 5551])
+                                    ("ParamFunctor" function
+                                       (:constructor-flag t
+                                        :arguments 
+                                          ( ("f" variable
+                                               (:reference 1
+                                                :constant-flag t
+                                                :type ("Func" type (:type "class") nil nil))
+                                                (reparse-symbol arg-sub-list) [5687 5702]))                                          
+                                        :type ("ParamFunctor" type (:type "class") nil nil))
+                                        (reparse-symbol classsubparts) [5673 5770])
+                                    ("FreeFunc" function
+                                       (:prototype-flag t
+                                        :function-pointer t
+                                        :arguments 
+                                          ( ("" variable
+                                               (:pointer 1
+                                                :type "double")
+                                                (reparse-symbol arg-sub-list) [5840 5850])
+                                            ("" variable
+                                               (:pointer 1
+                                                :type "double")
+                                                (reparse-symbol arg-sub-list) [5851 5860]))                                          
+                                        :type "double")
+                                        (reparse-symbol classsubparts) [5818 5861])
+                                    ("ParamFunctor" function
+                                       (:constructor-flag t
+                                        :arguments 
+                                          ( ("f" variable (:type ("FreeFunc" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [5878 5889]))                                          
+                                        :type ("ParamFunctor" type (:type "class") nil nil))
+                                        (reparse-symbol classsubparts) [5865 5965])
+                                    ("ParamFunctor" function
+                                       (:destructor-flag t
+                                        :typemodifiers ("virtual")
+                                        :type "void")
+                                        (reparse-symbol classsubparts) [6017 6080])
+                                    ("ParamFunctor" function
+                                       (:constructor-flag t
+                                        :arguments 
+                                          ( ("rhs" variable
+                                               (:reference 1
+                                                :constant-flag t
+                                                :type ("ParamFunctor" type (:type "class") nil nil))
+                                                (reparse-symbol arg-sub-list) [6134 6159]))                                          
+                                        :type ("ParamFunctor" type (:type "class") nil nil))
+                                        (reparse-symbol classsubparts) [6121 6341])
+                                    ("=" function
+                                       (:operator-flag t
+                                        :arguments 
+                                          ( ("rhs" variable
+                                               (:reference 1
+                                                :constant-flag t
+                                                :type ("ParamFunctor" type (:type "class") nil nil))
+                                                (reparse-symbol arg-sub-list) [6412 6437]))                                          
+                                        :type ("ParamFunctor" type (:type "class") nil nil))
+                                        (reparse-symbol classsubparts) [6385 6796])
+                                    ("GetImpl" function
+                                       (:pointer 1
+                                        :type "void")
+                                        (reparse-symbol classsubparts) [6801 6844])
+                                    ("()" function
+                                       (:operator-flag t
+                                        :arguments 
+                                          ( ("x" variable
+                                               (:pointer 1
+                                                :type "double")
+                                                (reparse-symbol arg-sub-list) [6869 6880])
+                                            ("p" variable
+                                               (:pointer 1
+                                                :type "double")
+                                                (reparse-symbol arg-sub-list) [6881 6892]))                                          
+                                        :type "double")
+                                        (reparse-symbol classsubparts) [6850 6928])
+                                    ("Empty" function (:type "bool") (reparse-symbol classsubparts) [6935 6976])
+                                    ("SetFunction" function
+                                       (:arguments 
+                                          ( ("f" variable
+                                               (:pointer 1
+                                                :type ("Impl" type (:type "class") nil nil))
+                                                (reparse-symbol arg-sub-list) [6999 7008]))                                          
+                                        :type "void")
+                                        (reparse-symbol classsubparts) [6982 7032])
+                                    ("private" label nil (reparse-symbol classsubparts) [7034 7043])
+                                    ("fImpl" variable
+                                       (:pointer 1
+                                        :type ("Impl" type (:type "class") nil nil))
+                                        (reparse-symbol classsubparts) [7081 7094]))                                  
+                                :type "class")
+                                (reparse-symbol namespacesubparts) [5151 7099]))                          
+                        :type "namespace")
+                        (reparse-symbol namespacesubparts) [897 7107]))                  
+                :type "namespace")
+                nil [879 7132]))          
+      :file "ParamFunctor.h"
+      :pointmax 7193
+      :fsize 7192
+      :lastmodtime '(22232 1411 0 0)
+      :unmatched-syntax '((TYPEDEF 5810 . 5817) (EXPLICIT 5664 . 5672) (punctuation 5659 . 5660) (symbol 5655 . 5659) (TYPENAME 5646 . 5654) (punctuation 5645 . 5646) (TEMPLATE 5636 . 5644))
+      :lexical-table 
+        '(("ROOT_Math_ParamFunctor")
+          )
+))
+  :file "!home!austin!root_build!include!Math!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

@@ -1,0 +1,448 @@
+(setq user-full-name "Austin V. Skeeters"
+      user-mail-address "avskeeters@gmail.com")
+
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(load custom-file)
+
+(use-package cyberpunk-theme
+  :if (window-system)
+  :ensure t
+  :init
+  (progn
+    (load-theme 'cyberpunk t)
+    (set-face-attribute `mode-line nil
+                        :box nil)
+    (set-face-attribute `mode-line-inactive nil
+                        :box nil)))
+
+(use-package solarized-theme
+  :defer 10
+  :init
+  (setq solarized-use-variable-pitch nil)
+  :ensure t)
+
+(defun switch-theme (theme)
+  "Disables any currently active themes and loads THEME."
+  ;; This interactive call is taken from `load-theme'
+  (interactive
+   (list
+    (intern (completing-read "Load custom theme: "
+                             (mapc 'symbol-name
+                                   (custom-available-themes))))))
+  (let ((enabled-themes custom-enabled-themes))
+    (mapc #'disable-theme custom-enabled-themes)
+    (load-theme theme t)))
+
+(defun disable-active-themes ()
+  "Disables any currently active themes listed in `custom-enabled-themes'."
+  (interactive)
+  (mapc #'disable-theme custom-enabled-themes))
+
+(bind-key "s-<f12>" 'switch-theme)
+(bind-key "s-<f11>" 'disable-active-themes)
+
+(add-to-list 'default-frame-alist
+             '(font . "Source Code Pro-14"))
+
+;; These functions are useful. Activate them.
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
+(put 'narrow-to-region 'disabled nil)
+(put 'dired-find-alternate-file 'disabled nil)
+
+;; Answering just 'y' or 'n' will do
+(defalias 'yes-or-no-p 'y-or-n-p)
+
+;; Keep all backup and auto-save files in one directory
+(setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
+(setq auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)))
+
+;; UTF-8 please
+(setq locale-coding-system 'utf-8) ; pretty
+(set-terminal-coding-system 'utf-8) ; pretty
+(set-keyboard-coding-system 'utf-8) ; pretty
+(set-selection-coding-system 'utf-8) ; please
+(prefer-coding-system 'utf-8) ; with sugar on top
+(setq-default indent-tabs-mode nil)
+
+;; Turn off the blinking cursor
+(blink-cursor-mode -1)
+
+(setq-default indent-tabs-mode nil)
+(setq-default indicate-empty-lines t)
+
+;; Don't count two spaces after a period as the end of a sentence.
+;; Just one space is needed.
+(setq sentence-end-double-space nil)
+
+;; delete the region when typing, just like as we expect nowadays.
+(delete-selection-mode t)
+
+(show-paren-mode t)
+
+(column-number-mode t)
+
+(global-visual-line-mode)
+(diminish 'visual-line-mode)
+
+(setq uniquify-buffer-name-style 'forward)
+
+;; -i gets alias definitions from .bash_profile
+(setq shell-command-switch "-ic")
+
+;; Don't beep at me
+(setq visible-bell t)
+
+(defun occur-dwim ()
+  "Call `occur' with a sane default."
+  (interactive)
+  (push (if (region-active-p)
+            (buffer-substring-no-properties
+             (region-beginning)
+             (region-end))
+          (thing-at-point 'symbol))
+        regexp-history)
+  (call-interactively 'occur))
+
+(bind-key "M-s o" 'occur-dwim)
+
+(use-package page-break-lines
+  :ensure t)
+
+;; make ibuffer the default buffer lister.
+(defalias 'list-buffers 'ibuffer)
+
+(add-hook 'dired-mode-hook 'auto-revert-mode)
+
+;; Also auto refresh dired, but be quiet about it
+(setq global-auto-revert-non-file-buffers t)
+(setq auto-revert-verbose nil)
+
+(use-package recentf
+  :bind ("C-x C-r" . helm-recentf)
+  :config
+  (recentf-mode t)
+  (setq recentf-max-saved-items 200))
+
+(bind-key "C-c l" 'org-store-link)
+(bind-key "C-c c" 'org-capture)
+(bind-key "C-c a" 'org-agenda)
+
+(setq org-agenda-files
+      (delq nil
+            (mapcar (lambda (x) (and (file-exists-p x) x))
+                    '("~/Dropbox/Agenda"))))
+
+(bind-key "C-c c" 'org-capture)
+(setq org-default-notes-file "~/Dropbox/Notes/notes.org")
+
+(setq org-use-speed-commands t)
+
+(setq org-image-actual-width 550)
+
+(setq org-highlight-latex-and-related '(latex script entities))
+
+(setq org-tags-column 45)
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((python . t)
+   (C . t)
+   (fortran . t)
+   (calc . t)
+   (latex . t)
+   (lisp . t)
+   (sh . t)))
+
+(defun my-org-confirm-babel-evaluate (lang body)
+  "Do not confirm evaluation for these languages."
+  (not (or (string= lang "C")
+           (string= lang "python")
+           (string= lang "fortran")
+           (string= lang "emacs-lisp")
+(setq org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate))))
+
+(setq org-src-fontify-natively t
+      org-src-window-setup 'current-window
+      org-src-strip-leading-and-trailing-blank-lines t
+      org-src-preserve-indentation t
+      org-src-tab-acts-natively t)
+
+(use-package ox-pandoc
+  :no-require t
+  :defer 10
+  :ensure t)
+
+(setq org-latex-pdf-process (list "latexmk -pdf %f"))
+
+(bind-key "s-C-<left>"  'shrink-window-horizontally)
+(bind-key "s-C-<right>" 'enlarge-window-horizontally)
+(bind-key "s-C-<down>"  'shrink-window)
+(bind-key "s-C-<up>"    'enlarge-window)
+
+(defun vsplit-other-window ()
+  "Splits the window vertically and switches to that window."
+  (interactive)
+  (split-window-vertically)
+  (other-window 1 nil))
+(defun hsplit-other-window ()
+  "Splits the window horizontally and switches to that window."
+  (interactive)
+  (split-window-horizontally)
+  (other-window 1 nil))
+
+(bind-key "C-x 2" 'vsplit-other-window)
+(bind-key "C-x 3" 'hsplit-other-window)
+
+(use-package winner
+  :config
+  (winner-mode t)
+  :bind (("M-s-<left>" . winner-undo)
+         ("M-s-<right>" . winner-redo)))
+
+(use-package transpose-frame
+  :ensure t
+  :bind ("H-t" . transpose-frame))
+
+(use-package whitespace
+  :bind ("s-<f10>" . whitespace-mode))
+
+(use-package ace-jump-mode
+  :ensure t
+  :diminish ace-jump-mode
+  :commands ace-jump-mode
+  :bind ("C-S-s" . ace-jump-mode))
+
+(use-package ace-window
+  :ensure t
+  :config
+  (setq aw-keys '(1 2 3 4 5 6 7 8 9))
+  (ace-window-display-mode)
+  :bind ("s-o" . ace-window))
+
+(use-package c-eldoc
+  :commands c-turn-on-eldoc-mode
+  :ensure t
+  :init (add-hook 'c-mode-hook #'c-turn-on-eldoc-mode))
+
+(use-package clojure-mode
+  :defer t
+  :ensure t)
+
+(use-package helm
+  :ensure t
+  :diminish helm-mode
+  :init (progn
+          (require 'helm-config)
+          (use-package helm-projectile
+            :ensure t
+            :commands helm-projectile
+            :bind ("C-c p h" . helm-projectile))
+          (use-package helm-ag :defer 10  :ensure t)
+          (setq helm-locate-command "mdfind -interpret -name %s %s"
+                helm-ff-newfile-prompt-p nil
+                helm-M-x-fuzzy-match t)
+          (helm-mode)
+          (use-package helm-swoop
+            :ensure t
+            :bind ("H-w" . helm-swoop)))
+  :bind (("C-c h" . helm-command-prefix)
+         ("C-x b" . helm-mini)
+         ("C-`" . helm-resume)
+         ("M-x" . helm-M-x)
+         ("C-x C-f" . helm-find-files)))
+
+(use-package magit
+  :ensure t
+  :defer t
+  :bind ("C-c g" . magit-status)
+  :config
+  (define-key magit-status-mode-map (kbd "q") 'magit-quit-session))
+
+;; full screen magit-status
+(defadvice magit-status (around magit-fullscreen activate)
+  (window-configuration-to-register :magit-fullscreen)
+  ad-do-it
+  (delete-other-windows))
+
+(defun magit-quit-session ()
+  "Restores the previous window configuration and kills the magit buffer"
+  (interactive)
+  (kill-buffer)
+  (jump-to-register :magit-fullscreen))
+
+(use-package edit-server
+  :ensure t
+  :config
+  (edit-server-start)
+  (setq edit-server-default-major-mode 'markdown-mode)
+  (setq edit-server-new-frame nil))
+
+(use-package ein
+  :ensure t
+  :defer t)
+
+(use-package expand-region
+  :ensure t
+  :bind ("C-@" . er/expand-region))
+
+(use-package flycheck
+  :ensure t
+  :defer 10
+  :config (setq flycheck-html-tidy-executable "tidy5"))
+
+(use-package macrostep
+  :ensure t
+  :bind ("H-`" . macrostep-expand))
+
+(use-package multiple-cursors
+  :ensure t
+  :bind (("C-S-c C-S-c" . mc/edit-lines)
+         ("C->"         . mc/mark-next-like-this)
+         ("C-<"         . mc/mark-previous-like-this)
+         ("C-c C-<"     . mc/mark-all-like-this)
+         ("C-!"         . mc/mark-next-symbol-like-this)
+         ("s-d"         . mc/mark-all-dwim)))
+
+(use-package olivetti
+  :ensure t
+  :bind ("s-<f6>" . olivetti-mode))
+
+(use-package projectile
+  :ensure t
+  :diminish projectile-mode
+  :commands projectile-mode
+  :config
+  (progn
+    (projectile-global-mode t)
+    (setq projectile-enable-caching t)
+    (use-package ag
+      :commands ag
+      :ensure t)))
+
+(use-package python-mode
+  :defer t
+  :ensure t)
+
+(use-package smartparens
+  :ensure t
+  :defer t
+  :diminish smartparens-mode
+  :config
+  (require 'smartparens-config)
+  (add-hook `c-mode-hook #'smartparens-strict-mode)
+  (add-hook `c++-mode-hook #'smartparens-strict-mode)
+  (add-hook `python-mode-hook #'smartparens-strict-mode)
+  (add-hook `fortran-mode-hook #'smartparens-strict-mode)
+
+  ;; Set up some pairings for org mode markup. These pairings won't
+  ;; activate by default; they'll only apply for wrapping regions.
+  (sp-local-pair 'org-mode "~" "~" :actions '(wrap))
+  (sp-local-pair 'org-mode "/" "/" :actions '(wrap))
+  (sp-local-pair 'org-mode "*" "*" :actions '(wrap)))
+
+(use-package smartscan
+  :ensure t
+  :config (global-smartscan-mode 1)
+  :bind (("s-n" . smartscan-symbol-go-forward)
+         ("s-p" . smartscan-symbol-go-backward)))
+
+(use-package smooth-scrolling
+  :ensure t)
+
+(use-package visual-regexp
+  :ensure t
+  :init
+  (use-package visual-regexp-steroids :ensure t)
+  :bind (("C-c r" . vr/replace)
+         ("C-c q" . vr/query-replace)
+         ("C-c m" . vr/mc-mark) ; Need multiple cursors
+         ("C-M-r" . vr/isearch-backward)
+         ("C-M-s" . vr/isearch-forward)))
+
+(use-package yasnippet
+  :ensure t
+  :defer t
+  :diminish yas-minor-mode
+  :config
+  (setq yas-snippet-dirs (concat user-emacs-directory "snippets"))
+  (yas-global-mode))
+
+(use-package zoom-frm
+  :ensure t
+  :bind (("C-M-=" . zoom-in/out)
+         ("H-z"   . toggle-zoom-frame))
+  :config
+  (setq frame-zoom-font-difference 10))
+
+(use-package scratch
+  :ensure t
+  :commands scratch)
+
+(use-package shell-pop
+  :ensure t
+  :bind ("M-<f12>" . shell-pop))
+
+(use-package slime
+  :ensure t
+  :defer 10
+  :init
+  (setq inferior-lisp-program "/usr/local/bin/sbcl")
+  (add-to-list 'slime-contribs 'slime-fancy))
+
+(use-package quickrun
+  :defer 10
+  :ensure t
+  :bind ("H-q" . quickrun))
+
+(use-package visible-mode
+  :bind ("H-v" . visible-mode))
+
+(use-package latex-extra
+  :defer t
+  :ensure t)
+
+(use-package latex-preview-pane
+  :ensure t
+  :defer t)
+
+(use-package undo-tree
+  :ensure t)
+
+(use-package crux
+  :ensure t
+  :bind (("C-c o o" . crux-open-with)
+         ("C-c u" . crux-view-url)))
+
+(defvar mai/user-settings-dir nil
+  "The directory with user-specific Emacs settings for this
+  user.")
+
+;; Settings for currently logged in user
+(require 's)
+(setq mai/user-settings-dir
+      (concat user-emacs-directory
+              "users/"
+              (s-trim (shell-command-to-string "hostname -s"))))
+(add-to-list 'load-path mai/user-settings-dir)
+
+;; Load settings specific for the current user
+(when (file-exists-p mai/user-settings-dir)
+  (mapc 'load (directory-files mai/user-settings-dir nil "^[^#].*el$")))
+
+(defun my-c-mode-hook ()
+  (setq c-basic-offset 4)
+  (c-set-offset 'substatement-open 0)   ; Curly braces alignment
+  (c-set-offset 'case-label 4))         ; Switch case statements alignment
+
+(add-hook 'c-mode-hook 'my-c-mode-hook)
+
+(setq display-time-default-load-average nil)
+
+(setq battery-mode-line-format "[%b%p%% %t]")
+
+(use-package doc-view
+  :commands doc-view-mode
+  :config
+  (define-key doc-view-mode-map (kbd "<right>") 'doc-view-next-page)
+  (define-key doc-view-mode-map (kbd "<left>") 'doc-view-previous-page))

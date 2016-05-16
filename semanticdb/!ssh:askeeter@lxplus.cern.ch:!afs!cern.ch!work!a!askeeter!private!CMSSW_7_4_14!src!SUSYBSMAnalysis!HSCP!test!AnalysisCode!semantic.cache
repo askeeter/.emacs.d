@@ -1,0 +1,3184 @@
+;; Object AnalysisCode/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "AnalysisCode/"
+  :tables
+  (list
+    (semanticdb-table "Analysis_Step4_LimitComputation.C"
+      :major-mode 'c++-mode
+      :tags 
+        '( ("Analysis_Global.h" include nil nil [40 68])
+            ("Analysis_CommonFunction.h" include nil nil [69 105])
+            ("Analysis_PlotFunction.h" include nil nil [106 140])
+            ("Analysis_Samples.h" include nil nil [141 170])
+            ("tdrstyle.C" include nil nil [171 192])
+            ("TGraphAsymmErrors.h" include nil nil [194 224])
+            ("std" using (:type ("std" type
+                 (:prototype t
+                  :type "namespace")
+                  nil nil)) nil [226 246])
+            ("stAllInfo" type
+               (:members 
+                  ( ("public" label nil (reparse-symbol classsubparts) [268 275])
+                    ("Mass" variable (:type "double") (reparse-symbol classsubparts) [279 321])
+                    ("MassMean" variable (:type "double") (reparse-symbol classsubparts) [279 321])
+                    ("MassSigma" variable (:type "double") (reparse-symbol classsubparts) [279 321])
+                    ("MassCut" variable (:type "double") (reparse-symbol classsubparts) [279 321])
+                    ("XSec_Th" variable (:type "double") (reparse-symbol classsubparts) [325 424])
+                    ("XSec_Err" variable (:type "double") (reparse-symbol classsubparts) [325 424])
+                    ("XSec_Exp" variable (:type "double") (reparse-symbol classsubparts) [325 424])
+                    ("XSec_ExpUp" variable (:type "double") (reparse-symbol classsubparts) [325 424])
+                    ("XSec_ExpDown" variable (:type "double") (reparse-symbol classsubparts) [325 424])
+                    ("XSec_Exp2Up" variable (:type "double") (reparse-symbol classsubparts) [325 424])
+                    ("XSec_Exp2Down" variable (:type "double") (reparse-symbol classsubparts) [325 424])
+                    ("XSec_Obs" variable (:type "double") (reparse-symbol classsubparts) [325 424])
+                    ("Eff" variable (:type "double") (reparse-symbol classsubparts) [428 517])
+                    ("Eff_SYSTP" variable (:type "double") (reparse-symbol classsubparts) [428 517])
+                    ("Eff_SYSTI" variable (:type "double") (reparse-symbol classsubparts) [428 517])
+                    ("Eff_SYSTM" variable (:type "double") (reparse-symbol classsubparts) [428 517])
+                    ("Eff_SYSTH" variable (:type "double") (reparse-symbol classsubparts) [428 517])
+                    ("Eff_SYSTT" variable (:type "double") (reparse-symbol classsubparts) [428 517])
+                    ("Eff_SYSTPU" variable (:type "double") (reparse-symbol classsubparts) [428 517])
+                    ("TotalUnc" variable (:type "double") (reparse-symbol classsubparts) [428 517])
+                    ("EffE" variable (:type "double") (reparse-symbol classsubparts) [521 607])
+                    ("EffE_SYSTP" variable (:type "double") (reparse-symbol classsubparts) [521 607])
+                    ("EffE_SYSTI" variable (:type "double") (reparse-symbol classsubparts) [521 607])
+                    ("EffE_SYSTM" variable (:type "double") (reparse-symbol classsubparts) [521 607])
+                    ("EffE_SYSTH" variable (:type "double") (reparse-symbol classsubparts) [521 607])
+                    ("EffE_SYSTT" variable (:type "double") (reparse-symbol classsubparts) [521 607])
+                    ("EffE_SYSTPU" variable (:type "double") (reparse-symbol classsubparts) [521 607])
+                    ("Significance" variable (:type "double") (reparse-symbol classsubparts) [611 631])
+                    ("XSec_5Sigma" variable (:type "double") (reparse-symbol classsubparts) [632 651])
+                    ("Index" variable (:type "double") (reparse-symbol classsubparts) [655 689])
+                    ("WP_Pt" variable (:type "double") (reparse-symbol classsubparts) [655 689])
+                    ("WP_I" variable (:type "double") (reparse-symbol classsubparts) [655 689])
+                    ("WP_TOF" variable (:type "double") (reparse-symbol classsubparts) [655 689])
+                    ("NData" variable (:type "float") (reparse-symbol classsubparts) [693 730])
+                    ("NPred" variable (:type "float") (reparse-symbol classsubparts) [693 730])
+                    ("NPredErr" variable (:type "float") (reparse-symbol classsubparts) [693 730])
+                    ("NSign" variable (:type "float") (reparse-symbol classsubparts) [693 730])
+                    ("LInt" variable (:type "double") (reparse-symbol classsubparts) [734 746])
+                    ("stAllInfo" function
+                       (:constructor-flag t
+                        :arguments 
+                          ( ("path" variable
+                               (:default-value "\"\""
+                                :type ("string" type (:type "class") nil nil))
+                                (reparse-symbol arg-sub-list) [761 775]))                          
+                        :type ("stAllInfo" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [751 3623])
+                    ("Save" function
+                       (:arguments 
+                          ( ("path" variable
+                               (:default-value "\"\""
+                                :type ("string" type (:type "class") nil nil))
+                                (reparse-symbol arg-sub-list) [3638 3652]))                          
+                        :type "void")
+                        (reparse-symbol classsubparts) [3628 5526]))                  
+                :type "class")
+                nil [248 5529])
+            ("EXCLUSIONDIR" variable
+               (:default-value "\"EXCLUSION\""
+                :type ("string" type (:type "class") nil nil))
+                nil [5532 5566])
+            ("RescaleFactor" variable
+               (:default-value "1.0"
+                :type "double")
+                nil [5616 5643])
+            ("RescaleError" variable
+               (:default-value "0.2"
+                :type "double")
+                nil [5644 5671])
+            ("PlotMinScale" variable
+               (:default-value "0.0001"
+                :type "double")
+                nil [5699 5728])
+            ("PlotMaxScale" variable
+               (:default-value "1000"
+                :type "double")
+                nil [5729 5756])
+            ("FullExpLimit" variable
+               (:default-value "true"
+                :type "bool")
+                nil [5858 5881])
+            ("Optimize" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("InputPattern" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [5897 5917])
+                    ("Data" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [5918 5930])
+                    ("signal" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [5931 5945])
+                    ("shape" variable (:type "bool") (reparse-symbol arg-sub-list) [5946 5957])
+                    ("cutFromFile" variable (:type "bool") (reparse-symbol arg-sub-list) [5958 5975]))                  
+                :type "void")
+                nil [5883 5976])
+            ("GetSignalMeanHSCPPerEvent" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("InputPattern" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [6010 6030])
+                    ("CutIndex" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [6031 6053])
+                    ("MinRange" variable (:type "double") (reparse-symbol arg-sub-list) [6054 6070])
+                    ("MaxRange" variable (:type "double") (reparse-symbol arg-sub-list) [6071 6087]))                  
+                :type "double")
+                nil [5977 6088])
+            ("MakePlot" function
+               (:prototype-flag t
+                :pointer 1
+                :arguments 
+                  ( ("pFile" variable
+                       (:pointer 1
+                        :type ("FILE" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [6106 6118])
+                    ("talkFile" variable
+                       (:pointer 1
+                        :type ("FILE" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [6119 6134])
+                    ("InputPattern" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [6135 6155])
+                    ("ModelName" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [6156 6173])
+                    ("XSectionType" variable (:type "int") (reparse-symbol arg-sub-list) [6174 6191])
+                    ("modelSamples" variable
+                       (:reference 1
+                        :type ("std::vector" type
+                             (:template-specifier 
+                                ( ("stSample" type nil nil nil))                                
+                              :type "class")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [6192 6228])
+                    ("LInt" variable
+                       (:reference 1
+                        :type "double")
+                        (reparse-symbol arg-sub-list) [6229 6242]))                  
+                :type ("TGraph" type (:type "class") nil nil))
+                nil [6089 6243])
+            ("CheckSignalUncertainty" function
+               (:prototype-flag t
+                :pointer 1
+                :arguments 
+                  ( ("pFile" variable
+                       (:pointer 1
+                        :type ("FILE" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [6275 6287])
+                    ("talkFile" variable
+                       (:pointer 1
+                        :type ("FILE" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [6288 6303])
+                    ("InputPattern" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [6304 6324])
+                    ("ModelName" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [6325 6342])
+                    ("modelSample" variable
+                       (:reference 1
+                        :type ("std::vector" type
+                             (:template-specifier 
+                                ( ("stSample" type nil nil nil))                                
+                              :type "class")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [6343 6378]))                  
+                :type ("TGraph" type (:type "class") nil nil))
+                nil [6244 6379])
+            ("DrawModelLimitWithBand" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("InputPattern" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [6408 6428]))                  
+                :type "void")
+                nil [6380 6429])
+            ("DrawRatioBands" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("InputPattern" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [6450 6470]))                  
+                :type "void")
+                nil [6430 6471])
+            ("printSummary" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("pFile" variable
+                       (:pointer 1
+                        :type ("FILE" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [6490 6502])
+                    ("talkFile" variable
+                       (:pointer 1
+                        :type ("FILE" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [6503 6518])
+                    ("InputPattern" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [6519 6539])
+                    ("ModelName" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [6540 6557])
+                    ("modelSamples" variable
+                       (:reference 1
+                        :type ("std::vector" type
+                             (:template-specifier 
+                                ( ("stSample" type nil nil nil))                                
+                              :type "class")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [6558 6594]))                  
+                :type "void")
+                nil [6472 6595])
+            ("printSummaryPaper" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("pFile" variable
+                       (:pointer 1
+                        :type ("FILE" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [6619 6631])
+                    ("talkFile" variable
+                       (:pointer 1
+                        :type ("FILE" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [6632 6647])
+                    ("InputPattern" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [6648 6668])
+                    ("ModelName" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [6669 6686])
+                    ("modelSamples" variable
+                       (:reference 1
+                        :type ("std::vector" type
+                             (:template-specifier 
+                                ( ("stSample" type nil nil nil))                                
+                              :type "class")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [6687 6723]))                  
+                :type "void")
+                nil [6596 6724])
+            ("toLatex" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("value" variable (:type "double") (reparse-symbol arg-sub-list) [6740 6753]))                  
+                :type ("string" type (:type "class") nil nil))
+                nil [6725 6754])
+            ("makeDataCard" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("outpath" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [6774 6789])
+                    ("rootPath" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [6790 6806])
+                    ("ChannelName" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [6807 6826])
+                    ("SignalName" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [6827 6845])
+                    ("Obs" variable (:type "double") (reparse-symbol arg-sub-list) [6846 6857])
+                    ("Pred" variable (:type "double") (reparse-symbol arg-sub-list) [6858 6870])
+                    ("PredRelErr" variable (:type "double") (reparse-symbol arg-sub-list) [6871 6889])
+                    ("Sign" variable (:type "double") (reparse-symbol arg-sub-list) [6890 6902])
+                    ("SignalStat" variable (:type "double") (reparse-symbol arg-sub-list) [6903 6921])
+                    ("SignalUnc" variable (:type "double") (reparse-symbol arg-sub-list) [6922 6939])
+                    ("Shape" variable (:type "bool") (reparse-symbol arg-sub-list) [6940 6951]))                  
+                :type "void")
+                nil [6756 6952])
+            ("saveHistoForLimit" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("histo" variable
+                       (:pointer 1
+                        :type ("TH1" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [6976 6987])
+                    ("Name" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [6988 7000])
+                    ("Id" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [7001 7011]))                  
+                :type "void")
+                nil [6953 7012])
+            ("saveVariationHistoForLimit" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("histo" variable
+                       (:pointer 1
+                        :type ("TH1" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [7045 7056])
+                    ("vardown" variable
+                       (:pointer 1
+                        :type ("TH1" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [7057 7070])
+                    ("Name" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [7071 7083])
+                    ("variationName" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [7084 7105]))                  
+                :type "void")
+                nil [7013 7106])
+            ("testShapeBasedAnalysis" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("InputPattern" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [7135 7155])
+                    ("signal" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [7156 7170]))                  
+                :type "void")
+                nil [7107 7171])
+            ("computeSignificance" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("datacard" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [7199 7215])
+                    ("expected" variable (:type "bool") (reparse-symbol arg-sub-list) [7216 7230])
+                    ("signal" variable
+                       (:reference 1
+                        :type ("string" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [7231 7246])
+                    ("massStr" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [7247 7262])
+                    ("Strength" variable (:type "float") (reparse-symbol arg-sub-list) [7263 7278]))                  
+                :type "double")
+                nil [7172 7279])
+            ("runCombine" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("fastOptimization" variable (:type "bool") (reparse-symbol arg-sub-list) [7296 7318])
+                    ("getXsection" variable (:type "bool") (reparse-symbol arg-sub-list) [7319 7336])
+                    ("getSignificance" variable (:type "bool") (reparse-symbol arg-sub-list) [7337 7358])
+                    ("InputPattern" variable
+                       (:reference 1
+                        :type ("string" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [7359 7380])
+                    ("signal" variable
+                       (:reference 1
+                        :type ("string" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [7381 7396])
+                    ("CutIndex" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [7397 7419])
+                    ("Shape" variable (:type "bool") (reparse-symbol arg-sub-list) [7420 7431])
+                    ("Temporary" variable (:type "bool") (reparse-symbol arg-sub-list) [7432 7447])
+                    ("result" variable
+                       (:reference 1
+                        :type ("stAllInfo" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [7448 7466])
+                    ("MassData" variable
+                       (:pointer 1
+                        :type ("TH1" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [7467 7481])
+                    ("MassPred" variable
+                       (:pointer 1
+                        :type ("TH1" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [7482 7496])
+                    ("MassSign" variable
+                       (:pointer 1
+                        :type ("TH1" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [7497 7511])
+                    ("MassSignP" variable
+                       (:pointer 1
+                        :type ("TH1" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [7512 7527])
+                    ("MassSignI" variable
+                       (:pointer 1
+                        :type ("TH1" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [7528 7543])
+                    ("MassSignM" variable
+                       (:pointer 1
+                        :type ("TH1" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [7544 7559])
+                    ("MassSignH" variable
+                       (:pointer 1
+                        :type ("TH1" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [7560 7575])
+                    ("MassSignT" variable
+                       (:pointer 1
+                        :type ("TH1" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [7576 7591])
+                    ("MassSignPU" variable
+                       (:pointer 1
+                        :type ("TH1" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [7592 7608]))                  
+                :type "bool")
+                nil [7280 7609])
+            ("Combine" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("InputPattern" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [7623 7643])
+                    ("signal7" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [7644 7659])
+                    ("signal8" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [7660 7675]))                  
+                :type "bool")
+                nil [7610 7676])
+            ("useSample" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("TypeMode" variable (:type "int") (reparse-symbol arg-sub-list) [7692 7705])
+                    ("sample" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [7706 7720]))                  
+                :type "bool")
+                nil [7677 7721])
+            ("MinRange" variable
+               (:default-value "0"
+                :type "double")
+                nil [7723 7743])
+            ("MaxRange" variable
+               (:default-value "1999"
+                :type "double")
+                nil [7744 7767])
+            ("CurrentSampleIndex" variable (:type "int") nil [7768 7794])
+            ("samples" variable (:type ("std::vector" type
+                 (:template-specifier 
+                    ( ("stSample" type nil nil nil))                    
+                  :type "class")
+                  nil nil)) nil [7796 7826])
+            ("modelVector" variable (:type ("std::vector" type
+                 (:template-specifier 
+                    ( ("std::string" type nil nil nil))                    
+                  :type "class")
+                  nil nil)) nil [7827 7864])
+            ("modelMap" variable (:type ("std::map" type
+                 (:template-specifier 
+                    ( ("std::string" type nil nil nil)
+                      ("std::vector" type nil nil nil))                    
+                  :type "class")
+                  nil nil)) nil [7865 7920])
+            ("SHAPESTRING" variable
+               (:default-value "\"\""
+                :type ("string" type (:type "class") nil nil))
+                nil [7922 7944])
+            ("Analysis_Step4_LimitComputation" function
+               (:arguments 
+                  ( ("MODE" variable
+                       (:default-value "\"COMPILE\""
+                        :type ("string" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [7984 8005])
+                    ("InputPattern" variable
+                       (:default-value "\"\""
+                        :type ("string" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [8007 8029])
+                    ("signal" variable
+                       (:default-value "\"\""
+                        :type ("string" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [8031 8047]))                  
+                :type "void")
+                nil [7947 84031])
+            ("CheckSignalUncertainty" function
+               (:pointer 1
+                :arguments 
+                  ( ("pFile" variable
+                       (:pointer 1
+                        :type ("FILE" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [84064 84076])
+                    ("talkFile" variable
+                       (:pointer 1
+                        :type ("FILE" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [84077 84092])
+                    ("InputPattern" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [84093 84113])
+                    ("ModelName" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [84114 84131])
+                    ("modelSample" variable
+                       (:reference 1
+                        :type ("std::vector" type
+                             (:template-specifier 
+                                ( ("stSample" type nil nil nil))                                
+                              :type "class")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [84132 84167]))                  
+                :type ("TGraph" type (:type "class") nil nil))
+                nil [84033 96334])
+            ("MakePlot" function
+               (:pointer 1
+                :arguments 
+                  ( ("pFile" variable
+                       (:pointer 1
+                        :type ("FILE" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [96354 96366])
+                    ("talkFile" variable
+                       (:pointer 1
+                        :type ("FILE" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [96367 96382])
+                    ("InputPattern" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [96383 96403])
+                    ("ModelName" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [96404 96421])
+                    ("XSectionType" variable (:type "int") (reparse-symbol arg-sub-list) [96422 96439])
+                    ("modelSamples" variable
+                       (:reference 1
+                        :type ("std::vector" type
+                             (:template-specifier 
+                                ( ("stSample" type nil nil nil))                                
+                              :type "class")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [96440 96476])
+                    ("LInt" variable
+                       (:reference 1
+                        :type "double")
+                        (reparse-symbol arg-sub-list) [96477 96490]))                  
+                :type ("TGraph" type (:type "class") nil nil))
+                nil [96337 100644])
+            ("printSummary" function
+               (:arguments 
+                  ( ("pFile" variable
+                       (:pointer 1
+                        :type ("FILE" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [100665 100677])
+                    ("talkFile" variable
+                       (:pointer 1
+                        :type ("FILE" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [100678 100693])
+                    ("InputPattern" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [100694 100714])
+                    ("ModelName" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [100715 100732])
+                    ("modelSamples" variable
+                       (:reference 1
+                        :type ("std::vector" type
+                             (:template-specifier 
+                                ( ("stSample" type nil nil nil))                                
+                              :type "class")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [100733 100769]))                  
+                :type "void")
+                nil [100647 104141])
+            ("printSummaryPaper" function
+               (:arguments 
+                  ( ("pFile" variable
+                       (:pointer 1
+                        :type ("FILE" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [104168 104180])
+                    ("talkFile" variable
+                       (:pointer 1
+                        :type ("FILE" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [104181 104196])
+                    ("InputPattern" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [104197 104217])
+                    ("ModelName" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [104218 104235])
+                    ("modelSamples" variable
+                       (:reference 1
+                        :type ("std::vector" type
+                             (:template-specifier 
+                                ( ("stSample" type nil nil nil))                                
+                              :type "class")
+                              nil nil))
+                        (reparse-symbol arg-sub-list) [104236 104272]))                  
+                :type "void")
+                nil [104145 108380])
+            ("GetSignalMeanHSCPPerEvent" function
+               (:arguments 
+                  ( ("InputPattern" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [108416 108436])
+                    ("CutIndex" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [108437 108459])
+                    ("MinRange_" variable (:type "double") (reparse-symbol arg-sub-list) [108460 108477])
+                    ("MaxRange_" variable (:type "double") (reparse-symbol arg-sub-list) [108478 108495]))                  
+                :type "double")
+                nil [108383 109624])
+            ("DrawModelLimitWithBand" function
+               (:arguments 
+                  ( ("InputPattern" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [109656 109676]))                  
+                :type "void")
+                nil [109628 113466])
+            ("DrawRatioBands" function
+               (:arguments 
+                  ( ("InputPattern" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [113764 113784]))                  
+                :type "void")
+                nil [113744 120541])
+            ("Optimize" function
+               (:arguments 
+                  ( ("InputPattern" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [120652 120672])
+                    ("Data" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [120673 120685])
+                    ("signal" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [120686 120700])
+                    ("shape" variable (:type "bool") (reparse-symbol arg-sub-list) [120701 120712])
+                    ("cutFromFile" variable (:type "bool") (reparse-symbol arg-sub-list) [120713 120730]))                  
+                :type "void")
+                nil [120638 135329])
+            ("makeDataCard" function
+               (:arguments 
+                  ( ("outpath" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [135397 135412])
+                    ("rootPath" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [135413 135429])
+                    ("ChannelName" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [135430 135449])
+                    ("SignalName" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [135450 135468])
+                    ("Obs" variable (:type "double") (reparse-symbol arg-sub-list) [135469 135480])
+                    ("Pred" variable (:type "double") (reparse-symbol arg-sub-list) [135481 135493])
+                    ("PredRelErr" variable (:type "double") (reparse-symbol arg-sub-list) [135494 135512])
+                    ("Sign" variable (:type "double") (reparse-symbol arg-sub-list) [135513 135525])
+                    ("SignStat" variable (:type "double") (reparse-symbol arg-sub-list) [135526 135542])
+                    ("SignalUnc" variable (:type "double") (reparse-symbol arg-sub-list) [135543 135560])
+                    ("Shape" variable (:type "bool") (reparse-symbol arg-sub-list) [135561 135572]))                  
+                :type "void")
+                nil [135379 137689])
+            ("saveHistoForLimit" function
+               (:arguments 
+                  ( ("histo" variable
+                       (:pointer 1
+                        :type ("TH1" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [137813 137824])
+                    ("Name" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [137825 137837])
+                    ("Id" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [137838 137848]))                  
+                :type "void")
+                nil [137790 138554])
+            ("saveVariationHistoForLimit" function
+               (:arguments 
+                  ( ("histo" variable
+                       (:pointer 1
+                        :type ("TH1" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [138680 138691])
+                    ("vardown" variable
+                       (:pointer 1
+                        :type ("TH1" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [138692 138705])
+                    ("Name" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [138706 138718])
+                    ("variationName" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [138719 138740]))                  
+                :type "void")
+                nil [138648 139019])
+            ("testShapeBasedAnalysis" function
+               (:arguments 
+                  ( ("InputPattern" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [139222 139242])
+                    ("signal" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [139243 139257]))                  
+                :type "void")
+                nil [139194 142048])
+            ("computeSignificance" function
+               (:arguments 
+                  ( ("datacard" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [142170 142186])
+                    ("expected" variable (:type "bool") (reparse-symbol arg-sub-list) [142187 142201])
+                    ("signal" variable
+                       (:reference 1
+                        :type ("string" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [142202 142217])
+                    ("massStr" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [142218 142233])
+                    ("Strength" variable (:type "float") (reparse-symbol arg-sub-list) [142234 142249]))                  
+                :type "double")
+                nil [142143 143581])
+            ("runCombine" function
+               (:arguments 
+                  ( ("fastOptimization" variable (:type "bool") (reparse-symbol arg-sub-list) [143802 143824])
+                    ("getXsection" variable (:type "bool") (reparse-symbol arg-sub-list) [143825 143842])
+                    ("getSignificance" variable (:type "bool") (reparse-symbol arg-sub-list) [143843 143864])
+                    ("InputPattern" variable
+                       (:reference 1
+                        :type ("string" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [143865 143886])
+                    ("signal" variable
+                       (:reference 1
+                        :type ("string" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [143887 143902])
+                    ("CutIndex" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [143903 143925])
+                    ("Shape" variable (:type "bool") (reparse-symbol arg-sub-list) [143926 143937])
+                    ("Temporary" variable (:type "bool") (reparse-symbol arg-sub-list) [143938 143953])
+                    ("result" variable
+                       (:reference 1
+                        :type ("stAllInfo" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [143954 143972])
+                    ("MassData" variable
+                       (:pointer 1
+                        :type ("TH1" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [143973 143987])
+                    ("MassPred" variable
+                       (:pointer 1
+                        :type ("TH1" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [143988 144002])
+                    ("MassSign" variable
+                       (:pointer 1
+                        :type ("TH1" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [144003 144017])
+                    ("MassSignP" variable
+                       (:pointer 1
+                        :type ("TH1" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [144018 144033])
+                    ("MassSignI" variable
+                       (:pointer 1
+                        :type ("TH1" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [144034 144049])
+                    ("MassSignM" variable
+                       (:pointer 1
+                        :type ("TH1" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [144050 144065])
+                    ("MassSignH" variable
+                       (:pointer 1
+                        :type ("TH1" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [144066 144081])
+                    ("MassSignT" variable
+                       (:pointer 1
+                        :type ("TH1" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [144082 144097])
+                    ("MassSignPU" variable
+                       (:pointer 1
+                        :type ("TH1" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [144098 144114]))                  
+                :type "bool")
+                nil [143786 171650])
+            ("Combine" function
+               (:arguments 
+                  ( ("InputPattern" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [171666 171686])
+                    ("signal7" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [171687 171702])
+                    ("signal8" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [171703 171718]))                  
+                :type "bool")
+                nil [171653 178601])
+            ("useSample" function
+               (:arguments 
+                  ( ("TypeMode" variable (:type "int") (reparse-symbol arg-sub-list) [178619 178632])
+                    ("sample" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [178633 178647]))                  
+                :type "bool")
+                nil [178604 179212])
+            ("toLatex" function
+               (:arguments 
+                  ( ("value" variable (:type "double") (reparse-symbol arg-sub-list) [179229 179242]))                  
+                :type ("string" type (:type "class") nil nil))
+                nil [179214 179542]))          
+      :file "Analysis_Step4_LimitComputation.C"
+      :pointmax 179544
+      :fsize 179720
+      :lastmodtime '(22195 31891)
+      :unmatched-syntax nil)
+    (semanticdb-table "Analysis_Global.h"
+      :file "Analysis_Global.h"
+      :fsize 17093
+      :lastmodtime '(22204 47742))
+    (semanticdb-table "Analysis_CommonFunction.h"
+      :file "Analysis_CommonFunction.h"
+      :fsize 50874
+      :lastmodtime '(22119 1736))
+    (semanticdb-table "Analysis_PlotFunction.h"
+      :file "Analysis_PlotFunction.h"
+      :fsize 15797
+      :lastmodtime '(22119 1736))
+    (semanticdb-table "Analysis_Samples.h"
+      :file "Analysis_Samples.h"
+      :fsize 54663
+      :lastmodtime '(22119 1736))
+    (semanticdb-table "tdrstyle.C"
+      :file "tdrstyle.C"
+      :fsize 4703
+      :lastmodtime '(22119 1736))
+    (semanticdb-table "Analysis_Step2_BackgroundPrediction.C"
+      :major-mode 'c++-mode
+      :tags 
+        '( ("string" include (:system-flag t) nil [40 57])
+            ("vector" include (:system-flag t) nil [58 75])
+            ("TROOT.h" include nil nil [77 95])
+            ("TFile.h" include nil nil [96 114])
+            ("TDirectory.h" include nil nil [115 138])
+            ("TChain.h" include nil nil [139 158])
+            ("TObject.h" include nil nil [159 179])
+            ("TCanvas.h" include nil nil [180 200])
+            ("TMath.h" include nil nil [201 219])
+            ("TLegend.h" include nil nil [220 240])
+            ("TGraph.h" include nil nil [241 260])
+            ("TH1.h" include nil nil [261 277])
+            ("TH2.h" include nil nil [278 294])
+            ("TH3.h" include nil nil [295 311])
+            ("TTree.h" include nil nil [312 330])
+            ("TF1.h" include nil nil [331 347])
+            ("TGraphErrors.h" include nil nil [348 373])
+            ("TGraphAsymmErrors.h" include nil nil [374 404])
+            ("TMultiGraph.h" include nil nil [405 429])
+            ("TPaveText.h" include nil nil [430 452])
+            ("TRandom3.h" include nil nil [453 474])
+            ("tdrstyle.C" include nil nil [476 497])
+            ("Analysis_CommonFunction.h" include nil nil [499 535])
+            ("Analysis_Global.h" include nil nil [536 564])
+            ("Analysis_PlotFunction.h" include nil nil [565 599])
+            ("Analysis_PlotStructure.h" include nil nil [600 635])
+            ("Analysis_Samples.h" include nil nil [636 665])
+            ("std" using (:type ("std" type
+                 (:prototype t
+                  :type "namespace")
+                  nil nil)) nil [667 687])
+            ("Analysis_Step2_BackgroundPrediction" function
+               (:arguments 
+                  ( ("InputPattern" variable
+                       (:default-value "\"COMPILE\""
+                        :type ("std::string" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [805 839]))                  
+                :type "void")
+                nil [764 30175]))          
+      :file "Analysis_Step2_BackgroundPrediction.C"
+      :pointmax 30176
+      :fsize 30175
+      :lastmodtime '(22202 45950)
+      :unmatched-syntax nil)
+    (semanticdb-table "Analysis_PlotStructure.h"
+      :major-mode 'c-mode
+      :tags 
+        '( ("Analysis_Global.h" include nil nil [40 68])
+            ("Analysis_Samples.h" include nil nil [69 98])
+            ("stPlots" type
+               (:members 
+                  ( ("SelPlot" variable (:type "bool") (reparse-symbol classsubparts) [190 211])
+                    ("Name" variable (:type ("std::string" type (:type "class") nil nil)) (reparse-symbol classsubparts) [215 233])
+                    ("Directory" variable
+                       (:pointer 1
+                        :type ("TDirectory" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [237 260])
+                    ("Tree" variable
+                       (:pointer 1
+                        :type ("TTree" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [264 282])
+                    ("NCuts" variable (:type "unsigned int") (reparse-symbol classsubparts) [286 305])
+                    ("Tree_Run" variable (:type "unsigned int") (reparse-symbol classsubparts) [309 331])
+                    ("Tree_Event" variable (:type "unsigned int") (reparse-symbol classsubparts) [335 359])
+                    ("Tree_Hscp" variable (:type "unsigned int") (reparse-symbol classsubparts) [363 386])
+                    ("Tree_Pt" variable (:type "float") (reparse-symbol classsubparts) [390 411])
+                    ("Tree_I" variable (:type "float") (reparse-symbol classsubparts) [415 435])
+                    ("Tree_Ih" variable (:type "float") (reparse-symbol classsubparts) [438 460])
+                    ("Tree_TOF" variable (:type "float") (reparse-symbol classsubparts) [464 486])
+                    ("Tree_Mass" variable (:type "float") (reparse-symbol classsubparts) [490 513])
+                    ("Tree_dZ" variable (:type "float") (reparse-symbol classsubparts) [517 538])
+                    ("Tree_dXY" variable (:type "float") (reparse-symbol classsubparts) [542 564])
+                    ("Tree_dR" variable (:type "float") (reparse-symbol classsubparts) [568 589])
+                    ("Tree_eta" variable (:type "float") (reparse-symbol classsubparts) [593 615])
+                    ("Tree_phi" variable (:type "float") (reparse-symbol classsubparts) [618 640])
+                    ("Tree_hasMuon" variable (:type "bool") (reparse-symbol classsubparts) [643 669])
+                    ("TreeGEN" variable
+                       (:pointer 1
+                        :type ("TTree" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [673 694])
+                    ("TreeGEN_Run" variable (:type "unsigned int") (reparse-symbol classsubparts) [697 722])
+                    ("TreeGEN_Event" variable (:type "unsigned int") (reparse-symbol classsubparts) [725 752])
+                    ("TreeGEN_Gen" variable (:type "unsigned int") (reparse-symbol classsubparts) [755 780])
+                    ("TreeGEN_Pt" variable (:type "double") (reparse-symbol classsubparts) [811 835])
+                    ("TreeGEN_Mass" variable (:type "double") (reparse-symbol classsubparts) [838 864])
+                    ("TreeGEN_PDG" variable (:type "int") (reparse-symbol classsubparts) [867 892])
+                    ("TreeGEN_Status" variable (:type "int") (reparse-symbol classsubparts) [895 923])
+                    ("TreeGEN_eta" variable (:type "double") (reparse-symbol classsubparts) [926 951])
+                    ("TreeGEN_phi" variable (:type "double") (reparse-symbol classsubparts) [954 979])
+                    ("TreeGEN_charge" variable (:type "int") (reparse-symbol classsubparts) [982 1010])
+                    ("Mass" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1015 1027])
+                    ("MassTOF" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1031 1046])
+                    ("MassComb" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1050 1066])
+                    ("MaxEventMass" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1070 1090])
+                    ("Mass_SystP" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1095 1113])
+                    ("MassTOF_SystP" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1117 1138])
+                    ("MassComb_SystP" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1142 1164])
+                    ("MaxEventMass_SystP" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1168 1194])
+                    ("Mass_SystI" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1199 1217])
+                    ("MassTOF_SystI" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1221 1242])
+                    ("MassComb_SystI" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1246 1268])
+                    ("MaxEventMass_SystI" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1272 1298])
+                    ("Mass_SystM" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1303 1321])
+                    ("MassTOF_SystM" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1325 1346])
+                    ("MassComb_SystM" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1350 1372])
+                    ("MaxEventMass_SystM" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1376 1402])
+                    ("Mass_SystT" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1407 1425])
+                    ("MassTOF_SystT" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1429 1450])
+                    ("MassComb_SystT" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1454 1476])
+                    ("MaxEventMass_SystT" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1480 1506])
+                    ("Mass_SystPU" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1511 1530])
+                    ("MassTOF_SystPU" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1534 1556])
+                    ("MassComb_SystPU" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1560 1583])
+                    ("MaxEventMass_SystPU" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1587 1614])
+                    ("Mass_SystH" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1619 1637])
+                    ("MassTOF_SystH" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1641 1662])
+                    ("MassComb_SystH" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1666 1688])
+                    ("MaxEventMass_SystH" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1692 1718])
+                    ("Mass_Flip" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1725 1742])
+                    ("MassTOF_Flip" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1746 1766])
+                    ("MassComb_Flip" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1770 1791])
+                    ("IntLumi" variable
+                       (:pointer 1
+                        :type ("TProfile" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1796 1814])
+                    ("TotalE" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1818 1831])
+                    ("TotalEPU" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1835 1850])
+                    ("TotalTE" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1855 1869])
+                    ("Total" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1873 1885])
+                    ("V3D" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1889 1899])
+                    ("Chi2" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1904 1915])
+                    ("Qual" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1921 1932])
+                    ("TNOH" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1937 1948])
+                    ("TNOM" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1952 1963])
+                    ("nDof" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1967 1978])
+                    ("tofError" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [1982 1997])
+                    ("Pterr" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2001 2013])
+                    ("MPt" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2017 2027])
+                    ("MI" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2032 2041])
+                    ("MTOF" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2046 2057])
+                    ("TIsol" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2062 2074])
+                    ("EIsol" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2078 2090])
+                    ("SumpTOverpT" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2094 2112])
+                    ("Pt" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2116 2125])
+                    ("I" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2130 2138])
+                    ("TOF" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2143 2153])
+                    ("HSCPE" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2157 2169])
+                    ("NVTrack" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2173 2187])
+                    ("Stations" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2191 2206])
+                    ("Dxy" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2210 2220])
+                    ("Dz" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2224 2233])
+                    ("SegSep" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2237 2250])
+                    ("FailDz" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2254 2267])
+                    ("Basic" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2271 2283])
+                    ("HSCPE_SystP" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2288 2306])
+                    ("HSCPE_SystI" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2310 2328])
+                    ("HSCPE_SystM" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2332 2350])
+                    ("HSCPE_SystT" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2354 2372])
+                    ("HSCPE_SystPU" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2376 2395])
+                    ("HSCPE_SystH" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2399 2417])
+                    ("Beta_Gen" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2422 2437])
+                    ("Beta_GenCharged" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2441 2463])
+                    ("Beta_Triggered" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2467 2488])
+                    ("Beta_Matched" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2492 2511])
+                    ("Beta_PreselectedA" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2515 2539])
+                    ("Beta_PreselectedB" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2543 2567])
+                    ("Beta_PreselectedC" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2571 2595])
+                    ("Beta_SelectedP" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2599 2620])
+                    ("Beta_SelectedI" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2624 2645])
+                    ("Beta_SelectedT" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2649 2670])
+                    ("BS_V3D" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2675 2689])
+                    ("BS_Chi2" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2693 2708])
+                    ("BS_Qual" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2712 2727])
+                    ("BS_TNOH" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2731 2746])
+                    ("BS_TNOH_PUA" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2750 2769])
+                    ("BS_TNOH_PUB" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2773 2792])
+                    ("BS_TNOHFraction" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2796 2819])
+                    ("BS_TNOPH" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2823 2839])
+                    ("BS_Eta" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2843 2857])
+                    ("BS_TNOM" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2861 2876])
+                    ("BS_TNOM_PUA" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2880 2899])
+                    ("BS_TNOM_PUB" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2903 2922])
+                    ("BS_NOMoNOHvsPV" variable
+                       (:pointer 1
+                        :type ("TProfile" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2926 2952])
+                    ("BS_nDof" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2956 2971])
+                    ("BS_TOFError" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2975 2994])
+                    ("BS_Pterr" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [2998 3014])
+                    ("BS_MPt" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [3018 3032])
+                    ("BS_MIs" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [3037 3051])
+                    ("BS_MIm" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [3056 3070])
+                    ("BS_MTOF" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [3075 3090])
+                    ("BS_TIsol" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [3094 3110])
+                    ("BS_EIsol" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [3114 3130])
+                    ("BS_SumpTOverpT" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [3134 3156])
+                    ("BS_dR_NVTrack" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [3160 3181])
+                    ("BS_MatchedStations" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [3185 3211])
+                    ("BS_NVertex" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [3215 3233])
+                    ("BS_NVertex_NoEventWeight" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [3237 3269])
+                    ("BS_PV" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [3273 3286])
+                    ("BS_PV_NoEventWeight" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [3290 3317])
+                    ("BS_dzAll" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [3321 3337])
+                    ("BS_dxyAll" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [3341 3358])
+                    ("BS_dzMinv3d" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [3362 3381])
+                    ("BS_dxyMinv3d" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [3385 3405])
+                    ("BS_SegSep" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [3409 3426])
+                    ("BS_SegMinPhiSep" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [3430 3453])
+                    ("BS_SegMinEtaSep" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [3457 3480])
+                    ("BS_SegMinEtaSep_FailDz" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [3484 3514])
+                    ("BS_SegMinEtaSep_PassDz" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [3518 3548])
+                    ("BS_Dz_FailSep" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [3552 3573])
+                    ("BS_InnerInvPtDiff" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [3577 3602])
+                    ("BS_Phi" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [3606 3620])
+                    ("BS_TimeAtIP" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [3624 3643])
+                    ("BS_OpenAngle" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [3647 3667])
+                    ("BS_OpenAngle_Cosmic" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [3671 3698])
+                    ("BS_Pt_FailDz" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [3703 3723])
+                    ("BS_Pt_FailDz_DT" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [3727 3750])
+                    ("BS_Pt_FailDz_CSC" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [3754 3778])
+                    ("BS_TOF_FailDz" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [3782 3803])
+                    ("BS_TOF_FailDz_DT" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [3807 3831])
+                    ("BS_TOF_FailDz_CSC" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [3835 3860])
+                    ("BS_Dxy" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [3864 3878])
+                    ("BS_Dxy_Cosmic" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [3882 3903])
+                    ("BS_Dz" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [3907 3920])
+                    ("BS_Dz_Cosmic" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [3924 3944])
+                    ("BS_Dz_CSC" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [3948 3965])
+                    ("BS_Dz_DT" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [3969 3985])
+                    ("BS_Pt_Binned" variable
+                       (:pointer 1
+                        :dereference 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [3989 4022])
+                    ("BS_TOF_Binned" variable
+                       (:pointer 1
+                        :dereference 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [4026 4060])
+                    ("AS_Eta_RegionA" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [4066 4087])
+                    ("AS_Eta_RegionB" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [4091 4112])
+                    ("AS_Eta_RegionC" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [4116 4137])
+                    ("AS_Eta_RegionD" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [4141 4162])
+                    ("AS_Eta_RegionE" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [4166 4187])
+                    ("AS_Eta_RegionF" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [4191 4212])
+                    ("AS_Eta_RegionG" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [4216 4237])
+                    ("AS_Eta_RegionH" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [4241 4262])
+                    ("BS_P" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [4267 4279])
+                    ("AS_P" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [4284 4296])
+                    ("BS_Pt" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [4300 4313])
+                    ("AS_Pt" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [4317 4330])
+                    ("BS_Pt_PUA" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [4334 4351])
+                    ("BS_Pt_PUB" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [4355 4372])
+                    ("BS_Pt_DT" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [4376 4392])
+                    ("BS_Pt_CSC" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [4396 4413])
+                    ("BS_Is" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [4417 4430])
+                    ("AS_Is" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [4434 4447])
+                    ("BS_Is_PUA" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [4451 4468])
+                    ("BS_Is_PUB" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [4472 4489])
+                    ("BS_Im" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [4493 4506])
+                    ("AS_Im" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [4517 4530])
+                    ("BS_Im_PUA" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [4534 4551])
+                    ("BS_Im_PUB" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [4555 4572])
+                    ("BS_TOF" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [4576 4590])
+                    ("AS_TOF" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [4600 4614])
+                    ("BS_TOF_PUA" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [4618 4636])
+                    ("BS_TOF_PUB" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [4640 4658])
+                    ("BS_TOF_DT" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [4662 4679])
+                    ("BS_TOF_CSC" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [4683 4701])
+                    ("BS_Is_Cosmic" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [4705 4725])
+                    ("BS_Pt_Cosmic" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [4729 4749])
+                    ("BS_EtaIs" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [4756 4772])
+                    ("BS_EtaIm" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [4802 4818])
+                    ("BS_EtaP" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [4848 4863])
+                    ("BS_EtaPt" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [4888 4904])
+                    ("BS_EtaTOF" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [4930 4947])
+                    ("BS_EtaDz" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [4977 4993])
+                    ("BS_PIs" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [4999 5013])
+                    ("AS_PIs" variable
+                       (:pointer 1
+                        :type ("TH3F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5017 5031])
+                    ("BS_PImHD" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5035 5051])
+                    ("BS_PIm" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5056 5070])
+                    ("AS_PIm" variable
+                       (:pointer 1
+                        :type ("TH3F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5080 5094])
+                    ("BS_PtIs" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5098 5113])
+                    ("AS_PtIs" variable
+                       (:pointer 1
+                        :type ("TH3F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5122 5137])
+                    ("BS_PtIm" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5141 5156])
+                    ("AS_PtIm" variable
+                       (:pointer 1
+                        :type ("TH3F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5165 5180])
+                    ("BS_PtTOF" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5184 5200])
+                    ("BS_TOFIs" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5204 5220])
+                    ("AS_TOFIs" variable
+                       (:pointer 1
+                        :type ("TH3F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5228 5244])
+                    ("BS_TOFIm" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5250 5266])
+                    ("AS_TOFIm" variable
+                       (:pointer 1
+                        :type ("TH3F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5274 5290])
+                    ("H_A" variable
+                       (:pointer 1
+                        :type ("TH1D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5323 5333])
+                    ("H_B" variable
+                       (:pointer 1
+                        :type ("TH1D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5336 5346])
+                    ("H_C" variable
+                       (:pointer 1
+                        :type ("TH1D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5349 5359])
+                    ("H_D" variable
+                       (:pointer 1
+                        :type ("TH1D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5362 5372])
+                    ("H_E" variable
+                       (:pointer 1
+                        :type ("TH1D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5375 5385])
+                    ("H_F" variable
+                       (:pointer 1
+                        :type ("TH1D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5388 5398])
+                    ("H_G" variable
+                       (:pointer 1
+                        :type ("TH1D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5401 5411])
+                    ("H_H" variable
+                       (:pointer 1
+                        :type ("TH1D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5414 5424])
+                    ("H_B_Binned" variable
+                       (:pointer 1
+                        :dereference 1
+                        :type ("TH1D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5537 5567])
+                    ("H_D_Binned" variable
+                       (:pointer 1
+                        :dereference 1
+                        :type ("TH1D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5570 5600])
+                    ("H_F_Binned" variable
+                       (:pointer 1
+                        :dereference 1
+                        :type ("TH1D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5603 5633])
+                    ("H_H_Binned" variable
+                       (:pointer 1
+                        :dereference 1
+                        :type ("TH1D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5636 5666])
+                    ("HCuts_Pt" variable
+                       (:pointer 1
+                        :type ("TH1D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5670 5686])
+                    ("HCuts_Is" variable
+                       (:pointer 1
+                        :type ("TH1D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5689 5705])
+                    ("HCuts_TOF" variable
+                       (:pointer 1
+                        :type ("TH1D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5708 5725])
+                    ("Hist_Pt" variable
+                       (:pointer 1
+                        :type ("TH1D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5729 5745])
+                    ("Hist_Is" variable
+                       (:pointer 1
+                        :type ("TH1D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5748 5765])
+                    ("Hist_TOF" variable
+                       (:pointer 1
+                        :type ("TH1D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5768 5784])
+                    ("Pred_EtaP" variable
+                       (:pointer 1
+                        :type ("TH3D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5788 5806])
+                    ("Pred_I" variable
+                       (:pointer 1
+                        :type ("TH2D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5809 5827])
+                    ("Pred_TOF" variable
+                       (:pointer 1
+                        :type ("TH2D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5830 5848])
+                    ("Pred_EtaB" variable
+                       (:pointer 1
+                        :type ("TH2D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5851 5868])
+                    ("Pred_EtaS" variable
+                       (:pointer 1
+                        :type ("TH2D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5871 5888])
+                    ("Pred_EtaS2" variable
+                       (:pointer 1
+                        :type ("TH2D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5891 5909])
+                    ("RegionD_P" variable
+                       (:pointer 1
+                        :type ("TH2D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5913 5930])
+                    ("RegionD_I" variable
+                       (:pointer 1
+                        :type ("TH2D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5933 5950])
+                    ("RegionD_Ias" variable
+                       (:pointer 1
+                        :type ("TH2D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5953 5972])
+                    ("RegionD_TOF" variable
+                       (:pointer 1
+                        :type ("TH2D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5975 5994])
+                    ("RegionH_Ias" variable
+                       (:pointer 1
+                        :type ("TH2D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [5998 6017])
+                    ("H_A_Flip" variable
+                       (:pointer 1
+                        :type ("TH1D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [6021 6036])
+                    ("H_B_Flip" variable
+                       (:pointer 1
+                        :type ("TH1D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [6039 6054])
+                    ("H_C_Flip" variable
+                       (:pointer 1
+                        :type ("TH1D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [6057 6072])
+                    ("H_D_Flip" variable
+                       (:pointer 1
+                        :type ("TH1D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [6075 6090])
+                    ("H_E_Flip" variable
+                       (:pointer 1
+                        :type ("TH1D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [6093 6108])
+                    ("H_F_Flip" variable
+                       (:pointer 1
+                        :type ("TH1D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [6111 6126])
+                    ("H_G_Flip" variable
+                       (:pointer 1
+                        :type ("TH1D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [6129 6144])
+                    ("H_H_Flip" variable
+                       (:pointer 1
+                        :type ("TH1D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [6147 6162])
+                    ("H_B_Binned_Flip" variable
+                       (:pointer 1
+                        :dereference 1
+                        :type ("TH1D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [6166 6201])
+                    ("H_D_Binned_Flip" variable
+                       (:pointer 1
+                        :dereference 1
+                        :type ("TH1D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [6204 6239])
+                    ("H_F_Binned_Flip" variable
+                       (:pointer 1
+                        :dereference 1
+                        :type ("TH1D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [6242 6277])
+                    ("H_H_Binned_Flip" variable
+                       (:pointer 1
+                        :dereference 1
+                        :type ("TH1D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [6280 6315])
+                    ("Pred_EtaP_Flip" variable
+                       (:pointer 1
+                        :type ("TH3D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [6319 6342])
+                    ("Pred_I_Flip" variable
+                       (:pointer 1
+                        :type ("TH2D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [6345 6368])
+                    ("Pred_TOF_Flip" variable
+                       (:pointer 1
+                        :type ("TH2D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [6371 6394])
+                    ("Pred_EtaB_Flip" variable
+                       (:pointer 1
+                        :type ("TH2D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [6397 6419])
+                    ("Pred_EtaS_Flip" variable
+                       (:pointer 1
+                        :type ("TH2D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [6422 6444])
+                    ("Pred_EtaS2_Flip" variable
+                       (:pointer 1
+                        :type ("TH2D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [6447 6470])
+                    ("RegionD_P_Flip" variable
+                       (:pointer 1
+                        :type ("TH2D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [6474 6496])
+                    ("RegionD_I_Flip" variable
+                       (:pointer 1
+                        :type ("TH2D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [6499 6521])
+                    ("RegionD_Ias_Flip" variable
+                       (:pointer 1
+                        :type ("TH2D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [6524 6548])
+                    ("RegionD_TOF_Flip" variable
+                       (:pointer 1
+                        :type ("TH2D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [6551 6575])
+                    ("RegionH_Ias_Flip" variable
+                       (:pointer 1
+                        :type ("TH2D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [6579 6603])
+                    ("H_D_DzSidebands" variable
+                       (:pointer 1
+                        :type ("TH2D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [6607 6629])
+                    ("genrecopT" variable
+                       (:pointer 1
+                        :type ("TH2F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [6633 6650])
+                    ("genlevelpT" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [6653 6671])
+                    ("genleveleta" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [6674 6693])
+                    ("genlevelbeta" variable
+                       (:pointer 1
+                        :type ("TH1F" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [6696 6716])
+                    ("CtrlPt_S1_Is" variable
+                       (:pointer 1
+                        :type ("TH1D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [6720 6740])
+                    ("CtrlPt_S2_Is" variable
+                       (:pointer 1
+                        :type ("TH1D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [6743 6763])
+                    ("CtrlPt_S3_Is" variable
+                       (:pointer 1
+                        :type ("TH1D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [6766 6786])
+                    ("CtrlPt_S4_Is" variable
+                       (:pointer 1
+                        :type ("TH1D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [6789 6809])
+                    ("CtrlIs_S1_TOF" variable
+                       (:pointer 1
+                        :type ("TH1D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [6813 6834])
+                    ("CtrlIs_S2_TOF" variable
+                       (:pointer 1
+                        :type ("TH1D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [6837 6858])
+                    ("CtrlIs_S3_TOF" variable
+                       (:pointer 1
+                        :type ("TH1D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [6861 6882])
+                    ("CtrlIs_S4_TOF" variable
+                       (:pointer 1
+                        :type ("TH1D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [6885 6906])
+                    ("CtrlIm_S1_TOF" variable
+                       (:pointer 1
+                        :type ("TH1D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [6910 6931])
+                    ("CtrlIm_S2_TOF" variable
+                       (:pointer 1
+                        :type ("TH1D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [6934 6955])
+                    ("CtrlIm_S3_TOF" variable
+                       (:pointer 1
+                        :type ("TH1D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [6958 6979])
+                    ("CtrlIm_S4_TOF" variable
+                       (:pointer 1
+                        :type ("TH1D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [6982 7003])
+                    ("CtrlPt_S1_Im" variable
+                       (:pointer 1
+                        :type ("TH1D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [7007 7027])
+                    ("CtrlPt_S2_Im" variable
+                       (:pointer 1
+                        :type ("TH1D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [7030 7050])
+                    ("CtrlPt_S3_Im" variable
+                       (:pointer 1
+                        :type ("TH1D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [7053 7073])
+                    ("CtrlPt_S4_Im" variable
+                       (:pointer 1
+                        :type ("TH1D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [7076 7096])
+                    ("CtrlPt_S1_TOF" variable
+                       (:pointer 1
+                        :type ("TH1D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [7100 7121])
+                    ("CtrlPt_S2_TOF" variable
+                       (:pointer 1
+                        :type ("TH1D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [7124 7145])
+                    ("CtrlPt_S3_TOF" variable
+                       (:pointer 1
+                        :type ("TH1D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [7148 7169])
+                    ("CtrlPt_S4_TOF" variable
+                       (:pointer 1
+                        :type ("TH1D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [7172 7193])
+                    ("CtrlPt_S1_TOF_Binned" variable
+                       (:pointer 1
+                        :dereference 1
+                        :type ("TH1D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [7197 7237])
+                    ("CtrlPt_S2_TOF_Binned" variable
+                       (:pointer 1
+                        :dereference 1
+                        :type ("TH1D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [7240 7280])
+                    ("CtrlPt_S3_TOF_Binned" variable
+                       (:pointer 1
+                        :dereference 1
+                        :type ("TH1D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [7283 7323])
+                    ("CtrlPt_S4_TOF_Binned" variable
+                       (:pointer 1
+                        :dereference 1
+                        :type ("TH1D" type (:type "class") nil nil))
+                        (reparse-symbol classsubparts) [7326 7366]))                  
+                :type "struct")
+                nil [170 7369])
+            ("stPlots_Init" function
+               (:arguments 
+                  ( ("HistoFile" variable
+                       (:pointer 1
+                        :type ("TFile" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [7702 7719])
+                    ("st" variable
+                       (:reference 1
+                        :type ("stPlots" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [7720 7732])
+                    ("BaseName" variable (:type ("std::string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [7733 7754])
+                    ("NCuts" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [7755 7774])
+                    ("SkipSelectionPlot" variable
+                       (:default-value "false"
+                        :type "bool")
+                        (reparse-symbol arg-sub-list) [7775 7803])
+                    ("isSignal" variable
+                       (:default-value "true"
+                        :type "bool")
+                        (reparse-symbol arg-sub-list) [7805 7823])
+                    ("NCuts_Flip" variable
+                       (:default-value "0"
+                        :type "unsigned int")
+                        (reparse-symbol arg-sub-list) [7825 7850]))                  
+                :type "void")
+                nil [7684 47801])
+            ("stPlots_InitFromFile" function
+               (:arguments 
+                  ( ("HistoFile" variable
+                       (:pointer 1
+                        :type ("TFile" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [47881 47898])
+                    ("st" variable
+                       (:reference 1
+                        :type ("stPlots" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [47899 47911])
+                    ("BaseName" variable (:type ("std::string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [47912 47933]))                  
+                :type "bool")
+                nil [47855 67310])
+            ("stPlots_Clear" function
+               (:arguments 
+                  ( ("st" variable
+                       (:pointer 1
+                        :type ("stPlots" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [67430 67442])
+                    ("WriteFirst" variable
+                       (:default-value "false"
+                        :type "bool")
+                        (reparse-symbol arg-sub-list) [67443 67464]))                  
+                :type "void")
+                nil [67411 67641])
+            ("stPlots_FillTree" function
+               (:arguments 
+                  ( ("st" variable
+                       (:pointer 1
+                        :type ("stPlots" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [67811 67823])
+                    ("Run" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [67824 67841])
+                    ("Event" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [67842 67861])
+                    ("Hscp" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [67862 67880])
+                    ("Pt" variable (:type "double") (reparse-symbol arg-sub-list) [67881 67891])
+                    ("I" variable (:type "double") (reparse-symbol arg-sub-list) [67892 67901])
+                    ("Ih" variable (:type "double") (reparse-symbol arg-sub-list) [67902 67912])
+                    ("TOF" variable (:type "double") (reparse-symbol arg-sub-list) [67913 67924])
+                    ("Mass" variable (:type "double") (reparse-symbol arg-sub-list) [67925 67937])
+                    ("dZ" variable (:type "double") (reparse-symbol arg-sub-list) [67938 67948])
+                    ("dXY" variable (:type "double") (reparse-symbol arg-sub-list) [67949 67960])
+                    ("dR" variable (:type "double") (reparse-symbol arg-sub-list) [67961 67971])
+                    ("eta" variable (:type "double") (reparse-symbol arg-sub-list) [67972 67983])
+                    ("phi" variable (:type "double") (reparse-symbol arg-sub-list) [67984 67995])
+                    ("hasMuon" variable (:type "bool") (reparse-symbol arg-sub-list) [67996 68009])
+                    ("MaxEntry" variable
+                       (:default-value "20000"
+                        :type "int")
+                        (reparse-symbol arg-sub-list) [68010 68028]))                  
+                :type "void")
+                nil [67789 68470])
+            ("stPlots_FillTreeGEN" function
+               (:arguments 
+                  ( ("st" variable
+                       (:pointer 1
+                        :type ("stPlots" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [68497 68509])
+                    ("Run" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [68510 68527])
+                    ("Event" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [68528 68547])
+                    ("Gen" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [68548 68565])
+                    ("Pt" variable (:type "double") (reparse-symbol arg-sub-list) [68566 68576])
+                    ("Mass" variable (:type "double") (reparse-symbol arg-sub-list) [68577 68589])
+                    ("PDG" variable (:type "int") (reparse-symbol arg-sub-list) [68590 68598])
+                    ("Status" variable (:type "int") (reparse-symbol arg-sub-list) [68599 68610])
+                    ("eta" variable (:type "double") (reparse-symbol arg-sub-list) [68611 68622])
+                    ("phi" variable (:type "double") (reparse-symbol arg-sub-list) [68623 68634])
+                    ("charge" variable (:type "int") (reparse-symbol arg-sub-list) [68635 68646])
+                    ("MaxEntry" variable
+                       (:default-value "20000"
+                        :type "int")
+                        (reparse-symbol arg-sub-list) [68646 68666]))                  
+                :type "void")
+                nil [68472 69997])
+            ("stPlots_Dump" function
+               (:arguments 
+                  ( ("st" variable
+                       (:reference 1
+                        :type ("stPlots" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [70075 70087])
+                    ("pFile" variable
+                       (:pointer 1
+                        :type ("FILE" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [70088 70100])
+                    ("CutIndex" variable (:type "int") (reparse-symbol arg-sub-list) [70101 70114]))                  
+                :type "void")
+                nil [70057 81315])
+            ("stPlots_Draw" function
+               (:arguments 
+                  ( ("st" variable
+                       (:reference 1
+                        :type ("stPlots" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [81451 81463])
+                    ("SavePath" variable (:type ("std::string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [81464 81485])
+                    ("LegendTitle" variable (:type ("std::string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [81486 81510])
+                    ("CutIndex" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [81511 81533]))                  
+                :type "void")
+                nil [81433 115760])
+            ("stPlots_DrawComparison" function
+               (:arguments 
+                  ( ("SavePath" variable (:type ("std::string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [115896 115917])
+                    ("LegendTitle" variable (:type ("std::string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [115918 115942])
+                    ("CutIndex" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [115943 115965])
+                    ("CutIndexTight" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [115966 115993])
+                    ("st1" variable
+                       (:pointer 1
+                        :type ("stPlots" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [115994 116007])
+                    ("st2" variable
+                       (:pointer 1
+                        :default-value "NULL"
+                        :type ("stPlots" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [116008 116025])
+                    ("st3" variable
+                       (:pointer 1
+                        :default-value "NULL"
+                        :type ("stPlots" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [116027 116044])
+                    ("st4" variable
+                       (:pointer 1
+                        :default-value "NULL"
+                        :type ("stPlots" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [116046 116063])
+                    ("st5" variable
+                       (:pointer 1
+                        :default-value "NULL"
+                        :type ("stPlots" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [116065 116082])
+                    ("st6" variable
+                       (:pointer 1
+                        :default-value "NULL"
+                        :type ("stPlots" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [116084 116101])
+                    ("st7" variable
+                       (:pointer 1
+                        :default-value "NULL"
+                        :type ("stPlots" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [116103 116120]))                  
+                :type "void")
+                nil [115868 164384]))          
+      :file "Analysis_PlotStructure.h"
+      :pointmax 164385
+      :fsize 164384
+      :lastmodtime '(22157 54173)
+      :unmatched-syntax nil)
+    (semanticdb-table "Analysis_Step3_MakePlots.C"
+      :major-mode 'c++-mode
+      :tags 
+        '( ("Analysis_Global.h" include nil nil [39 67])
+            ("Analysis_Global.h" include nil nil [69 97])
+            ("Analysis_CommonFunction.h" include nil nil [98 134])
+            ("Analysis_PlotFunction.h" include nil nil [135 169])
+            ("Analysis_PlotStructure.h" include nil nil [170 205])
+            ("Analysis_Samples.h" include nil nil [206 235])
+            ("tdrstyle.C" include nil nil [236 257])
+            ("Math/QuantFuncMathCore.h" include nil nil [258 293])
+            ("TMath.h" include nil nil [294 312])
+            ("TGraphAsymmErrors.h" include nil nil [313 343])
+            ("TPaletteAxis.h" include nil nil [344 369])
+            ("TColor.h" include nil nil [370 389])
+            ("TLatex.h" include nil nil [390 409])
+            ("std" using (:type ("std" type
+                 (:prototype t
+                  :type "namespace")
+                  nil nil)) nil [411 431])
+            ("MassPrediction" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("InputPattern" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [533 553])
+                    ("CutIndex" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [554 576])
+                    ("HistoSuffix" variable
+                       (:default-value "\"Mass\""
+                        :type ("string" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [577 602])
+                    ("showMC" variable
+                       (:default-value "true"
+                        :type "bool")
+                        (reparse-symbol arg-sub-list) [604 620])
+                    ("Data" variable
+                       (:default-value "\"Data13TeV\""
+                        :type ("string" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [622 645]))                  
+                :type "void")
+                nil [513 647])
+            ("PredictionAndControlPlot" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("InputPattern" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [678 698])
+                    ("Data" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [699 711])
+                    ("CutIndex" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [712 734])
+                    ("CutIndex_Flip" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [735 762]))                  
+                :type "void")
+                nil [648 763])
+            ("CutFlow" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("InputPattern" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [777 797])
+                    ("CutIndex" variable
+                       (:default-value "0"
+                        :type "unsigned int")
+                        (reparse-symbol arg-sub-list) [798 821]))                  
+                :type "void")
+                nil [764 823])
+            ("CutFlowPlot" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("InputPattern" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [841 861])
+                    ("CutIndex" variable
+                       (:default-value "4"
+                        :type "unsigned int")
+                        (reparse-symbol arg-sub-list) [862 885])
+                    ("ylow" variable
+                       (:default-value "8e-3"
+                        :type "double")
+                        (reparse-symbol arg-sub-list) [887 903])
+                    ("yhigh" variable
+                       (:default-value "1.5e+7"
+                        :type "double")
+                        (reparse-symbol arg-sub-list) [905 924])
+                    ("setLog" variable
+                       (:default-value "true"
+                        :type "bool")
+                        (reparse-symbol arg-sub-list) [926 942]))                  
+                :type "void")
+                nil [824 944])
+            ("SelectionPlot" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("InputPattern" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [965 985])
+                    ("CutIndex" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [986 1008])
+                    ("CutIndexTight" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [1009 1036]))                  
+                :type "void")
+                nil [945 1037])
+            ("Make2DPlot_Core" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("ResultPattern" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [1060 1081])
+                    ("CutIndex" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [1082 1104]))                  
+                :type "void")
+                nil [1039 1105])
+            ("SignalMassPlot" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("InputPattern" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [1126 1146])
+                    ("CutIndex" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [1147 1169]))                  
+                :type "void")
+                nil [1106 1170])
+            ("GetSystematicOnPrediction" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("InputPattern" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [1202 1222])
+                    ("DataName" variable
+                       (:default-value "\"Data8TeV\""
+                        :type ("string" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [1223 1249]))                  
+                :type "void")
+                nil [1171 1251])
+            ("MakeExpLimitpLot" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("Input" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [1274 1287])
+                    ("Output" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [1288 1302]))                  
+                :type "void")
+                nil [1252 1303])
+            ("CosmicBackgroundSystematic" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("InputPattern" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [1336 1356])
+                    ("DataType" variable
+                       (:default-value "\"8TeV\""
+                        :type ("string" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [1357 1379]))                  
+                :type "void")
+                nil [1304 1381])
+            ("CheckPrediction" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("InputPattern" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [1403 1423])
+                    ("HistoSuffix" variable
+                       (:default-value "\"_Flip\""
+                        :type ("string" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [1424 1450])
+                    ("DataType" variable
+                       (:default-value "\"Data8TeV\""
+                        :type ("string" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [1452 1478]))                  
+                :type "void")
+                nil [1382 1480])
+            ("CheckPredictionBin" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("InputPattern" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [1505 1525])
+                    ("HistoSuffix" variable
+                       (:default-value "\"_Flip\""
+                        :type ("string" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [1526 1552])
+                    ("DataType" variable
+                       (:default-value "\"Data8TeV\""
+                        :type ("string" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [1554 1580])
+                    ("bin" variable
+                       (:default-value "\"\""
+                        :type ("string" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [1582 1595]))                  
+                :type "void")
+                nil [1481 1597])
+            ("CollisionBackgroundSystematicFromFlip" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("InputPattern" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [1641 1661])
+                    ("DataType" variable
+                       (:default-value "\"Data8TeV\""
+                        :type ("string" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [1662 1688]))                  
+                :type "void")
+                nil [1598 1690])
+            ("Make2DPlot_Special" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("ResultPattern" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [1716 1737])
+                    ("ResultPattern2" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [1737 1759]))                  
+                :type "void")
+                nil [1692 1760])
+            ("CompareRecoAndGenPt" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("ResultPattern" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [1814 1835]))                  
+                :type "void")
+                nil [1789 1836])
+            ("CheckPUDistribution" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("InputPattern" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [1862 1882])
+                    ("CutIndex" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [1883 1905]))                  
+                :type "void")
+                nil [1837 1906])
+            ("samples" variable (:type ("std::vector" type
+                 (:template-specifier 
+                    ( ("stSample" type nil nil nil))                    
+                  :type "class")
+                  nil nil)) nil [1909 1939])
+            ("Analysis_Step3_MakePlots" function (:type "void") nil [2016 12896])
+            ("MassPrediction" function
+               (:arguments 
+                  ( ("InputPattern" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [13197 13217])
+                    ("CutIndex" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [13218 13240])
+                    ("HistoSuffix" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [13241 13260])
+                    ("showMC" variable (:type "bool") (reparse-symbol arg-sub-list) [13261 13273])
+                    ("DataName" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [13274 13290]))                  
+                :type "void")
+                nil [13177 34370])
+            ("PredictionAndControlPlot" function
+               (:arguments 
+                  ( ("InputPattern" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [34466 34486])
+                    ("Data" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [34487 34499])
+                    ("CutIndex" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [34500 34522])
+                    ("CutIndex_Flip" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [34523 34550]))                  
+                :type "void")
+                nil [34436 71939])
+            ("CutFlow" function
+               (:arguments 
+                  ( ("InputPattern" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [72023 72043])
+                    ("CutIndex" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [72044 72066]))                  
+                :type "void")
+                nil [72010 74076])
+            ("CutFlowPlot" function
+               (:arguments 
+                  ( ("InputPattern" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [74095 74115])
+                    ("CutIndex" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [74116 74138])
+                    ("ylow" variable (:type "double") (reparse-symbol arg-sub-list) [74139 74151])
+                    ("yhigh" variable (:type "double") (reparse-symbol arg-sub-list) [74152 74165])
+                    ("setLog" variable (:type "bool") (reparse-symbol arg-sub-list) [74166 74178]))                  
+                :type "void")
+                nil [74078 84985])
+            ("SelectionPlot" function
+               (:arguments 
+                  ( ("InputPattern" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [85108 85128])
+                    ("CutIndex" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [85129 85151])
+                    ("CutIndexTight" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [85152 85179]))                  
+                :type "void")
+                nil [85089 93507])
+            ("GetSystematicOnPrediction" function
+               (:arguments 
+                  ( ("InputPattern" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [93670 93690])
+                    ("DataName" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [93691 93707]))                  
+                :type "void")
+                nil [93639 115450])
+            ("SignalMassPlot" function
+               (:arguments 
+                  ( ("InputPattern" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [115867 115887])
+                    ("CutIndex" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [115888 115910]))                  
+                :type "void")
+                nil [115847 117126])
+            ("Make2DPlot_Core" function
+               (:arguments 
+                  ( ("InputPattern" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [117151 117171])
+                    ("CutIndex" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [117172 117194]))                  
+                :type "void")
+                nil [117130 137114])
+            ("MakeExpLimitpLot" function
+               (:arguments 
+                  ( ("Input" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [137139 137152])
+                    ("Output" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [137153 137167]))                  
+                :type "void")
+                nil [137117 138876])
+            ("CosmicBackgroundSystematic" function
+               (:arguments 
+                  ( ("InputPattern" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [138911 138931])
+                    ("DataType" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [138932 138948]))                  
+                :type "void")
+                nil [138879 146451])
+            ("CheckPrediction" function
+               (:arguments 
+                  ( ("InputPattern" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [146476 146496])
+                    ("HistoSuffix" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [146497 146516])
+                    ("DataType" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [146517 146533]))                  
+                :type "void")
+                nil [146455 152518])
+            ("CollisionBackgroundSystematicFromFlip" function
+               (:arguments 
+                  ( ("InputPattern" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [152564 152584])
+                    ("DataType" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [152585 152601]))                  
+                :type "void")
+                nil [152521 171092])
+            ("CheckPredictionBin" function
+               (:arguments 
+                  ( ("InputPattern" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [171122 171142])
+                    ("HistoSuffix" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [171143 171162])
+                    ("DataType" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [171163 171179])
+                    ("bin" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [171180 171191]))                  
+                :type "void")
+                nil [171098 176277])
+            ("Make2DPlot_Special" function
+               (:arguments 
+                  ( ("InputPattern" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [176306 176326])
+                    ("InputPattern2" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [176327 176348]))                  
+                :type "void")
+                nil [176282 184288])
+            ("CompareRecoAndGenPt" function
+               (:arguments 
+                  ( ("InputPattern" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [184315 184335]))                  
+                :type "void")
+                nil [184290 187432])
+            ("CheckPUDistribution" function
+               (:arguments 
+                  ( ("InputPattern" variable (:type ("string" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [187460 187480])
+                    ("CutIndex" variable (:type "unsigned int") (reparse-symbol arg-sub-list) [187481 187503]))                  
+                :type "void")
+                nil [187435 189308]))          
+      :file "Analysis_Step3_MakePlots.C"
+      :pointmax 190176
+      :fsize 190175
+      :lastmodtime '(22220 29927)
+      :unmatched-syntax nil)
+
+    (semanticdb-table "Analysis_Step1_EventLoop.C"
+      :major-mode 'c++-mode
+      :tags 
+        '( ("reco" type
+               (:members 
+                  ( ("Vertex" type
+                       (:prototype t
+                        :type "class")
+                        (reparse-symbol namespacesubparts) [61 74])
+                    ("Track" type
+                       (:prototype t
+                        :type "class")
+                        (reparse-symbol namespacesubparts) [75 87])
+                    ("GenParticle" type
+                       (:prototype t
+                        :type "class")
+                        (reparse-symbol namespacesubparts) [88 106])
+                    ("DeDxData" type
+                       (:prototype t
+                        :type "class")
+                        (reparse-symbol namespacesubparts) [107 122])
+                    ("MuonTimeExtra" type
+                       (:prototype t
+                        :type "class")
+                        (reparse-symbol namespacesubparts) [123 143])
+                    ("PFMET" type
+                       (:prototype t
+                        :type "class")
+                        (reparse-symbol namespacesubparts) [144 156])
+                    ("HitPattern" type
+                       (:prototype t
+                        :type "class")
+                        (reparse-symbol namespacesubparts) [157 174]))                  
+                :type "namespace")
+                nil [41 175])
+            ("susybsm" type
+               (:members 
+                  ( ("HSCParticle" type
+                       (:prototype t
+                        :type "class")
+                        (reparse-symbol namespacesubparts) [196 214])
+                    ("HSCPIsolation" type
+                       (:prototype t
+                        :type "class")
+                        (reparse-symbol namespacesubparts) [215 235])
+                    ("MuonSegment" type
+                       (:prototype t
+                        :type "class")
+                        (reparse-symbol namespacesubparts) [236 254])
+                    ("HSCPDeDxInfo" type
+                       (:prototype t
+                        :type "class")
+                        (reparse-symbol namespacesubparts) [255 274]))                  
+                :type "namespace")
+                nil [176 275])
+            ("fwlite" type
+               (:members 
+                  ( ("ChainEvent" type
+                       (:prototype t
+                        :type "class")
+                        (reparse-symbol namespacesubparts) [296 313]))                  
+                :type "namespace")
+                nil [276 314])
+            ("trigger" type
+               (:members 
+                  ( ("TriggerEvent" type
+                       (:prototype t
+                        :type "class")
+                        (reparse-symbol namespacesubparts) [335 354]))                  
+                :type "namespace")
+                nil [315 355])
+            ("edm" type
+               (:members 
+                  ( ("TriggerResults" type
+                       (:prototype t
+                        :type "class")
+                        (reparse-symbol namespacesubparts) [376 397])
+                    ("TriggerResultsByName" type
+                       (:prototype t
+                        :type "class")
+                        (reparse-symbol namespacesubparts) [398 425])
+                    ("InputTag" type
+                       (:prototype t
+                        :type "class")
+                        (reparse-symbol namespacesubparts) [426 441])
+                    ("LumiReWeighting" type
+                       (:prototype t
+                        :type "class")
+                        (reparse-symbol namespacesubparts) [442 464]))                  
+                :type "namespace")
+                nil [356 465])
+            ("reweight" type
+               (:members 
+                  ( ("PoissonMeanShifter" type
+                       (:prototype t
+                        :type "class")
+                        (reparse-symbol namespacesubparts) [486 511]))                  
+                :type "namespace")
+                nil [466 512])
+            ("DataFormats/FWLite/interface/Handle.h" include nil nil [563 611])
+            ("DataFormats/FWLite/interface/Event.h" include nil nil [612 659])
+            ("DataFormats/FWLite/interface/ChainEvent.h" include nil nil [660 712])
+            ("DataFormats/Common/interface/MergeableCounter.h" include nil nil [713 771])
+            ("DataFormats/VertexReco/interface/Vertex.h" include nil nil [773 825])
+            ("DataFormats/HepMCCandidate/interface/GenParticle.h" include nil nil [826 887])
+            ("AnalysisDataFormats/SUSYBSMObjects/interface/HSCParticle.h" include nil nil [888 957])
+            ("AnalysisDataFormats/SUSYBSMObjects/interface/HSCPIsolation.h" include nil nil [958 1029])
+            ("AnalysisDataFormats/SUSYBSMObjects/interface/HSCPDeDxInfo.h" include nil nil [1030 1100])
+            ("DataFormats/TrackReco/interface/DeDxHitInfo.h" include nil nil [1101 1157])
+            ("AnalysisDataFormats/SUSYBSMObjects/interface/MuonSegment.h" include nil nil [1158 1227])
+            ("DataFormats/MuonReco/interface/MuonTimeExtraMap.h" include nil nil [1228 1288])
+            ("SimDataFormats/GeneratorProducts/interface/GenEventInfoProduct.h" include nil nil [1289 1364])
+            ("DataFormats/METReco/interface/PFMETCollection.h" include nil nil [1366 1424])
+            ("DataFormats/METReco/interface/PFMET.h" include nil nil [1425 1473])
+            ("DataFormats/HLTReco/interface/TriggerEvent.h" include nil nil [1475 1530])
+            ("DataFormats/HLTReco/interface/TriggerObject.h" include nil nil [1531 1587])
+            ("DataFormats/Common/interface/TriggerResults.h" include nil nil [1588 1644])
+            ("PhysicsTools/Utilities/interface/LumiReWeighting.h" include nil nil [1645 1706])
+            ("SimDataFormats/PileupSummaryInfo/interface/PileupSummaryInfo.h" include nil nil [1707 1780])
+            ("fwlite" using (:type ("fwlite" type
+                 (:prototype t
+                  :type "namespace")
+                  nil nil)) nil [1783 1806])
+            ("reco" using (:type ("reco" type
+                 (:prototype t
+                  :type "namespace")
+                  nil nil)) nil [1807 1828])
+            ("susybsm" using (:type ("susybsm" type
+                 (:prototype t
+                  :type "namespace")
+                  nil nil)) nil [1829 1853])
+            ("std" using (:type ("std" type
+                 (:prototype t
+                  :type "namespace")
+                  nil nil)) nil [1854 1874])
+            ("edm" using (:type ("edm" type
+                 (:prototype t
+                  :type "namespace")
+                  nil nil)) nil [1875 1895])
+            ("trigger" using (:type ("trigger" type
+                 (:prototype t
+                  :type "namespace")
+                  nil nil)) nil [1896 1920])
+            ("reweight" using (:type ("reweight" type
+                 (:prototype t
+                  :type "namespace")
+                  nil nil)) nil [1921 1946])
+            ("FWLITE" variable (:constant-flag t) nil [2035 2041])
+            ("Analysis_Global.h" include nil nil [2042 2070])
+            ("Analysis_CommonFunction.h" include nil nil [2071 2107])
+            ("Analysis_PlotFunction.h" include nil nil [2108 2142])
+            ("Analysis_PlotStructure.h" include nil nil [2143 2178])
+            ("Analysis_Samples.h" include nil nil [2179 2208])
+            ("Analysis_TOFUtility.h" include nil nil [2209 2241])
+            ("tdrstyle.C" include nil nil [2242 2263])
+            ("InitHistos" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("st" variable
+                       (:pointer 1
+                        :default-value "NULL"
+                        :type ("stPlots" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [2361 2377]))                  
+                :type "void")
+                nil [2345 2379])
+            ("Analysis_Step1_EventLoop" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("SavePath" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [2410 2425]))                  
+                :type "void")
+                nil [2380 2426])
+            ("PassTrigger" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("ev" variable
+                       (:reference 1
+                        :constant-flag t
+                        :type ("fwlite::ChainEvent" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [2445 2474])
+                    ("isData" variable (:type "bool") (reparse-symbol arg-sub-list) [2475 2487])
+                    ("isCosmic" variable
+                       (:default-value "false"
+                        :type "bool")
+                        (reparse-symbol arg-sub-list) [2488 2507]))                  
+                :type "bool")
+                nil [2428 2509])
+            ("PassPreselection" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("hscp" variable
+                       (:reference 1
+                        :constant-flag t
+                        :type ("susybsm::HSCParticle" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [2534 2567])
+                    ("dedxSObj" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type ("reco::DeDxData" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [2569 2600])
+                    ("dedxMObj" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type ("reco::DeDxData" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [2601 2632])
+                    ("tof" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type ("reco::MuonTimeExtra" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [2633 2664])
+                    ("dttof" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type ("reco::MuonTimeExtra" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [2665 2698])
+                    ("csctof" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type ("reco::MuonTimeExtra" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [2699 2733])
+                    ("ev" variable
+                       (:reference 1
+                        :constant-flag t
+                        :type ("fwlite::ChainEvent" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [2734 2763])
+                    ("st" variable
+                       (:pointer 1
+                        :default-value "NULL"
+                        :type ("stPlots" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [2764 2780])
+                    ("GenBeta" variable
+                       (:reference 1
+                        :constant-flag t
+                        :default-value "-1"
+                        :type "double")
+                        (reparse-symbol arg-sub-list) [2782 2806])
+                    ("RescaleP" variable
+                       (:default-value "false"
+                        :type "bool")
+                        (reparse-symbol arg-sub-list) [2808 2827])
+                    ("RescaleI" variable
+                       (:reference 1
+                        :constant-flag t
+                        :default-value "0.0"
+                        :type "double")
+                        (reparse-symbol arg-sub-list) [2829 2855])
+                    ("RescaleT" variable
+                       (:reference 1
+                        :constant-flag t
+                        :default-value "0.0"
+                        :type "double")
+                        (reparse-symbol arg-sub-list) [2857 2883]))                  
+                :type "bool")
+                nil [2510 2885])
+            ("PassSelection" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("hscp" variable
+                       (:reference 1
+                        :constant-flag t
+                        :type ("susybsm::HSCParticle" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [2905 2938])
+                    ("dedxSObj" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type ("reco::DeDxData" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [2940 2971])
+                    ("dedxMObj" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type ("reco::DeDxData" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [2972 3003])
+                    ("tof" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type ("reco::MuonTimeExtra" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [3004 3035])
+                    ("ev" variable
+                       (:reference 1
+                        :constant-flag t
+                        :type ("fwlite::ChainEvent" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [3036 3065])
+                    ("CutIndex" variable
+                       (:reference 1
+                        :constant-flag t
+                        :default-value "0"
+                        :type "int")
+                        (reparse-symbol arg-sub-list) [3066 3087])
+                    ("st" variable
+                       (:pointer 1
+                        :default-value "NULL"
+                        :type ("stPlots" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [3089 3105])
+                    ("isFlip" variable
+                       (:constant-flag t
+                        :default-value "false"
+                        :type "bool")
+                        (reparse-symbol arg-sub-list) [3107 3130])
+                    ("GenBeta" variable
+                       (:reference 1
+                        :constant-flag t
+                        :default-value "-1"
+                        :type "double")
+                        (reparse-symbol arg-sub-list) [3132 3156])
+                    ("RescaleP" variable
+                       (:default-value "false"
+                        :type "bool")
+                        (reparse-symbol arg-sub-list) [3158 3177])
+                    ("RescaleI" variable
+                       (:reference 1
+                        :constant-flag t
+                        :default-value "0.0"
+                        :type "double")
+                        (reparse-symbol arg-sub-list) [3179 3205])
+                    ("RescaleT" variable
+                       (:reference 1
+                        :constant-flag t
+                        :default-value "0.0"
+                        :type "double")
+                        (reparse-symbol arg-sub-list) [3207 3233]))                  
+                :type "bool")
+                nil [2886 3235])
+            ("Analysis_FillControlAndPredictionHist" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("hscp" variable
+                       (:reference 1
+                        :constant-flag t
+                        :type ("susybsm::HSCParticle" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [3279 3312])
+                    ("dedxSObj" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type ("reco::DeDxData" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [3313 3344])
+                    ("dedxMObj" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type ("reco::DeDxData" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [3345 3376])
+                    ("tof" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type ("reco::MuonTimeExtra" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [3377 3408])
+                    ("st" variable
+                       (:pointer 1
+                        :default-value "NULL"
+                        :type ("stPlots" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [3409 3425]))                  
+                :type "void")
+                nil [3236 3427])
+            ("SegSep" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("hscp" variable
+                       (:reference 1
+                        :constant-flag t
+                        :type ("susybsm::HSCParticle" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [3442 3475])
+                    ("ev" variable
+                       (:reference 1
+                        :constant-flag t
+                        :type ("fwlite::ChainEvent" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [3476 3505])
+                    ("minPhi" variable
+                       (:reference 1
+                        :type "double")
+                        (reparse-symbol arg-sub-list) [3506 3521])
+                    ("minEta" variable
+                       (:reference 1
+                        :type "double")
+                        (reparse-symbol arg-sub-list) [3522 3537]))                  
+                :type "double")
+                nil [3428 3538])
+            ("RescaledPt" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("pt" variable
+                       (:reference 1
+                        :constant-flag t
+                        :type "double")
+                        (reparse-symbol arg-sub-list) [3557 3574])
+                    ("eta" variable
+                       (:reference 1
+                        :constant-flag t
+                        :type "double")
+                        (reparse-symbol arg-sub-list) [3575 3593])
+                    ("phi" variable
+                       (:reference 1
+                        :constant-flag t
+                        :type "double")
+                        (reparse-symbol arg-sub-list) [3594 3612])
+                    ("charge" variable
+                       (:reference 1
+                        :constant-flag t
+                        :type "int")
+                        (reparse-symbol arg-sub-list) [3613 3631]))                  
+                :type "double")
+                nil [3539 3632])
+            ("muonStations" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("hitPattern" variable
+                       (:reference 1
+                        :constant-flag t
+                        :type ("reco::HitPattern" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [3651 3686]))                  
+                :type "int")
+                nil [3633 3687])
+            ("scaleFactor" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("eta" variable (:type "double") (reparse-symbol arg-sub-list) [3707 3718]))                  
+                :type "double")
+                nil [3688 3719])
+            ("Event_Weight" variable
+               (:default-value "1"
+                :type "float")
+                nil [3800 3823])
+            ("MaxEntry" variable
+               (:default-value "-1"
+                :type "int")
+                nil [3824 3844])
+            ("HistoFile" variable
+               (:pointer 1
+                :type ("TFile" type (:type "class") nil nil))
+                nil [3846 3863])
+            ("CutPt" variable (:type ("std::vector" type
+                 (:template-specifier 
+                    ( ("double" type nil nil nil))                    
+                  :type "class")
+                  nil nil)) nil [3865 3893])
+            ("CutI" variable (:type ("std::vector" type
+                 (:template-specifier 
+                    ( ("double" type nil nil nil))                    
+                  :type "class")
+                  nil nil)) nil [3894 3922])
+            ("CutTOF" variable (:type ("std::vector" type
+                 (:template-specifier 
+                    ( ("double" type nil nil nil))                    
+                  :type "class")
+                  nil nil)) nil [3923 3951])
+            ("HCuts_Pt" variable
+               (:pointer 1
+                :type ("TProfile" type (:type "class") nil nil))
+                nil [3953 3973])
+            ("HCuts_I" variable
+               (:pointer 1
+                :type ("TProfile" type (:type "class") nil nil))
+                nil [3974 3993])
+            ("HCuts_TOF" variable
+               (:pointer 1
+                :type ("TProfile" type (:type "class") nil nil))
+                nil [3994 4015])
+            ("CutPt_Flip" variable (:type ("std::vector" type
+                 (:template-specifier 
+                    ( ("double" type nil nil nil))                    
+                  :type "class")
+                  nil nil)) nil [4097 4130])
+            ("CutI_Flip" variable (:type ("std::vector" type
+                 (:template-specifier 
+                    ( ("double" type nil nil nil))                    
+                  :type "class")
+                  nil nil)) nil [4131 4164])
+            ("CutTOF_Flip" variable (:type ("std::vector" type
+                 (:template-specifier 
+                    ( ("double" type nil nil nil))                    
+                  :type "class")
+                  nil nil)) nil [4165 4198])
+            ("HCuts_Pt_Flip" variable
+               (:pointer 1
+                :type ("TProfile" type (:type "class") nil nil))
+                nil [4200 4225])
+            ("HCuts_I_Flip" variable
+               (:pointer 1
+                :type ("TProfile" type (:type "class") nil nil))
+                nil [4226 4250])
+            ("HCuts_TOF_Flip" variable
+               (:pointer 1
+                :type ("TProfile" type (:type "class") nil nil))
+                nil [4251 4277])
+            ("samples" variable (:type ("std::vector" type
+                 (:template-specifier 
+                    ( ("stSample" type nil nil nil))                    
+                  :type "class")
+                  nil nil)) nil [4279 4309])
+            ("samplesFull" variable (:type ("std::vector" type
+                 (:template-specifier 
+                    ( ("stSample" type nil nil nil))                    
+                  :type "class")
+                  nil nil)) nil [4310 4344])
+            ("plotsMap" variable (:type ("std::map" type
+                 (:template-specifier 
+                    ( ("std::string" type nil nil nil)
+                      ("stPlots" type nil nil nil))                    
+                  :type "class")
+                  nil nil)) nil [4345 4385])
+            ("BgLumiMC" variable (:type ("std::vector" type
+                 (:template-specifier 
+                    ( ("float" type nil nil nil))                    
+                  :type "class")
+                  nil nil)) nil [4387 4417])
+            ("TrueDist" variable (:type ("std::vector" type
+                 (:template-specifier 
+                    ( ("float" type nil nil nil))                    
+                  :type "class")
+                  nil nil)) nil [4466 4496])
+            ("TrueDistSyst" variable (:type ("std::vector" type
+                 (:template-specifier 
+                    ( ("float" type nil nil nil))                    
+                  :type "class")
+                  nil nil)) nil [4497 4531])
+            ("LumiWeightsMC" variable (:type ("edm::LumiReWeighting" type (:type "class") nil nil)) nil [4533 4568])
+            ("LumiWeightsMCSyst" variable (:type ("edm::LumiReWeighting" type (:type "class") nil nil)) nil [4569 4608])
+            ("dEdxTemplates" variable
+               (:pointer 1
+                :default-value "NULL"
+                :type ("TH3F" type (:type "class") nil nil))
+                nil [4691 4718])
+            ("trackerCorrector" variable (:type ("dedxGainCorrector" type (:type "class") nil nil)) nil [4719 4754])
+            ("dEdxSF" variable
+               (:dereference 1
+                :default-value "{
+   1.00000,   // [0]  unchanged
+   1.21836    // [1]  Pixel data to SiStrip data
+}"
+                :type "double")
+                nil [4755 4860])
+            ("HIPemulator" variable (:type ("dedxHIPEmulator" type (:type "class") nil nil)) nil [4861 4889])
+            ("useClusterCleaning" variable
+               (:default-value "false"
+                :type "bool")
+                nil [4891 4923])
+            ("useCrossTalk" variable
+               (:default-value "false"
+                :type "bool")
+                nil [4924 4950])
+            ("Analysis_Step1_EventLoop" function
+               (:arguments 
+                  ( ("MODE" variable
+                       (:default-value "\"COMPILE\""
+                        :type ("string" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [5056 5077])
+                    ("TypeMode_" variable
+                       (:default-value "0"
+                        :type "int")
+                        (reparse-symbol arg-sub-list) [5079 5094])
+                    ("InputSampleName" variable
+                       (:default-value "\"\""
+                        :type ("string" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [5096 5121]))                  
+                :type "void")
+                nil [5026 12394])
+            ("PassTrigger" function
+               (:arguments 
+                  ( ("ev" variable
+                       (:reference 1
+                        :constant-flag t
+                        :type ("fwlite::ChainEvent" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [12554 12583])
+                    ("isData" variable (:type "bool") (reparse-symbol arg-sub-list) [12584 12596])
+                    ("isCosmic" variable (:type "bool") (reparse-symbol arg-sub-list) [12597 12611]))                  
+                :type "bool")
+                nil [12537 13985])
+            ("OpenAngle" variable
+               (:default-value "-1"
+                :type "double")
+                nil [14165 14187])
+            ("TreeDXY" variable
+               (:default-value "-1"
+                :type "double")
+                nil [14252 14272])
+            ("TreeDZ" variable
+               (:default-value "-1"
+                :type "double")
+                nil [14273 14292])
+            ("isCosmicSB" variable
+               (:default-value "false"
+                :type "bool")
+                nil [14293 14317])
+            ("isSemiCosmicSB" variable
+               (:default-value "false"
+                :type "bool")
+                nil [14318 14346])
+            ("PassPreselection" function
+               (:arguments 
+                  ( ("hscp" variable
+                       (:reference 1
+                        :constant-flag t
+                        :type ("susybsm::HSCParticle" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [14369 14402])
+                    ("dedxSObj" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type ("reco::DeDxData" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [14404 14435])
+                    ("dedxMObj" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type ("reco::DeDxData" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [14436 14467])
+                    ("tof" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type ("reco::MuonTimeExtra" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [14468 14499])
+                    ("dttof" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type ("reco::MuonTimeExtra" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [14500 14533])
+                    ("csctof" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type ("reco::MuonTimeExtra" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [14534 14568])
+                    ("ev" variable
+                       (:reference 1
+                        :constant-flag t
+                        :type ("fwlite::ChainEvent" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [14569 14598])
+                    ("st" variable
+                       (:pointer 1
+                        :type ("stPlots" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [14599 14611])
+                    ("GenBeta" variable
+                       (:reference 1
+                        :constant-flag t
+                        :type "double")
+                        (reparse-symbol arg-sub-list) [14612 14634])
+                    ("RescaleP" variable (:type "bool") (reparse-symbol arg-sub-list) [14635 14649])
+                    ("RescaleI" variable
+                       (:reference 1
+                        :constant-flag t
+                        :type "double")
+                        (reparse-symbol arg-sub-list) [14650 14673])
+                    ("RescaleT" variable
+                       (:reference 1
+                        :constant-flag t
+                        :type "double")
+                        (reparse-symbol arg-sub-list) [14674 14697]))                  
+                :type "bool")
+                nil [14347 31749])
+            ("PassSelection" function
+               (:arguments 
+                  ( ("hscp" variable
+                       (:reference 1
+                        :constant-flag t
+                        :type ("susybsm::HSCParticle" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [31944 31977])
+                    ("dedxSObj" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type ("reco::DeDxData" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [31979 32010])
+                    ("dedxMObj" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type ("reco::DeDxData" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [32011 32042])
+                    ("tof" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type ("reco::MuonTimeExtra" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [32043 32074])
+                    ("ev" variable
+                       (:reference 1
+                        :constant-flag t
+                        :type ("fwlite::ChainEvent" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [32075 32104])
+                    ("CutIndex" variable
+                       (:reference 1
+                        :constant-flag t
+                        :type "int")
+                        (reparse-symbol arg-sub-list) [32105 32125])
+                    ("st" variable
+                       (:pointer 1
+                        :type ("stPlots" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [32126 32138])
+                    ("isFlip" variable
+                       (:constant-flag t
+                        :type "bool")
+                        (reparse-symbol arg-sub-list) [32139 32157])
+                    ("GenBeta" variable
+                       (:reference 1
+                        :constant-flag t
+                        :type "double")
+                        (reparse-symbol arg-sub-list) [32158 32180])
+                    ("RescaleP" variable (:type "bool") (reparse-symbol arg-sub-list) [32181 32195])
+                    ("RescaleI" variable
+                       (:reference 1
+                        :constant-flag t
+                        :type "double")
+                        (reparse-symbol arg-sub-list) [32196 32219])
+                    ("RescaleT" variable
+                       (:reference 1
+                        :constant-flag t
+                        :type "double")
+                        (reparse-symbol arg-sub-list) [32220 32243]))                  
+                :type "bool")
+                nil [31925 34947])
+            ("Analysis_FillControlAndPredictionHist" function
+               (:arguments 
+                  ( ("hscp" variable
+                       (:reference 1
+                        :constant-flag t
+                        :type ("susybsm::HSCParticle" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [35138 35171])
+                    ("dedxSObj" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type ("reco::DeDxData" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [35172 35203])
+                    ("dedxMObj" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type ("reco::DeDxData" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [35204 35235])
+                    ("tof" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type ("reco::MuonTimeExtra" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [35236 35267])
+                    ("st" variable
+                       (:pointer 1
+                        :type ("stPlots" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [35268 35280]))                  
+                :type "void")
+                nil [35095 47182])
+            ("Analysis_Step1_EventLoop" function
+               (:arguments 
+                  ( ("SavePath" variable
+                       (:pointer 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [47320 47335]))                  
+                :type "void")
+                nil [47290 82955])
+            ("InitHistos" function
+               (:arguments 
+                  ( ("st" variable
+                       (:pointer 1
+                        :type ("stPlots" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [82973 82985]))                  
+                :type "void")
+                nil [82957 83956])
+            ("RescaledPt" function
+               (:arguments 
+                  ( ("pt" variable
+                       (:reference 1
+                        :constant-flag t
+                        :type "double")
+                        (reparse-symbol arg-sub-list) [84055 84072])
+                    ("eta" variable
+                       (:reference 1
+                        :constant-flag t
+                        :type "double")
+                        (reparse-symbol arg-sub-list) [84073 84091])
+                    ("phi" variable
+                       (:reference 1
+                        :constant-flag t
+                        :type "double")
+                        (reparse-symbol arg-sub-list) [84092 84110])
+                    ("charge" variable
+                       (:reference 1
+                        :constant-flag t
+                        :type "int")
+                        (reparse-symbol arg-sub-list) [84111 84129]))                  
+                :type "double")
+                nil [84037 84346])
+            ("SegSep" function
+               (:arguments 
+                  ( ("hscp" variable
+                       (:reference 1
+                        :constant-flag t
+                        :type ("susybsm::HSCParticle" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [84362 84395])
+                    ("ev" variable
+                       (:reference 1
+                        :constant-flag t
+                        :type ("fwlite::ChainEvent" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [84396 84425])
+                    ("minPhi" variable
+                       (:reference 1
+                        :type "double")
+                        (reparse-symbol arg-sub-list) [84426 84441])
+                    ("minEta" variable
+                       (:reference 1
+                        :type "double")
+                        (reparse-symbol arg-sub-list) [84442 84457]))                  
+                :type "double")
+                nil [84348 85883])
+            ("muonStations" function
+               (:arguments 
+                  ( ("hitPattern" variable
+                       (:reference 1
+                        :constant-flag t
+                        :type ("reco::HitPattern" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [85993 86028]))                  
+                :type "int")
+                nil [85975 86591])
+            ("scaleFactor" function
+               (:arguments 
+                  ( ("eta" variable (:type "double") (reparse-symbol arg-sub-list) [86612 86623]))                  
+                :type "double")
+                nil [86593 86938]))          
+      :file "Analysis_Step1_EventLoop.C"
+      :pointmax 86939
+      :fsize 86938
+      :lastmodtime '(22203 25107)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("FWLITE")
+          )
+)
+    (semanticdb-table "Analysis_TOFUtility.h"
+      :file "Analysis_TOFUtility.h"
+      :fsize 40714
+      :lastmodtime '(22119 1736)))
+  :file "!ssh:askeeter@lxplus.cern.ch:!afs!cern.ch!work!a!askeeter!private!CMSSW_7_4_14!src!SUSYBSMAnalysis!HSCP!test!AnalysisCode!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

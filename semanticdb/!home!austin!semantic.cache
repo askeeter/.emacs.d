@@ -1,0 +1,38 @@
+;; Object austin/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "austin/"
+  :tables
+  (list
+    (semanticdb-table "temp.cpp"
+      :major-mode 'c++-mode
+      :tags 
+        '( ("float" include (:system-flag t) nil [40 56])
+            ("iostream" include (:system-flag t) nil [57 76])
+            ("main" function
+               (:arguments 
+                  ( ("argc" variable (:type "int") (reparse-symbol arg-sub-list) [93 102])
+                    ("argv" variable
+                       (:pointer 1
+                        :dereference 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [103 116]))                  
+                :type "int")
+                nil [84 292]))          
+      :file "temp.cpp"
+      :pointmax 293
+      :fsize 292
+      :lastmodtime '(22183 59886 125279 127000)
+      :unmatched-syntax nil)
+    (semanticdb-table "test.py"
+      :major-mode 'python-mode
+      :tags 
+        '( ("a" variable nil nil [20 39])
+            ("for" code nil nil [40 89]))          
+      :file "test.py"
+      :pointmax 94
+      :fsize 93
+      :lastmodtime '(22184 63227 207063 546000)
+      :unmatched-syntax nil))
+  :file "!home!austin!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")
