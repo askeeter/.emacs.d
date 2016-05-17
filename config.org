@@ -185,7 +185,7 @@ Sources for this section include [[https://github.com/magnars/.emacs.d/blob/mast
 #+end_src
 
 The following function for ~occur-dwim~ is taken from [[https://github.com/abo-abo][Oleh Krehel]] from
-[[http://oremacs.com/2015/01/26/occur-dwim/][his blog post at (or emacs]]. It takes the current region or the symbol
+[[http://oremacs.com/2015/01/26/occur-dwim/][his blog post at (or emacs)]]. It takes the current region or the symbol
 at point as the default value for occur.
 
 #+begin_src emacs-lisp
@@ -329,7 +329,7 @@ good column number to do that.
            (string= lang "python")
 	   (string= lang "fortran")
            (string= lang "emacs-lisp")
-(setq org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate)
+(setq org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate))))
 #+end_src
 
 ** Org babel/source blocks
@@ -353,6 +353,15 @@ consistent as it doesn't pad source blocks with leading spaces.
       org-src-tab-acts-natively t)
 #+end_src
 
+Want to use python3 instead of the default python2
+#+BEGIN_SRC emacs-lisp
+(setq org-babel-python-command "python3")
+#+END_SRC
+
+Want to use f95 instead of gfortran for fortran
+#+BEGIN_SRC emacs-lisp
+(setq org-babel-fortran-compiler "f95")
+#+END_SRC
 ** Org exporting
 
 *** Pandoc exporter

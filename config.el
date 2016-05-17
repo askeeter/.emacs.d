@@ -168,6 +168,10 @@
       org-src-preserve-indentation t
       org-src-tab-acts-natively t)
 
+(setq org-babel-python-command "python3")
+
+(setq org-babel-fortran-compiler "f95")
+
 (use-package ox-pandoc
   :no-require t
   :defer 10

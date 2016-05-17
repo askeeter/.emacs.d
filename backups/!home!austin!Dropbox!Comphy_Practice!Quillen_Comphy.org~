@@ -1,0 +1,143 @@
+In order to keep my coding chops up to par, I will write three versions of each of these assignments. A Python, C++, and Fortran version. 
+
+These org-mode cookbooks should prove useful as well:
+http://ehneilsen.net/notebook/orgExamples/org-examples.html#sec-23
+http://orgmode.org/worg/org-contrib/babel/languages/ob-doc-python.html
+
+* Problem Set 1
+** Problem 1 
+Write a subroutine that takes an argument ( a float angle) and returns a number between 0 and $2\pi$ so that the angle is modulo $2\pi$. Check what your routine does with negative numbers and if you pass it integers.
+
+*** Python
+#+BEGIN_SRC python :results output
+import numpy as np
+two_pi = np.pi
+print (two_pi)
+# Create several test cases
+print ("Positive 8: %f"%(8.0%two_pi))
+print ("Negative 8: %f"%((-8.0)%two_pi))
+#+END_SRC
+
+#+RESULTS:
+: 3.141592653589793
+: Positive 8: 1.716815
+: Negative 8: 1.424778
+
+*** C++
+#+BEGIN_SRC cpp
+#include <iostream>
+#include <cmath>
+using namespace std;
+int main(void){
+  double two_pi = 2 * M_PI;
+  cout << "Positive 8: " << fmod(8.0,two_pi) << endl;
+  cout << "Negative 8: " << fmod(-8.0,two_pi) << endl;
+  return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+| Positive | 8: |  1.71681 |
+| Negative | 8: | -1.71681 |
+
+*** Fortran
+#+BEGIN_SRC fortran
+program modulo
+implicit none
+
+real, parameter :: two_pi=2*4*atan(1.0)
+print *, 'Positive 8: ',mod(8.0,two_pi)
+print *, 'Negative 8: ',mod(-8.0,two_pi)
+end program modulo
+#+END_SRC
+
+#+RESULTS:
+| Positive | 8: |  1.71681452 |
+| Negative | 8: | -1.71681452 |
+
+** Problem 3
+Write a subroutine that takes 3 arguments, a prefix string, a suffix string and an integer, and returns a string that starts with the prefix, ends with the suffix and has an integer in the middle that is comprised of six digits and instead of spaces has zeros. For example mysub(’a_’,’.txt’,6) should return ’a_000006.txt’. This is a way to make filenames for sequential outputs of a simulation or a sequential set of images that can later be turned into a movie!
+
+*** Python
+#+BEGIN_SRC python :results output
+import numpy as np
+
+# inputs:
+#       f_prefix: Desired file prefix, without underscore
+#       f_suffix: Filetype extension, without period
+#       f_index : Numerical (int) index of current file
+#       f_max_digits: Maximum number of filename digits
+# outputs:
+#       A string combining the three        
+def seq_file_create(f_prefix,f_suffix,f_index,f_max_digits):
+    init_str = f_prefix
+    # convert the input integer into a string
+    ind_str = '{0:d}'.format(f_index)
+    # Count the number of digits in the index
+    # Add preceding zeros to fill in the difference
+    num_digits = len(ind_str)
+    num_zeros = f_max_digits - num_digits
+    # Add this many zeros to the string
+    string = f_prefix + '_' + ('{0:0%dd}'%f_max_digits).format(f_index) + '.' + f_suffix
+    print (string)
+    return string
+
+# Two test cases
+seq_file_create('test10','txt',101101,10)
+seq_file_create('test5','txt',934,5)
+#+END_SRC
+
+#+RESULTS:
+: test10_0000101101.txt
+: test5_00934.txt
+
+*** C++
+#+BEGIN_SRC C++
+#include <stdio.h>
+#include <string>
+#include <cstdlib>
+#include <string.h>
+#include <sstream>
+
+using namespace std;
+
+int main(void){
+  /*
+    inputs:
+       f_prefix: Desired file prefix, without underscore
+       f_suffix: Filetype extension, without period
+       f_index : Numerical (int) index of current file
+       f_max_digits: Maximum number of filename digits
+    outputs:
+       A string combining the three        
+   ,*/
+  string seq_file_create(const string &f_prefix, const string &f_suffix, const int &f_index, const int &f_max_digits){
+    string init_str = f_prefix;
+    // convert the input integer into a string
+    char ind_str[f_max_digits];
+    itoa(f_index,ind_str,10);
+    // Count the number of digits in the index
+    // Add preceding zeros to fill in the difference
+    int num_digits = (int)strlen(ind_str);
+    int num_zeros = f_max_digits - num_digits;
+    // Add this many zeros to the index
+    char padded_ind_str[f_max_digits];
+    stringstream format_string;
+    format_string << "%0" << f_max_digits << "d";
+    snprintf(padded_ind_str,sizeof(padde_ind_str),format_string.str().c_str(),ind_str);
+    stringstream final_string;
+    final_string << f_prefix << "_" << padded_ind_str << "." << f_suffix;
+    printf(final_string.str().c_str());
+    return final_string.str();
+  }
+
+  // Two test cases
+  string test_1 = seq_file_create("test10","txt",101101,10);
+  string test_2 = seq_file_create("test5","txt",934,5);
+
+  return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+
