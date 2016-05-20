@@ -300,6 +300,10 @@ speed keys in Org mode]].
 (setq org-highlight-latex-and-related '(latex script entities))
 #+END_SRC
 
+#+BEGIN_SRC emacs-lisp
+(setq org-format-latex-options (plist-put org-format-latex-options :scale 2.0))
+#+END_SRC
+
 ** Org tags
 
 The default value is -77, which is weird for smaller width windows.
@@ -384,6 +388,7 @@ http://tex.stackexchange.com/a/161619.
 #+BEGIN_SRC emacs-lisp
 (setq org-latex-pdf-process (list "latexmk -pdf %f"))
 #+END_SRC
+
 
 
 * Tramp
