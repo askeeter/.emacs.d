@@ -1,0 +1,1842 @@
+% Created 2016-05-23 Mon 11:38
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\author{Austin V. Skeeters}
+\date{\today}
+\title{}
+\hypersetup{
+ pdfauthor={Austin V. Skeeters},
+ pdftitle={},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 24.5.1 (Org mode 8.3.3)}, 
+ pdflang={English}}
+\begin{document}
+
+\tableofcontents
+
+\section{Robustness of the Optical Model under Error Propagation}
+\label{sec:orgheadline23}
+The goal of this investigation is to study the robustness of a
+Woods-Saxon potential when applied to elastic scattering
+between a lead target, and lithium-6 and lithium-7 beams. We begin with the Cook potential as a
+reference, and make tweaks from there. The Cook potentials are as
+follows:
+
+\begin{center}
+\begin{tabular}{rrrrrr}
+\hline
+V & R & a & W & R\(_{\text{i}}\) & a\(_{\text{i}}\)\\
+\hline
+114.2 & 1.286 & 0.853 & 9.440 & 1.739 & 0.809\\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{/home/austin/NuclearAnalysis/LabNotebook/NotebookFigures/60MeV_208Pb_7Li_Base_Cook.pdf}
+\caption{\label{fig:orgparagraph1}
+Cook Potential applied to 60 MeV lithium-7, lead-208 elastic scattering data. \(\chi^{2}=0.0771\)}
+\end{figure}
+
+Applying these parameters to 60 MeV scattering with lithium-7 data
+yields Fig \ref{fig:orgparagraph1}, with a corresponding \(\chi^{2}\) value of 0.0771.
+
+Slight modification of the Cook potential was performed with the
+purpose of further \(\chi^{2}\) minimization. The percent deviations
+from the base Cook potential parameters are included beneath each
+parameter. Based on these percentages, it would appear the parameter
+that required the most alteration was the imaginary potential.
+
+\begin{center}
+\begin{tabular}{llllll}
+\hline
+V & R & a & W & R\(_{\text{i}}\) & a\(_{\text{i}}\)\\
+\hline
+114.2 & 1.305 & 0.861 & 8.820 & 1.729 & 0.816\\
+\hline
+0.00\% & 1.48\% & 0.938\% & 6.57\% & 0.575\% & 0.865\%\\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/60MeV_208Pb_7Li_Base_ImpCook.pdf}
+\caption{\label{fig:orgparagraph2}
+An improved Cook Potential applied to 60 MeV lithium-7, lead-208 elastic scattering data. \(\chi^{2}=0.0744\)}
+\end{figure} 
+
+Applying this improved fit to the same 60MeV scattering data yields
+Fig \ref{fig:orgparagraph2}, with a corresponding
+\(\chi^{2}\) value of 0.0744. While this new fit results in only a
+slight reduction of the \(\chi^{2}\) value, it is also characterized by
+a more accurate prediction of the depth and angle of the first dip
+than the original Cook potential. This is important, as this is the
+region of interest of this study, and where the fundamental physical
+processes that are occuring might be studied.
+
+Now that a baseline has been established, this investigation seeks
+primarily to study the validity and robustness of any given Optical
+Model potential of the Woods-Saxon form under the effects of
+experimental error. That is, despite all precautions during
+experimentation, there exists an innate an unavoidable error
+associated with the measurement of scattering angles in the lab. It
+follows that this error is propagated directly to center of mass angle
+calculations as well. However, it is of more use to emulate this
+assumption of error through propagation to the calculated values of the ratio to
+Rutherford cross-section, as (especially at shallower scattering
+angles) slight mismeasurements in the angle result in between a factor
+of two to four difference in the calculated cross-section. Thus, for
+the purposes of this study, the center of mass angles will defined as
+being known with infinite precision.
+
+Data was obtained at lab energies of 27, 29, 31, 33, 35, and 39 MeV
+for both lithium-6 and lithium-7, as well as added 44 and 60 MeV data
+for the latter. This generous range of energies allows for a sub-study
+to be conducted involving the validity of the Cook potentials under
+varying lab energies. For each data set, every individual measurement
+was smeared randomly and independently of the other measurements. More
+specifically, each point was randomly replaced with a new
+cross-section value chosen from a uniform distribution ranging between
+plus and minus five and ten percent of the particular value being
+replaced. 
+
+It will be shown that despite a five percent error
+assumption, the Cook Potential describes the data equally as well
+for a given energy despite fluctuations in the in the aforementioned
+range. Unfortunately, an assertion of a ten percent error demonstrates
+a pronounced lack of robustness in the Optical Model potentials in
+general, as well as a bolstered sensitivity in general to several of
+the Optical Model parameters over others. Further, it will be
+demonstrated that upon breakdown of the Cook potentials at lower
+energies, unilateral modification of the imaginary parameters of the
+Woods-Saxon potential are sufficient to correct the fit to once again
+accurately describe the data.
+
+\subsection{Five Percent Error Propagation}
+\label{sec:orgheadline16}
+
+\subsubsection{60 MeV Lithium-7 Lead-208 Elastic Scattering}
+\label{sec:orgheadline3}
+The original experimental data displayed above for 60 MeV elastic
+scattering of lithium-7 on lead-208 was varied as described above
+assuming a five percent error in the cross section. Multiple
+randomized data sets were created in this range, and fit with both the
+Cook potential, and the improved Cook potential given above.
+
+\begin{enumerate}
+\item Cook Potential
+\label{sec:orgheadline1}
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/60MeV_208Pb_7Li_0.05_Cook_1.pdf}
+\caption{\label{fig:orgparagraph3}
+Cook Potential applied to 5\% randomized 60 MeV lithium-7, lead-208 elastic scattering data. \(\chi^{2}=0.0819\)}
+\end{figure}
+
+Initial randomization as displayed in Fig \ref{fig:orgparagraph3} exhibits slight modification
+of the data, but still well within the limits of experimental
+observation. The corresponding Optical Model fit using the Cook
+potentials fits the randomized data well, despite a slight
+over-prediction in the region between 35 and 45 degrees in the center
+of mass. Fortunately, the dip is well-described, better even than in
+the non-randomized data to the naked eye. The displayed fit yielded a
+\(\chi^{2}\) value of 0.0819, which is slightly higher than in the base
+(non-randomized) data. This is a first indication that while
+\(\chi^{2}\) is in general a useful measure of ``goodness-of-fit,'' it
+does not necessarily indicate a better description of the physical
+region of interest in the data. 
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/60MeV_208Pb_7Li_0.05_Cook_2.pdf}
+\caption{\label{fig:orgparagraph4}
+Cook Potential applied to 5\% randomized 60 MeV lithium-7, lead-208 elastic scattering data. \(\chi^{2}=0.0951\)}
+\end{figure}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/60MeV_208Pb_7Li_0.05_Cook_3.pdf}
+\caption{\label{fig:orgparagraph5}
+Cook Potential applied to 5\% randomized 60 MeV lithium-7, lead-208 elastic scattering data. \(\chi^{2}=0.0867\)}
+\end{figure}
+
+Two more examples of randomization are shown in Figs \ref{fig:orgparagraph4} and \ref{fig:orgparagraph5} with
+\(\chi^{2}\) values of 0.0951 and 0.0867, respectively.
+It should be noted though that the latter displays a significant
+under-calculation of the peak, which has not yet been seen. Overall
+though, the Optical Model with the unmodified Cook potential appears
+to remain an acceptable description of the experimental data despite
+five percent fluctuations. 
+
+
+\label{orgtarget1}
+\item Improved Cook Potential
+\label{sec:orgheadline2}
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/60MeV_208Pb_7Li_0.05_ImpCook_1.pdf}
+\caption{\label{fig:orgparagraph6}
+An improved Cook Potential applied to 5\% randomized 60 MeV lithium-7, lead-208 elastic scattering data. \(\chi^{2}=0.0885\)}
+\end{figure}
+
+Comparing to the same initially randomized set as above, we obtain Fig
+\ref{fig:orgparagraph6}. While it should be noted that the \(\chi^{2}\) value of
+this fit, 0.0885, is indeed higher than that of the Cook potential
+fit, it appears to the eye to better describe the first dip. Based on
+steadfast validity of the Cook potential Optical model fit under
+further randomization, it can be asserted that this fit would also
+continue to describe the the data equally as well.
+\end{enumerate}
+
+\subsubsection{39 MeV Lithium-7 Lead-208 Elastic Scattering}
+\label{sec:orgheadline6}
+\label{orgtarget2}
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/39MeV_208Pb_7Li_Base_Cook.pdf}
+\caption{\label{fig:orgparagraph7}
+Cook Potential applied to 39 MeV lithium-7, lead-208 elastic scattering data. \(\chi^{2}=0.0844\)}
+\end{figure}
+
+While the seemingly robust application of the Cook potential to the 60
+MeV data above suggests an energy invariance, that is unfortunately
+not the case. This is a direct result of the now closeness to the
+Coulomb barrier, characterized by a rapid change in the cross-section
+that may not be able to be accurately described by pure potential
+scattering. This energy scale is also characterized by dominant
+electromagnetic effects as opposed to nuclear effects more evident at
+higher (GeV range) energies. As applied to the base 39 MeV data set,
+the Cook potentials yield Fig \ref{fig:orgparagraph7}. To the naked eye, this is
+clearly not an acceptable or accurate description of the elastic
+scattering. Interestingly though, the fit has a corresponding
+\(\chi^{2}\) value of 0.0844, which is lower than the third Cook fit
+from the 60 MeV randomized data above. Again, \(\chi^{2}\) is not always
+the best indication of the physical implications and accuracy of the
+Optical Model prediction of interest.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/39MeV_208Pb_7Li_Base_ImpCook.pdf}
+\caption{\label{fig:orgparagraph8}
+An improved Cook Potential applied to 39 MeV lithium-7, lead-208 elastic scattering data. \(\chi^{2}=0.012\)}
+\end{figure}
+
+Through sole manipulation of the imaginary parameters, it was
+impossible to obtain an accurate fit at this energy scale. The result
+of varying all parameters except for the real potential yielded Fig
+\ref{fig:orgparagraph8}. While managing to fit the majority of the data
+exceptionally well, the dip of interest simply could not be reached in
+depth, although the corresponding angle is not far off. Again, this is
+due to effects caused by closeness in energy to the Coulomb
+barrier. The resulting fit (referred to as the Improved Cook Fit for
+the duration of the investigation of this particular energy), along
+with percent deviation from the base Cook potential is as follows:
+
+\begin{center}
+\begin{tabular}{llllll}
+\hline
+V & R & a & W & R\(_{\text{i}}\) & a\(_{\text{i}}\)\\
+\hline
+114.2 & 1.283 & 0.907 & 9.520 & 1.734 & 0.699\\
+\hline
+0\% & 0.2\% & 6.33\% & 0.847\% & 0.288\% & 13.60\%\\
+\hline
+\end{tabular}
+\end{center}
+
+This improved fit yielded a \(\chi^{2}\) value of 0.012, roughly a
+factor of eight improvement over the base Cook potential. Unlike the
+60MeV fit displayed above which necessitated (primarily) a slight
+alteration of the imaginary potential, the aforementioned physical
+effects due to the nearness to the Coulomb barrier require a
+significant shifting of both the imaginary and real difusenesses, with
+a greater change being necessary in the former. Unfortunately, this
+information cannot and should not be extrapolated to energies in
+excess of 60MeV, as the increased distance from the Coulomb barrier
+renders the difuseness-altering effects negligible. It is reasonable
+though to begin with the above fit, and perform an investigation
+into the robustness of the potential in the sub-39 MeV regime. Prior to
+doing this though, the robustness of this fit in against five percent
+smearing of the data must be explored.
+
+\begin{enumerate}
+\item Cook Potential
+\label{sec:orgheadline4}
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/39MeV_208Pb_7Li_0.05_Cook_1.pdf}
+\caption{\label{fig:orgparagraph9}
+Cook Potential applied to 5\% randomized 39 MeV lithium-7, lead-208 elastic scattering data. \(\chi^{2}=0.1068\)}
+\end{figure}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/39MeV_208Pb_7Li_0.05_Cook_2.pdf}
+\caption{\label{fig:orgparagraph10}
+Cook Potential applied to 5\% randomized 39 MeV lithium-7, lead-208 elastic scattering data. \(\chi^{2}=0.1273\)}
+\end{figure}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/39MeV_208Pb_7Li_0.05_Cook_3.pdf}
+\caption{\label{fig:orgparagraph11}
+Cook Potential applied to 5\% randomized 39 MeV lithium-7, lead-208 elastic scattering data. \(\chi^{2}=0.1024\)}
+\end{figure}
+
+When the base Cook potential is applied to five percent randomized
+data sets, the results are not entirely promising. While the \(\chi^2\)
+values resulting from the fits do not increase significantly, it is
+evident even to the naked eye that the potential does not accurately
+describe the entire range of data. This is especially evident in the
+range between forty and eighty degrees in the center of mass. With
+that said, the Cook potential did not satisfactorily describe the
+non-randomized data to begin with, so this is not a surprise. Fits of
+the randomized data sets can be seen in Figs
+\ref{fig:orgparagraph9}, \ref{fig:orgparagraph10}, and
+\ref{fig:orgparagraph11} with corresponding \(\chi^2\) values of
+0.1068, 0.1273, and 0.1024, respectively.
+
+\item Improved Cook Potential
+\label{sec:orgheadline5}
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/39MeV_208Pb_7Li_0.05_ImpCook_1.pdf}
+\caption{\label{fig:orgparagraph12}
+An improved Cook Potential applied to 5\% randomized 39 MeV lithium-7, lead-208 elastic scattering data. \(\chi^{2}=0.0437\)}
+\end{figure}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/39MeV_208Pb_7Li_0.05_ImpCook_2.pdf}
+\caption{\label{fig:orgparagraph13}
+An improved Cook Potential applied to 5\% randomized 39 MeV lithium-7, lead-208 elastic scattering data. \(\chi^{2}=0.0566\)}
+\end{figure}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/39MeV_208Pb_7Li_0.05_ImpCook_3.pdf}
+\caption{\label{fig:orgparagraph14}
+An improved Cook Potential applied to 5\% randomized 39 MeV lithium-7, lead-208 elastic scattering data. \(\chi^{2}=0.0510\)}
+\end{figure}
+
+The robustness of the improved fit is satisfactory under five percent
+smearing. To the naked eye, there is no discernible deviation of the
+fit from the randomized data to necessitate any perturbations of the
+potential parameters. This is confirmed by comparison of \(\chi^{2}\)
+values for several randomized sets, while leaving the improved
+potential constant. Several plots can be seen in Figs
+\ref{fig:orgparagraph12},
+\ref{fig:orgparagraph13}, and
+\ref{fig:orgparagraph14} with corresponding \(\chi^2\) values
+of 0.0437, 0.0566, and 0.0510 respectively, affirming the claim that
+this fit is acceptable within five percent randomization.  Further, it
+should be noted that each of these \(\chi^2\) values are approximately
+half of those corresponding to the base Cook potential for the same
+data set. In essence then, the improvement is roughly twice as good at
+describing the data, so to speak.
+\end{enumerate}
+
+\subsubsection{35 MeV Lithium-7 Lead-208 Elastic Scattering}
+\label{sec:orgheadline9}
+\label{orgtarget3}
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/35MeV_208Pb_7Li_Base_Cook.pdf}
+\caption{\label{fig:orgparagraph15}
+Cook Potential applied to 35 MeV lithium-7, lead-208 elastic scattering data. \(\chi^{2}=0.3164\)}
+\end{figure}
+
+The effects of closeness to the Coulomb barrier are made all the more
+evident by the obvious lack of accuracy from the Cook potential, as
+evidenced by \ref{fig:orgparagraph15}, with a corresponding \(\chi^2\) value of
+0.3164. Further, the experimental data display a dampening of the dip
+to the point where it is virtually non-existent.
+
+After tweaking of the Cook potential, a much better fit was
+obtained. The parameters are as follows:
+
+\begin{center}
+\begin{tabular}{llllll}
+\hline
+V & R & a & W & R\(_{\text{i}}\) & a\(_{\text{i}}\)\\
+\hline
+114.2 & 1.283 & 0.902 & 8.870 & 1.734 & 0.676\\
+\hline
+0\% & 0.233\% & 5.74\% & 6.04\% & 0.288\% & 16.44\%\\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/35MeV_208Pb_7Li_Base_ImpCook.pdf}
+\caption{\label{fig:orgparagraph16}
+An improved Cook Potential applied to 35 MeV lithium-7, lead-208 elastic scattering data. \(\chi^{2}=0.0160\)}
+\end{figure}
+
+The resulting fit can be viewed in Fig
+\ref{fig:orgparagraph16}, with a corresponding \(\chi^2\) value
+of 0.0160. Again we see that the fit improvement depends most
+importantly on altering the imaginary diffuseness as well as the real
+diffuseness. Here also, a decrease in the imaginary potential was
+necessary, likely corresponding directly to the slight decrease in lab
+energy. This fit is both visually and statistically extremely
+proficient at accurately describing the experimental data. It would
+appear then that the energy range between 35MeV and 39MeV might not be
+acceptably described by pure potential scattering.
+
+\begin{enumerate}
+\item Cook Potential
+\label{sec:orgheadline7}
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/35MeV_208Pb_7Li_0.05_Cook_1.pdf}
+\caption{\label{fig:orgparagraph17}
+Cook Potential applied to 5\% randomized 35 MeV lithium-7, lead-208 elastic scattering data. \(\chi^{2}=0.3506\)}
+\end{figure}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/35MeV_208Pb_7Li_0.05_Cook_2.pdf}
+\caption{\label{fig:orgparagraph18}
+Cook Potential applied to 5\% randomized 35 MeV lithium-7, lead-208 elastic scattering data. \(\chi^{2}=0.3765\)}
+\end{figure}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/35MeV_208Pb_7Li_0.05_Cook_3.pdf}
+\caption{\label{fig:orgparagraph19}
+Cook Potential applied to 5\% randomized 35 MeV lithium-7, lead-208 elastic scattering data. \(\chi^{2}=0.3875\)}
+\end{figure}
+
+While still not a good fit to the data, the base Cook potential
+remains just as good/bad despite randomization. It now seems safe to
+conclude that this is a feature of whatever potential is chosen,
+subjected to randomization at a magnitude of five percent. Plots of
+the randomization can be seen in Figs \ref{fig:orgparagraph17},
+\ref{fig:orgparagraph18}, and \ref{fig:orgparagraph19},
+with corresponding \(\chi^2\) values of 0.3506, 0.3765, and 0.3875,
+respectively.
+
+\item Improved Cook Potential
+\label{sec:orgheadline8}
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/35MeV_208Pb_7Li_0.05_ImpCook_1.pdf}
+\caption{\label{fig:orgparagraph20}
+An improved Cook Potential applied to 5\% randomized 35 MeV lithium-7, lead-208 elastic scattering data. \(\chi^{2}=0.0522\)}
+\end{figure}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/35MeV_208Pb_7Li_0.05_ImpCook_2.pdf}
+\caption{\label{fig:orgparagraph21}
+An improved Cook Potential applied to 5\% randomized 35 MeV lithium-7, lead-208 elastic scattering data. \(\chi^{2}=0.0518\)}
+\end{figure}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/35MeV_208Pb_7Li_0.05_ImpCook_3.pdf}
+\caption{\label{fig:orgparagraph22}
+An improved Cook Potential applied to 5\% randomized 35 MeV lithium-7, lead-208 elastic scattering data. \(\chi^{2}=0.0642\)}
+\end{figure}
+
+The improved Cook potential continues to serve as a superb description
+of the experimental data despite five percent randomization. This is
+evidenced by the plots shown in Figs
+\ref{fig:orgparagraph20},
+\ref{fig:orgparagraph21}, and
+\ref{fig:orgparagraph22}, with corresponding \(\chi^2\) values
+of 0.0522, 0.0518, and 0.0642, respectively.
+\end{enumerate}
+\subsubsection{31 MeV Lithium-7 Lead-208 Elastic Scattering}
+\label{sec:orgheadline12}
+\label{orgtarget4}
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/31MeV_208Pb_7Li_Base_Cook.pdf}
+\caption{\label{fig:orgparagraph23}
+Cook Potential applied to 31 MeV lithium-7, lead-208 elastic scattering data. \(\chi^{2}=1.0774\)}
+\end{figure}
+
+Decreasing the energy once again, we see a complete failure of the
+Cook potential. Fitting the experimental data with the base Cook
+potential yields Fig \ref{fig:orgparagraph23}, with a corresponding \(\chi^2\)
+value of 1.0774. This is by far, the worst failure of the Cook
+potential that has been displayed. Once again, an improved fit was
+found that describes the data extremely well. The improved parameters
+are as follows:
+
+\begin{center}
+\begin{tabular}{llllll}
+\hline
+V & R & a & W & R\(_{\text{i}}\) & a\(_{\text{i}}\)\\
+\hline
+114.2 & 1.283 & 0.903 & 8.870 & 1.733 & 0.658\\
+\hline
+0\% & 0.233\% & 5.86\% & 6.04\% & 0.345\% & 18.67\%\\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/31MeV_208Pb_7Li_Base_ImpCook.pdf}
+\caption{\label{fig:orgparagraph24}
+An improved Cook Potential applied to 31 MeV lithium-7, lead-208 elastic scattering data. \(\chi^{2}=0.0234\)}
+\end{figure}
+
+Once again we that the necessary changes in the parameters occur in
+the real and imaginary diffuseness, as well as in the imaginary
+potential, which remained the same as when fitting the 35MeV
+data. Again, the largest change is necessary in the imaginary
+diffuseness. The resulting fit can be seen in Fig \ref{fig:orgparagraph24}, with a corresponding
+\(\chi^2\) value of 0.0234.
+
+\begin{enumerate}
+\item Cook Potential
+\label{sec:orgheadline10}
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/31MeV_208Pb_7Li_0.05_Cook_1.pdf}
+\caption{\label{fig:orgparagraph25}
+Cook Potential applied to 5\% randomized 31 MeV lithium-7, lead-208 elastic scattering data. \(\chi^2=1.1423\)}
+\end{figure}
+
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/31MeV_208Pb_7Li_0.05_Cook_2.pdf}
+\caption{\label{fig:orgparagraph26}
+Cook Potential applied to 5\% randomized 31 MeV lithium-7, lead-208 elastic scattering data. \(\chi^2=1.1214\)}
+\end{figure}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/31MeV_208Pb_7Li_0.05_Cook_3.pdf}
+\caption{\label{fig:orgparagraph27}
+Cook Potential applied to 5\% randomized 31 MeV lithium-7, lead-208 elastic scattering data. \(\chi^2=1.10695\)}
+\end{figure}
+
+Upon applying a five percent smearing, the Cook potential fails even
+worse. In Fig \ref{fig:orgparagraph25} in particular, the prediction (\(\chi^2\) of 1.1423)
+fails to touch even a single data point. Further, all of the data is
+under-predicted save for a single point. Further examples of this
+claim can be seen in Figs \ref{fig:orgparagraph26}, and \ref{fig:orgparagraph27}, with corresponding \(\chi^2\) values of
+1.1214 and 1.0695, respectively. Again, the Cook potential fit is a
+failure at this energy. 
+
+\item Improved Cook Potential
+\label{sec:orgheadline11}
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/31MeV_208Pb_7Li_0.05_ImpCook_1.pdf}
+\caption{\label{fig:orgparagraph28}
+An improved Cook Potential applied to 5\% randomized 31 MeV lithium-7, lead-208 elastic scattering data. \(\chi^2=0.0609\)}
+\end{figure}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/31MeV_208Pb_7Li_0.05_ImpCook_2.pdf}
+\caption{\label{fig:orgparagraph29}
+An improved Cook Potential applied to 5\% randomized 31 MeV lithium-7, lead-208 elastic scattering data. \(\chi^2=0.0573\)}
+\end{figure}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/31MeV_208Pb_7Li_0.05_ImpCook_3.pdf}
+\caption{\label{fig:orgparagraph30}
+An improved Cook Potential applied to 5\% randomized 31 MeV lithium-7, lead-208 elastic scattering data. \(\chi^2=0.0482\)}
+\end{figure}
+
+When applied to the same randomized files as above, the improved fit
+holds up well, as expected. This is demonstrated in Figs \ref{fig:orgparagraph28}, \ref{fig:orgparagraph29},
+and \ref{fig:orgparagraph30},
+with corresponding \(\chi^2\) values of 0.0609, 0.0573, and 0.0482,
+respectively. Once again, the fit holds despite randomization.
+\end{enumerate}
+
+
+\subsubsection{29 MeV Lithium-7 Lead-208 Elastic Scattering}
+\label{sec:orgheadline15}
+\label{orgtarget5}
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/29MeV_208Pb_7Li_Base_Cook.pdf}
+\caption{\label{fig:orgparagraph31}
+Cook Potential applied to 29 MeV lithium-7, lead-208 elastic scattering data. \(\chi^{2}=0.8165\)}
+\end{figure}
+
+A further decrease in energy causes a significant improvement in the
+predictive power of the Cook potential, although not to the point of
+it being an accurate description of the data. While it does capture
+the data to some extent in the region up to roughly one-hundred
+degrees in the center of mass, the point at which the physics kicks
+in, so to speak, is not accurately described. This is displayed in Fig
+\ref{fig:orgparagraph31},
+with a corresponding \(\chi^2\) value of 0.8165. Refinement of the
+Optical Model parameters was again performed, with an improved fit
+characterized by the below parameters:
+
+\begin{center}
+\begin{tabular}{llllll}
+\hline
+V & R & a & W & R\(_{\text{i}}\) & a\(_{\text{i}}\)\\
+\hline
+114.2 & 1.283 & 0.910 & 8.870 & 1.733 & 0.691\\
+\hline
+0\% & 0.233\% & 6.68\% & 6.04\% & 0.345\% & 14.56\%\\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/29MeV_208Pb_7Li_Base_ImpCook.pdf}
+\caption{\label{fig:orgparagraph32}
+An improved Cook Potential applied to 29 MeV lithium-7, lead-208 elastic scattering data. \(\chi^{2}=0.1609\)}
+\end{figure}
+
+The resulting fit can be seen in Fig \ref{fig:orgparagraph32}, with a corresponding \(\chi^2\)
+value of 0.1609. The spread in this data is significantly higher than
+in the previous data sets. Due to this, the real potential and radius,
+as well as the imaginary radius can be varied slightly without
+impacting the overall fit in too harmful of a manner. Due to this
+though, the above fit was chosen by minimizing the \(\chi^2\) value,
+with no visual attributes taken into account. 
+
+\begin{enumerate}
+\item Cook Potential
+\label{sec:orgheadline13}
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/29MeV_208Pb_7Li_0.05_Cook_1.pdf}
+\caption{\label{fig:orgparagraph33}
+Cook Potential applied to 5\% randomized 29 MeV lithium-7, lead-208 elastic scattering data. \(\chi^2=0.7922\)}
+\end{figure}
+
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/29MeV_208Pb_7Li_0.05_Cook_2.pdf}
+\caption{\label{fig:orgparagraph34}
+Cook Potential applied to 5\% randomized 29 MeV lithium-7, lead-208 elastic scattering data. \(\chi^2=0.7911\)}
+\end{figure}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/29MeV_208Pb_7Li_0.05_Cook_3.pdf}
+\caption{\label{fig:orgparagraph35}
+Cook Potential applied to 5\% randomized 29 MeV lithium-7, lead-208 elastic scattering data. \(\chi^2=0.8568\)}
+\end{figure}
+
+The Cook potential consistently under-measures the cross section in
+the center of mass range beyond roughly one-hundred degrees. This is
+demonstrated \ref{fig:orgparagraph33}, \ref{fig:orgparagraph34}, and \ref{fig:orgparagraph35}, with corresponding \(\chi^2\) values
+of 0.7922, 0.7911, and 0.8568, respectively.
+
+\item Improved Cook Potential
+\label{sec:orgheadline14}
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/29MeV_208Pb_7Li_0.05_ImpCook_1.pdf}
+\caption{\label{fig:orgparagraph36}
+An improved Cook Potential applied to 5\% randomized 29 MeV lithium-7, lead-208 elastic scattering data. \(\chi^2=0.2369\)}
+\end{figure}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/29MeV_208Pb_7Li_0.05_ImpCook_2.pdf}
+\caption{\label{fig:orgparagraph37}
+An improved Cook Potential applied to 5\% randomized 29 MeV lithium-7, lead-208 elastic scattering data. \(\chi^2=0.1864\)}
+\end{figure}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/29MeV_208Pb_7Li_0.05_ImpCook_3.pdf}
+\caption{\label{fig:orgparagraph38}
+An improved Cook Potential applied to 5\% randomized 29 MeV lithium-7, lead-208 elastic scattering data. \(\chi^2=0.2346\)}
+\end{figure}
+
+Again, the improved fit holds under randomization, however at this
+point that fact is not entirely discernible by eye alone. It would
+appear that we have indeed reached an energy limit where reliance on
+the \(\chi^2\) value of the fit is of more importance than visual
+inspection and confirmation. Examples of the fit under variation are
+displayed in Figs \ref{fig:orgparagraph36},
+\ref{fig:orgparagraph37}, and
+\ref{fig:orgparagraph38}, with corresponding \(\chi^2\)
+values of 0.2369, 0.1864, and 0.2346, respectively. Roughly constant.
+\end{enumerate}
+
+
+\subsection{Ten Percent Error Propagation}
+\label{sec:orgheadline22}
+\subsubsection{60 MeV Lithium-7 Lead-208 Elastic Scattering}
+\label{sec:orgheadline17}
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/60MeV_208Pb_7Li_0.10_ImpCook_1.pdf}
+\caption{\label{fig:orgparagraph39}
+60 MeV Improved cook potential applied to ten-percent randomized data. Resulting \(\chi^2=0.1198\).}
+\end{figure} 
+
+Application of the initial improved Cook potential  to a ten-percent
+randomized set of scattering data results in
+\ref{fig:orgparagraph39}, which has a corresponding \(\chi^2\)
+value of 0.1198. It no longer appears that the improved fit is
+sufficient to describe the data. Tweaking in order to minimize
+\(\chi^2\) results in a new potential of 0.0951.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/60MeV_208Pb_7Li_0.10_TweakedCook_1.pdf}
+\caption{\label{fig:orgparagraph40}
+Slightly tweaked improved cook potential applied to ten-percent randomized data. Resulting \(\chi^2=0.0951\).}
+\end{figure} 
+
+This tweaked potential is as follows:
+\begin{center}
+\begin{tabular}{llllll}
+\hline
+V & R & a & W & R\(_{\text{i}}\) & a\(_{\text{i}}\)\\
+\hline
+114.2 & 1.331 & 0.849 & 11.29 & 1.747 & 0.724\\
+\hline
+0\% & 3.449\% & 0.469\% & 19.597\% & 0.460\% & 10.507\%\\
+\hline
+\end{tabular}
+\end{center}
+
+The most notable, and quantitatively appreciable differences in this
+case between my improved fit and the result of refitting the 10$\backslash$%
+smeared data are seen in the imaginary potential and diffuseness. For
+the purposes of further analysis, ``significance'' will be
+characterized by any parameter that deviates by more than 8$\backslash$% from
+the original Improved Cook deviation. 
+
+\subsubsection{39 MeV Lithium-7 Lead-208 Elastic Scattering}
+\label{sec:orgheadline18}
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/39MeV_208Pb_7Li_0.10_ImpCook_1.pdf}
+\caption{\label{fig:orgparagraph41}
+39 MeV Improved cook potential \ref{orgtarget2} applied to ten-percent randomized data. Resulting \(\chi^2=0.1607\).}
+\end{figure} 
+
+Initial application of my improved fit from \ref{orgtarget2} to ten-percent
+randomized data yields a \(\chi^2\) value of 0.1607. 
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/39MeV_208Pb_7Li_0.10_TweakedCook_1.pdf}
+\caption{\label{fig:orgparagraph42}
+39 MeV Tweaked cook potential applied to ten-percent randomized data. Resulting \(\chi^2=0.1563\).}
+\end{figure} 
+
+Tweaking the improved potential yielded the fit depicted in
+\ref{fig:orgparagraph42} with a corresponding \(\chi^2\)
+of 0.1563. The potential is as follows:
+
+\begin{center}
+\begin{tabular}{llllll}
+\hline
+V & R & a & W & R\(_{\text{i}}\) & a\(_{\text{i}}\)\\
+\hline
+114.2 & 1.275 & 0.906 & 8.620 & 1.736 & 0.730\\
+\hline
+0\% & 0.855\% & 6.213\% & 8.686\% & 0.173\% & 9.765\%\\
+\hline
+\end{tabular}
+\end{center}
+
+There is a markedly high deviation of the imaginary potential in this
+tweaked fit from the original improved fit, which had a 0.847$\backslash$%
+difference from the Cook imaginary potential before randomization. The
+imaginary diffuseness has also decreased in variation from 13.60$\backslash$% to
+9.765$\backslash$%. So, this potential is also appreciably different.
+
+\subsubsection{35 MeV Lithium-7 Lead-208 Elastic Scattering}
+\label{sec:orgheadline19}
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/35MeV_208Pb_7Li_0.10_ImpCook_1.pdf}
+\caption{\label{fig:orgparagraph43}
+35 MeV Improved cook potential \ref{orgtarget3} applied to ten-percent randomized data. Resulting \(\chi^2=0.1705\).}
+\end{figure} 
+
+Initial application of my improved fit from \ref{orgtarget3} to ten-percent
+randomized data yields a \(\chi^2\) value of 0.1705, as seen in
+\ref{fig:orgparagraph43}.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/35MeV_208Pb_7Li_0.10_TweakedCook_1.pdf}
+\caption{\label{fig:orgparagraph44}
+35 MeV Tweaked potential applied to ten-percent randomized data. Resulting \(\chi^2=0.1511\).}
+\end{figure} 
+
+Improving on this yields \ref{fig:orgparagraph44}, with
+a resulting \(\chi^2\) of 0.1511. The potential is as follows:
+
+\begin{center}
+\begin{tabular}{llllll}
+\hline
+V & R & a & W & R\(_{\text{i}}\) & a\(_{\text{i}}\)\\
+\hline
+114.2 & 1.303 & 0.902 & 12.79 & 1.704 & 0.621\\
+\hline
+0\% & 1.322\% & 5.744\% & 35.487\% & 2.013\% & 23.239\%\\
+\hline
+\end{tabular}
+\end{center}
+
+Again, we see the largest difference in the imaginary potential
+(6.04$\backslash$% to 35.5$\backslash$%) and diffuseness (16.44$\backslash$% to 23.24$\backslash$%). This is a
+much different potential from the original improvement, and further
+supports the notion that at ten-percent randomization/error, fit
+potentials can change appreciably.
+
+\subsubsection{31 MeV Lithium-7 Lead-208 Elastic Scattering}
+\label{sec:orgheadline20}
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/31MeV_208Pb_7Li_0.10_ImpCook_1.pdf}
+\caption{\label{fig:orgparagraph45}
+31 MeV Improved cook potential \ref{orgtarget4} applied to ten-percent randomized data. Resulting \(\chi^2=0.1875\).}
+\end{figure} 
+
+Initial application of my improved fit from \ref{orgtarget4} to ten-percent
+randomized data yields a \(\chi^2\) value of 0.1875, as seen in
+\ref{fig:orgparagraph45}.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/31MeV_208Pb_7Li_0.10_TweakedCook_1.pdf}
+\caption{\label{fig:orgparagraph46}
+31 MeV Tweaked potential applied to ten-percent randomized data. Resulting \(\chi^2=0.1750\).}
+\end{figure} 
+
+Improving on this yields \ref{fig:orgparagraph46} with a
+resulting \(\chi^2\) of 0.1750. The potential is as follows:
+
+\begin{center}
+\begin{tabular}{llllll}
+\hline
+V & R & a & W & R\(_{\text{i}}\) & a\(_{\text{i}}\)\\
+\hline
+114.2 & 1.287 & 0.902 & 6.85 & 1.742 & 0.671\\
+\hline
+0\% & 0.078\% & 5.744\% & 27.463\% & 0.173\% & 17.058\%\\
+\hline
+\end{tabular}
+\end{center}
+
+The largest change is in the imaginary potential (6.04$\backslash$% to
+27.463$\backslash$%). This time, the diffuseness changed by less than once percent.
+
+\subsubsection{29 MeV Lithium-7 Lead-208 Elastic Scattering}
+\label{sec:orgheadline21}
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/29MeV_208Pb_7Li_0.10_ImpCook_1.pdf}
+\caption{\label{fig:orgparagraph47}
+29 MeV Improved cook potential \ref{orgtarget5} applied to ten-percent randomized data. Resulting \(\chi^2=0.4200\).}
+\end{figure} 
+
+Initial application of my improved fit from \ref{orgtarget5} to ten-percent
+randomized data yields a \(\chi^2\) value of 0.4200, as seen in
+\ref{fig:orgparagraph47}.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/29MeV_208Pb_7Li_0.10_TweakedCook_1.pdf}
+\caption{\label{fig:orgparagraph48}
+29 MeV Tweaked potential applied to ten-percent randomized data. Resulting \(\chi^2=0.4166\).}
+\end{figure} 
+
+Improving on this yields \ref{fig:orgparagraph48} with a
+resulting \(\chi^2\) of 0.4166. The potential is as follows:
+
+\begin{center}
+\begin{tabular}{llllll}
+\hline
+V & R & a & W & R\(_{\text{i}}\) & a\(_{\text{i}}\)\\
+\hline
+114.2 & 1.289 & 0.910 & 8.870 & 1.733 & 0.691\\
+\hline
+0\% & 0.233\% & 6.682\% & 6.038\% & 0.345\% & 14.586\%\\
+\hline
+\end{tabular}
+\end{center}
+
+Interestingly enough, this tweaked potential is more or less
+indistinguishable from the initial improved fit. This likely has to
+due with skewing effects caused by a closeness in energy to the
+Coulomb barrier, however, the effects warrant further study.
+
+
+\section{Robustness of the Optical Model under Data Reduction}
+\label{sec:orgheadline54}
+The uniqueness of a given potential remains a question when the size
+of fitting data is considered. That is, does the potential remain
+viable when applied to a larger or smaller set of data? Further, what
+is the smallest number of data points required to obtain a general
+potential, if such a potential exists? Is this number of points energy
+invariant? Is this number of points angle invariant?
+These questions will be answered by removing every nth point from the
+data set, fitting, and comparing \(\chi^{2}\) values. 
+
+
+\subsection{\(N=2\)}
+\label{sec:orgheadline29}
+\subsubsection{60 MeV Lithium-7 Lead-208 Elastic Scattering}
+\label{sec:orgheadline24}
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/60MeV_208Pb_7Li_Base_Cook_N2.pdf}
+\caption{\label{fig:orgparagraph49}
+Cook Potential applied to 60 MeV lithium-7, lead-208 elastic scattering data. Every 2nd point has been plotted. \(\chi^{2}=0.0365\)}
+\end{figure} 
+
+The initial Cook fit to the unaltered 60 MeV data can be seen in
+\ref{fig:orgparagraph1}, with a \(\chi^{2}\) value of
+0.0771. Plotting every 2nd point yields the base Cook fit seen in
+\ref{fig:orgparagraph49}, with a \(\chi^{2}\) value of
+0.0365. Solely going off of this value, it would appear that the fit
+was made better by removing points. Of course, this is
+fallacious. There are simply fewer data points near the first dip than
+there are in the higher-angle, imaginary region, thus making the fit's
+nearness to these points improve the \(\chi^{2}\). An improvement to the
+base Cook potentials was found based on \(\chi^{2}\) values. The
+improved potential with a corresponding \(\chi^{2}\) of 0.0261 is as
+follows:
+
+\begin{center}
+\begin{tabular}{llllll}
+\hline
+V & R & a & W & R\(_{\text{i}}\) & a\(_{\text{i}}\)\\
+\hline
+114.2 & 1.286 & 0.872 & 10.46 & 1.739 & 0.787\\
+\hline
+0\% & 0\% & 2.227\% & 10.805\% & 0\% & 2.719\%\\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/60MeV_208Pb_7Li_Base_ImpCook_N2.pdf}
+\caption{\label{fig:orgparagraph50}
+An improved Cook Potential applied to 60 MeV lithium-7, lead-208 elastic scattering data. Every 2nd point has been plotted. \(\chi^{2}=0.0261\)}
+\end{figure} The improved
+fit can be seen in Fig \ref{fig:orgparagraph50}. While the
+improvement does seem to better approximate the first dip, it still
+fails to sufficiently model it.
+
+\subsubsection{39 MeV Lithium-7 Lead-208 Elastic Scattering}
+\label{sec:orgheadline25}
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/39MeV_208Pb_7Li_Base_Cook_N2.pdf}
+\caption{\label{fig:orgparagraph51}
+Cook Potential applied to 39 MeV lithium-7, lead-208 elastic scattering data. Every 2nd point has been plotted. \(\chi^{2}=0.0466\)}
+\end{figure} 
+
+The initial Cook fit to the unaltered 39 MeV data can be seen in
+\ref{fig:orgparagraph7}, with a \(\chi^{2}\) value of
+0.0844. Plotting every 2nd point yields the base Cook fit seen in
+\ref{fig:orgparagraph51}, with a \(\chi^{2}\) value of
+0.0466. Solely going off of this value, it would appear that the fit
+was made better by removing points. Of course, this is
+fallacious. There are simply fewer data points near the first dip than
+there are in the higher-angle, imaginary region, thus making the fit's
+nearness to these points improve the \(\chi^{2}\). An improvement to the
+base Cook potentials was found based on \(\chi^{2}\)
+values. Unfortunately, the improved fit does not exactly capture the
+first dip, but it is certainly well within reason. The
+improved potential with a corresponding \(\chi^{2}\) of 0.0066 is as
+follows:
+
+\begin{center}
+\begin{tabular}{llllll}
+\hline
+V & R & a & W & R\(_{\text{i}}\) & a\(_{\text{i}}\)\\
+\hline
+114.2 & 1.319 & 0.840 & 7.880 & 1.742 & 0.752\\
+\hline
+0\% & 2.566\% & 1.524\% & 16.525\% & 0.173\% & 7.046\%\\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/39MeV_208Pb_7Li_Base_ImpCook_N2.pdf}
+\caption{\label{fig:orgparagraph52}
+An improved Cook Potential applied to 39 MeV lithium-7, lead-208 elastic scattering data. Every 2nd point has been plotted. \(\chi^{2}=0.0066\)}
+\end{figure} The improved
+fit can be seen in Fig \ref{fig:orgparagraph52}. While the
+improvement does seem to better approximate the first dip, it still
+fails to sufficiently model it.
+
+\subsubsection{35 MeV Lithium-7 Lead-208 Elastic Scattering}
+\label{sec:orgheadline26}
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/35MeV_208Pb_7Li_Base_ImpCook_N2.pdf}
+\caption{\label{fig:orgparagraph53}
+An improved Cook Potential applied to 35 MeV lithium-7, lead-208 elastic scattering data. Every 2nd point has been plotted. \(\chi^{2}=0.0060\)}
+\end{figure}
+
+An improved fit to data obtained by plotting every other point in the
+data set is displayed in \ref{fig:orgparagraph53}, with a
+corresponding \(\chi^2\) value of 0.0060. The corresponding potential is
+as follows:
+
+\begin{center}
+\begin{tabular}{llllll}
+\hline
+V & R & a & W & R\(_{\text{i}}\) & a\(_{\text{i}}\)\\
+\hline
+114.2 & 1.283 & 0.914 & 12.30 & 1.705 & 0.653\\
+\hline
+0\% & 0.233\% & 7.151\% & 30.297\% & 1.955\% & 19.283\%\\
+\hline
+\end{tabular}
+\end{center}
+
+\subsubsection{31 MeV Lithium-7 Lead-208 Elastic Scattering}
+\label{sec:orgheadline27}
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/31MeV_208Pb_7Li_Base_ImpCook_N2.pdf}
+\caption{\label{fig:orgparagraph54}
+An improved Cook Potential applied to 31 MeV lithium-7, lead-208 elastic scattering data. Every 2nd point has been plotted. \(\chi^{2}=0.0086\)}
+\end{figure}
+
+An improved fit to data obtained by plotting every other point in the
+data set is displayed in \ref{fig:orgparagraph54}, with a
+corresponding \(\chi^2\) value of 0.0086. The corresponding potential is
+as follows:
+
+\begin{center}
+\begin{tabular}{llllll}
+\hline
+V & R & a & W & R\(_{\text{i}}\) & a\(_{\text{i}}\)\\
+\hline
+114.2 & 1.285 & 0.904 & 8.180 & 1.736 & 0.660\\
+\hline
+0\% & 0.078\% & 5.979\% & 13.347\% & 0.173\% & 18.418\%\\
+\hline
+\end{tabular}
+\end{center}
+
+\subsubsection{29 MeV Lithium-7 Lead-208 Elastic Scattering}
+\label{sec:orgheadline28}
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/29MeV_208Pb_7Li_Base_ImpCook_N2.pdf}
+\caption{\label{fig:orgparagraph55}
+An improved Cook Potential applied to 29 MeV lithium-7, lead-208 elastic scattering data. Every 2nd point has been plotted. \(\chi^{2}=0.0803\)}
+\end{figure}
+
+An improved fit to data obtained by plotting every other point in the
+data set is displayed in \ref{fig:orgparagraph55}, with a
+corresponding \(\chi^2\) value of 0.0803. The corresponding potential is
+as follows:
+
+\begin{center}
+\begin{tabular}{llllll}
+\hline
+V & R & a & W & R\(_{\text{i}}\) & a\(_{\text{i}}\)\\
+\hline
+114.2 & 1.316 & 0.905 & 6.830 & 1.738 & 0.691\\
+\hline
+0\% & 2.333\% & 6.096\% & 27.648\% & 0.058\% & 14.586\%\\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{\(N=3\)}
+\label{sec:orgheadline37}
+\subsubsection{60 MeV Lithium-7 Lead-208 Elastic Scattering}
+\label{sec:orgheadline31}
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/60MeV_208Pb_7Li_Base_Cook_N3.pdf}
+\caption{\label{fig:orgparagraph56}
+Cook Potential applied to 60 MeV lithium-7, lead-208 elastic scattering data. Every 3rd point has been plotted. \(\chi^{2}=0.0199\)}
+\end{figure} 
+
+The initial Cook fit to the unaltered 60 MeV data can be seen in
+\ref{fig:orgparagraph1}, with a \(\chi^{2}\) value of
+0.0771. Plotting every 3rd point yields the base Cook fit seen in
+\ref{fig:orgparagraph56}, with a \(\chi^{2}\) value of
+0.0199.  An improvement to the
+base Cook potentials was found based on \(\chi^{2}\) values. The
+improved potential with a corresponding \(\chi^{2}\) of 0.0130 is as
+follows:
+
+\begin{center}
+\begin{tabular}{llllll}
+\hline
+V & R & a & W & R\(_{\text{i}}\) & a\(_{\text{i}}\)\\
+\hline
+114.2 & 1.296 & 0.871 & 10.18 & 1.739 & 0.784\\
+\hline
+0\% & 0.778\% & 2.110\% & 7.839\% & 0\% & 3.090\%\\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/60MeV_208Pb_7Li_Base_ImpCook_N3.pdf}
+\caption{\label{fig:orgparagraph57}
+An improved Cook Potential applied to 60 MeV lithium-7, lead-208 elastic scattering data. Every 3rd point has been plotted. \(\chi^{2}=0.0130\)}
+\end{figure} The improved
+fit can be seen in Fig \ref{fig:orgparagraph57}. 
+
+
+\begin{enumerate}
+\item Five Percent Error Propagation
+\label{sec:orgheadline30}
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/60MeV_208Pb_7Li_0.05_Cook_N3_1.pdf}
+\caption{\label{fig:orgparagraph58}
+Cook Potential applied to 60 MeV lithium-7, lead-208 elastic scattering data. Every 3rd point has been plotted. Five percent randomization has been applied. \(\chi^{2}=0.0220\)}
+\end{figure} 
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/60MeV_208Pb_7Li_0.05_Cook_N3_2.pdf}
+\caption{\label{fig:orgparagraph59}
+Cook Potential applied to 60 MeV lithium-7, lead-208 elastic scattering data. Every 3rd point has been plotted. Five percent randomization has been applied. \(\chi^{2}=0.0197\)}
+\end{figure} 
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/60MeV_208Pb_7Li_0.05_Cook_N3_3.pdf}
+\caption{\label{fig:orgparagraph60}
+Cook Potential applied to 60 MeV lithium-7, lead-208 elastic scattering data. Every 3rd point has been plotted. Five percent randomization has been applied. \(\chi^{2}=0.0228\)}
+\end{figure} 
+
+Applying the base Cook potential to three, five percent randomized
+data sets yields Figs
+\ref{fig:orgparagraph58},\ref{fig:orgparagraph59}, and
+\ref{fig:orgparagraph60}, with corresponding \(\chi^{2}\) values of 0.0220,
+0.0197, and 0.0228, respectively. 
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/60MeV_208Pb_7Li_0.05_ImpCook_N3_1.pdf}
+\caption{\label{fig:orgparagraph61}
+Improved Cook Potential applied to 60 MeV lithium-7, lead-208 elastic scattering data. Every 3rd point has been plotted. Five percent randomization has been applied. \(\chi^{2}=0.0148\)}
+\end{figure} 
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/60MeV_208Pb_7Li_0.05_ImpCook_N3_2.pdf}
+\caption{\label{fig:orgparagraph62}
+Improved Cook Potential applied to 60 MeV lithium-7, lead-208 elastic scattering data. Every 3rd point has been plotted. Five percent randomization has been applied. \(\chi^{2}=0.0160\)}
+\end{figure} 
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/60MeV_208Pb_7Li_0.05_ImpCook_N3_3.pdf}
+\caption{\label{fig:orgparagraph63}
+Improved Cook Potential applied to 60 MeV lithium-7, lead-208 elastic scattering data. Every 3rd point has been plotted. Five percent randomization has been applied. \(\chi^{2}=0.0190\)}
+\end{figure} 
+
+Application of the improved Cook potential to the randomized data can
+be seen in Figs \ref{fig:orgparagraph61},\ref{fig:orgparagraph62}, and
+\ref{fig:orgparagraph63}, with corresponding \(\chi^{2}\)
+values of 0.0148, 0.0160, and 0.0190, respectively. Better than the
+base fit, and similarly, roughly constant.
+\end{enumerate}
+
+\subsubsection{39 MeV Lithium-7 Lead-208 Elastic Scattering}
+\label{sec:orgheadline33}
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/39MeV_208Pb_7Li_Base_Cook_N3.pdf}
+\caption{\label{fig:orgparagraph64}
+Cook Potential applied to 39 MeV lithium-7, lead-208 elastic scattering data. Every 3rd point has been plotted. \(\chi^{2}=0.0466\)}
+\end{figure} 
+
+The initial Cook fit to the unaltered 39 MeV data can be seen in
+\ref{fig:orgparagraph7}, with a \(\chi^{2}\) value of
+0.0844. Plotting every 3rd point yields the base Cook fit seen in
+\ref{fig:orgparagraph64}, with a \(\chi^{2}\) value of
+0.0466. Solely going off of this value, it would appear that the fit
+was made better by removing points. Of course, this is
+fallacious. There are simply fewer data points near the first dip than
+there are in the higher-angle, imaginary region, thus making the fit's
+nearness to these points improve the \(\chi^{2}\). An improvement to the
+base Cook potentials was found based on \(\chi^{2}\)
+values. Unfortunately, the improved fit does not exactly capture the
+first dip, but it is certainly well within reason. The
+improved potential with a corresponding \(\chi^{2}\) of 0.0066 is as
+follows:
+
+\begin{center}
+\begin{tabular}{llllll}
+\hline
+V & R & a & W & R\(_{\text{i}}\) & a\(_{\text{i}}\)\\
+\hline
+114.2 & 1.319 & 0.840 & 7.880 & 1.742 & 0.752\\
+\hline
+0\% & 2.566\% & 1.524\% & 16.525\% & 0.173\% & 7.046\%\\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/39MeV_208Pb_7Li_Base_ImpCook_N3.pdf}
+\caption{\label{fig:orgparagraph65}
+An improved Cook Potential applied to 39 MeV lithium-7, lead-208 elastic scattering data. Every 3rd point has been plotted. \(\chi^{2}=0.0042\)}
+\end{figure} The improved
+fit can be seen in Fig \ref{fig:orgparagraph65}. While the
+improvement does seem to better approximate the first dip, it still
+fails to sufficiently model it.
+
+
+\begin{enumerate}
+\item Five Percent Error Propagation
+\label{sec:orgheadline32}
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/39MeV_208Pb_7Li_0.05_ImpCook_N3_1.pdf}
+\caption{\label{fig:orgparagraph66}
+Improved Cook Potential applied to 39 MeV lithium-7, lead-208 elastic scattering data. Every 3rd point has been plotted. Five percent randomization has been applied. \(\chi^{2}=0.0200\)}
+\end{figure} 
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/39MeV_208Pb_7Li_0.05_ImpCook_N3_2.pdf}
+\caption{\label{fig:orgparagraph67}
+Improved Cook Potential applied to 39 MeV lithium-7, lead-208 elastic scattering data. Every 3rd point has been plotted. Five percent randomization has been applied. \(\chi^{2}=0.0157\)}
+\end{figure} 
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/39MeV_208Pb_7Li_0.05_ImpCook_N3_3.pdf}
+\caption{\label{fig:orgparagraph68}
+Improved Cook Potential applied to 39 MeV lithium-7, lead-208 elastic scattering data. Every 3rd point has been plotted. Five percent randomization has been applied. \(\chi^{2}=0.0214\)}
+\end{figure} 
+
+Application of the improved Cook potential to the randomized data can
+be seen in Figs \ref{fig:orgparagraph66},\ref{fig:orgparagraph67}, and
+\ref{fig:orgparagraph68}, with corresponding \(\chi^{2}\)
+values of 0.0200, 0.0157, and 0.0214, respectively. Better than the
+base fit, and similarly, roughly constant. It should be noted that
+upon randomization, the dip is not necessarily accurately modeled
+exactly. The margin of error though is quite small. As with the full
+data case, five percent randomization does not negate the validity of
+an improved fit, pertaining to that specific energy.
+\end{enumerate}
+
+\subsubsection{35 MeV Lithium-7 Lead-208 Elastic Scattering}
+\label{sec:orgheadline34}
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/35MeV_208Pb_7Li_Base_ImpCook_N3.pdf}
+\caption{\label{fig:orgparagraph69}
+An improved Cook Potential applied to 35 MeV lithium-7, lead-208 elastic scattering data. Every 3rd point has been plotted. \(\chi^{2}=0.0039\)}
+\end{figure}
+
+An improved fit to data obtained by plotting every 3rd point in the
+data set is displayed in \ref{fig:orgparagraph69}, with a
+corresponding \(\chi^2\) value of 0.0039. The corresponding potential is
+as follows:
+
+\begin{center}
+\begin{tabular}{llllll}
+\hline
+V & R & a & W & R\(_{\text{i}}\) & a\(_{\text{i}}\)\\
+\hline
+114.2 & 1.285 & 0.914 & 11.80 & 1.705 & 0.652\\
+\hline
+0\% & 0.078\% & 7.151\% & 25.00\% & 1.955\% & 19.407\%\\
+\hline
+\end{tabular}
+\end{center}
+
+This is extremely close to the N=2 fit, suggesting that data reduction has not yet had a detrimental effect on the fit.
+
+\subsubsection{31 MeV Lithium-7 Lead-208 Elastic Scattering}
+\label{sec:orgheadline35}
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/31MeV_208Pb_7Li_Base_ImpCook_N3.pdf}
+\caption{\label{fig:orgparagraph70}
+An improved Cook Potential applied to 31 MeV lithium-7, lead-208 elastic scattering data. Every 3rd point has been plotted. \(\chi^{2}=0.0078\)}
+\end{figure}
+
+An improved fit to data obtained by plotting every 3rd point in the
+data set is displayed in \ref{fig:orgparagraph70}, with a
+corresponding \(\chi^2\) value of 0.0078. The corresponding potential is
+as follows:
+
+\begin{center}
+\begin{tabular}{llllll}
+\hline
+V & R & a & W & R\(_{\text{i}}\) & a\(_{\text{i}}\)\\
+\hline
+114.2 & 1.283 & 0.904 & 8.180 & 1.736 & 0.662\\
+\hline
+0\% & 0.233\% & 5.979\% & 13.347\% & 0.173\% & 18.171\%\\
+\hline
+\end{tabular}
+\end{center}
+
+This is extremely close to the N=2 fit, suggesting that data reduction has not yet had a detrimental effect on the fit.
+\subsubsection{29 MeV Lithium-7 Lead-208 Elastic Scattering}
+\label{sec:orgheadline36}
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/29MeV_208Pb_7Li_Base_ImpCook_N3.pdf}
+\caption{\label{fig:orgparagraph71}
+An improved Cook Potential applied to 29 MeV lithium-7, lead-208 elastic scattering data. Every 3rd point has been plotted. \(\chi^{2}=0.0334\)}
+\end{figure}
+
+An improved fit to data obtained by plotting every 3rd point in the
+data set is displayed in \ref{fig:orgparagraph71}, with a
+corresponding \(\chi^2\) value of 0.0334. The corresponding potential is
+as follows:
+
+\begin{center}
+\begin{tabular}{llllll}
+\hline
+V & R & a & W & R\(_{\text{i}}\) & a\(_{\text{i}}\)\\
+\hline
+114.2 & 1.310 & 0.905 & 6.640 & 1.737 & 0.689\\
+\hline
+0\% & 1.866\% & 5.979\% & 6.096\% & 0.115\% & 14.833\%\\
+\hline
+\end{tabular}
+\end{center}
+
+This is extremely close to the N=2 fit, suggesting that data reduction has not yet had a detrimental effect on the fit.
+
+\subsection{Unused}
+\label{sec:orgheadline53}
+\subsubsection{\(N=4\)}
+\label{sec:orgheadline42}
+\begin{enumerate}
+\item 60 MeV Lithium-7 Lead-208 Elastic Scattering
+\label{sec:orgheadline39}
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/60MeV_208Pb_7Li_Base_Cook_N4.pdf}
+\caption{\label{fig:orgparagraph72}
+Cook Potential applied to 60 MeV lithium-7, lead-208 elastic scattering data. Every 4th point has been plotted. \(\chi^{2}=0.0178\)}
+\end{figure} 
+
+The initial Cook fit to the unaltered 60 MeV data can be seen in
+\ref{fig:orgparagraph1}, with a \(\chi^{2}\) value of
+0.0771. Plotting every 4th point yields the base Cook fit seen in
+\ref{fig:orgparagraph72}, with a \(\chi^{2}\) value of
+0.0178.  An improvement to the
+base Cook potentials was found based on \(\chi^{2}\) values. The
+improved potential with a corresponding \(\chi^{2}\) of 0.0121 is as
+follows:
+
+\begin{center}
+\begin{tabular}{llllll}
+\hline
+V & R & a & W & R\(_{\text{i}}\) & a\(_{\text{i}}\)\\
+\hline
+114.2 & 1.294 & 0.872 & 9.60 & 1.739 & 0.784\\
+\hline
+0\% & 0.622\% & 2.227\% & 1.695\% & 0\% & 3.090\%\\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/60MeV_208Pb_7Li_Base_ImpCook_N4.pdf}
+\caption{\label{fig:orgparagraph73}
+An improved Cook Potential applied to 60 MeV lithium-7, lead-208 elastic scattering data. Every 4th point has been plotted. \(\chi^{2}=0.0121\)}
+\end{figure} The improved
+fit can be seen in Fig \ref{fig:orgparagraph73}. 
+
+
+\begin{enumerate}
+\item Five Percent Error Propagation
+\label{sec:orgheadline38}
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/60MeV_208Pb_7Li_0.05_Cook_N4_1.pdf}
+\caption{\label{fig:orgparagraph74}
+Cook Potential applied to 60 MeV lithium-7, lead-208 elastic scattering data. Every 4th point has been plotted. Five percent randomization has been applied. \(\chi^{2}=0.0145\)}
+\end{figure} 
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/60MeV_208Pb_7Li_0.05_Cook_N4_2.pdf}
+\caption{\label{fig:orgparagraph75}
+Cook Potential applied to 60 MeV lithium-7, lead-208 elastic scattering data. Every 4th point has been plotted. Five percent randomization has been applied. \(\chi^{2}=0.0179\)}
+\end{figure} 
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/60MeV_208Pb_7Li_0.05_Cook_N4_3.pdf}
+\caption{\label{fig:orgparagraph76}
+Cook Potential applied to 60 MeV lithium-7, lead-208 elastic scattering data. Every 4th point has been plotted. Five percent randomization has been applied. \(\chi^{2}=0.0169\)}
+\end{figure} 
+
+Applying the base Cook potential to three, five percent randomized
+data sets yields Figs
+\ref{fig:orgparagraph74},\ref{fig:orgparagraph75}, and
+\ref{fig:orgparagraph76}, with corresponding \(\chi^{2}\) values of 0.0145,
+0.0179, and 0.0169, respectively. 
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/60MeV_208Pb_7Li_0.05_ImpCook_N4_1.pdf}
+\caption{\label{fig:orgparagraph77}
+Improved Cook Potential applied to 60 MeV lithium-7, lead-208 elastic scattering data. Every 4th point has been plotted. Five percent randomization has been applied. \(\chi^{2}=0.0121\)}
+\end{figure} 
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/60MeV_208Pb_7Li_0.05_ImpCook_N4_2.pdf}
+\caption{\label{fig:orgparagraph78}
+Improved Cook Potential applied to 60 MeV lithium-7, lead-208 elastic scattering data. Every 4th point has been plotted. Five percent randomization has been applied. \(\chi^{2}=0.0126\)}
+\end{figure} 
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/60MeV_208Pb_7Li_0.05_ImpCook_N4_3.pdf}
+\caption{\label{fig:orgparagraph79}
+Improved Cook Potential applied to 60 MeV lithium-7, lead-208 elastic scattering data. Every 4th point has been plotted. Five percent randomization has been applied. \(\chi^{2}=0.0130\)}
+\end{figure} 
+
+Application of the improved Cook potential to the randomized data can
+be seen in Figs \ref{fig:orgparagraph77},\ref{fig:orgparagraph78}, and
+\ref{fig:orgparagraph79}, with corresponding \(\chi^{2}\)
+values of 0.0121, 0.0126, and 0.0130, respectively. Better than the
+base fit, and similarly, roughly constant.
+\end{enumerate}
+
+
+
+\item 39 MeV Lithium-7 Lead-208 Elastic Scattering
+\label{sec:orgheadline41}
+The initial Cook fit to the unaltered 39 MeV data can be seen in
+\ref{fig:orgparagraph7}, with a \(\chi^{2}\) value of
+0.0844. An improvement to the
+base Cook potentials was found based on \(\chi^{2}\)
+values. Unfortunately, the improved fit does not exactly capture the
+first dip, but it is certainly well within reason. The
+improved potential with a corresponding \(\chi^{2}\) of 0.0029 is as
+follows:
+
+\begin{center}
+\begin{tabular}{llllll}
+\hline
+V & R & a & W & R\(_{\text{i}}\) & a\(_{\text{i}}\)\\
+\hline
+114.2 & 1.320 & 0.840 & 8.50 & 1.737 & 0.745\\
+\hline
+0\% & 2.800\% & 1.524\% & 9.958\% & 0.115\% & 7.911\%\\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/39MeV_208Pb_7Li_Base_ImpCook_N4.pdf}
+\caption{\label{fig:orgparagraph80}
+An improved Cook Potential applied to 39 MeV lithium-7, lead-208 elastic scattering data. Every 4th point has been plotted. \(\chi^{2}=0.0029\)}
+\end{figure} The improved
+fit can be seen in Fig \ref{fig:orgparagraph80}. This best fit is virtually identical to that of the N=3 case, with only the slightest of changes in the real radius.
+
+
+\begin{enumerate}
+\item Five Percent Error Propagation
+\label{sec:orgheadline40}
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/39MeV_208Pb_7Li_0.05_ImpCook_N4_1.pdf}
+\caption{\label{fig:orgparagraph81}
+Improved Cook Potential applied to 39 MeV lithium-7, lead-208 elastic scattering data. Every 4th point has been plotted. Five percent randomization has been applied. \(\chi^{2}=0.0088\)}
+\end{figure} 
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/39MeV_208Pb_7Li_0.05_ImpCook_N4_2.pdf}
+\caption{\label{fig:orgparagraph82}
+Improved Cook Potential applied to 39 MeV lithium-7, lead-208 elastic scattering data. Every 4th point has been plotted. Five percent randomization has been applied. \(\chi^{2}=0.0102\)}
+\end{figure} 
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/39MeV_208Pb_7Li_0.05_ImpCook_N4_3.pdf}
+\caption{\label{fig:orgparagraph83}
+Improved Cook Potential applied to 39 MeV lithium-7, lead-208 elastic scattering data. Every 4th point has been plotted. Five percent randomization has been applied. \(\chi^{2}=0.0097\)}
+\end{figure} 
+
+Application of the improved Cook potential to the randomized data can
+be seen in Figs \ref{fig:orgparagraph81},\ref{fig:orgparagraph82}, and
+\ref{fig:orgparagraph83}, with corresponding \(\chi^{2}\)
+values of 0.0088, 0.0102, and 0.0097, respectively. Better than the
+base fit, and similarly, roughly constant. It should be noted that
+upon randomization, the dip is not necessarily accurately modeled
+exactly. The margin of error though is quite small. As with the full
+data case, five percent randomization does not negate the validity of
+an improved fit, pertaining to that specific energy.
+\end{enumerate}
+\end{enumerate}
+
+\subsubsection{\(N=5\)}
+\label{sec:orgheadline47}
+\begin{enumerate}
+\item 60 MeV Lithium-7 Lead-208 Elastic Scattering
+\label{sec:orgheadline44}
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/60MeV_208Pb_7Li_Base_Cook_N5.pdf}
+\caption{\label{fig:orgparagraph84}
+Cook Potential applied to 60 MeV lithium-7, lead-208 elastic scattering data. Every 5th point has been plotted. \(\chi^{2}=0.0126\)}
+\end{figure} 
+
+The initial Cook fit to the unaltered 60 MeV data can be seen in
+\ref{fig:orgparagraph1}, with a \(\chi^{2}\) value of
+0.0771. Plotting every 5th point yields the base Cook fit seen in
+\ref{fig:orgparagraph84}, with a \(\chi^{2}\) value of
+0.0126.  An improvement to the
+base Cook potentials was found based on \(\chi^{2}\) values. The
+improved potential with a corresponding \(\chi^{2}\) of 0.0081 is as
+follows:
+
+\begin{center}
+\begin{tabular}{llllll}
+\hline
+V & R & a & W & R\(_{\text{i}}\) & a\(_{\text{i}}\)\\
+\hline
+114.2 & 1.294 & 0.869 & 10.41 & 1.739 & 0.789\\
+\hline
+0\% & 0.622\% & 1.876\% & 10.275\% & 0\% & 2.472\%\\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/60MeV_208Pb_7Li_Base_ImpCook_N5.pdf}
+\caption{\label{fig:orgparagraph85}
+An improved Cook Potential applied to 60 MeV lithium-7, lead-208 elastic scattering data. Every 5th point has been plotted. \(\chi^{2}=0.0081\)}
+\end{figure} The improved
+fit can be seen in Fig \ref{fig:orgparagraph85}. 
+
+
+\begin{enumerate}
+\item Five Percent Error Propagation
+\label{sec:orgheadline43}
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/60MeV_208Pb_7Li_0.05_Cook_N5_1.pdf}
+\caption{\label{fig:orgparagraph86}
+Cook Potential applied to 60 MeV lithium-7, lead-208 elastic scattering data. Every 5th point has been plotted. Five percent randomization has been applied. \(\chi^{2}=0.0136\)}
+\end{figure} 
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/60MeV_208Pb_7Li_0.05_Cook_N5_2.pdf}
+\caption{\label{fig:orgparagraph87}
+Cook Potential applied to 60 MeV lithium-7, lead-208 elastic scattering data. Every 5th point has been plotted. Five percent randomization has been applied. \(\chi^{2}=0.0112\)}
+\end{figure} 
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/60MeV_208Pb_7Li_0.05_Cook_N5_3.pdf}
+\caption{\label{fig:orgparagraph88}
+Cook Potential applied to 60 MeV lithium-7, lead-208 elastic scattering data. Every 5th point has been plotted. Five percent randomization has been applied. \(\chi^{2}=0.0135\)}
+\end{figure} 
+
+Applying the base Cook potential to three, five percent randomized
+data sets yields Figs
+\ref{fig:orgparagraph86},\ref{fig:orgparagraph87}, and
+\ref{fig:orgparagraph88}, with corresponding \(\chi^{2}\) values of 0.0136,
+0.0112, and 0.0135, respectively. 
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/60MeV_208Pb_7Li_0.05_ImpCook_N5_1.pdf}
+\caption{\label{fig:orgparagraph89}
+Improved Cook Potential applied to 60 MeV lithium-7, lead-208 elastic scattering data. Every 5th point has been plotted. Five percent randomization has been applied. \(\chi^{2}=0.0084\)}
+\end{figure} 
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/60MeV_208Pb_7Li_0.05_ImpCook_N5_2.pdf}
+\caption{\label{fig:orgparagraph90}
+Improved Cook Potential applied to 60 MeV lithium-7, lead-208 elastic scattering data. Every 5th point has been plotted. Five percent randomization has been applied. \(\chi^{2}=0.0094\)}
+\end{figure} 
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/60MeV_208Pb_7Li_0.05_ImpCook_N5_3.pdf}
+\caption{\label{fig:orgparagraph91}
+Improved Cook Potential applied to 60 MeV lithium-7, lead-208 elastic scattering data. Every 5th point has been plotted. Five percent randomization has been applied. \(\chi^{2}=0.0097\)}
+\end{figure} 
+
+Application of the improved Cook potential to the randomized data can
+be seen in Figs \ref{fig:orgparagraph89},\ref{fig:orgparagraph90}, and
+\ref{fig:orgparagraph91}, with corresponding \(\chi^{2}\)
+values of 0.0084, 0.0094, and 0.0097, respectively. Better than the
+base fit, and similarly, roughly constant.
+\end{enumerate}
+
+\item 39 MeV Lithium-7 Lead-208 Elastic Scattering
+\label{sec:orgheadline46}
+
+An improvement to the base Cook potentials was found based on
+\(\chi^{2}\) values. Unfortunately, the improved fit does not exactly
+capture the first dip, but it is certainly well within reason. The
+improved potential with a corresponding \(\chi^{2}\) of 0.0029 is as
+follows:
+
+\begin{center}
+\begin{tabular}{llllll}
+\hline
+V & R & a & W & R\(_{\text{i}}\) & a\(_{\text{i}}\)\\
+\hline
+114.2 & 1.320 & 0.842 & 8.50 & 1.737 & 0.744\\
+\hline
+0\% & 2.644\% & 1.290\% & 9.958\% & 0.115\% & 8.035\%\\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/39MeV_208Pb_7Li_Base_ImpCook_N5.pdf}
+\caption{\label{fig:orgparagraph92}
+An improved Cook Potential applied to 39 MeV lithium-7, lead-208 elastic scattering data. Every 5th point has been plotted. \(\chi^{2}=0.0029\)}
+\end{figure} The improved
+fit can be seen in Fig \ref{fig:orgparagraph92}. This best fit is virtually identical to that of the N=3 case, with only the slightest of changes in the real radius.
+
+\begin{enumerate}
+\item Five Percent Error Propagation
+\label{sec:orgheadline45}
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/39MeV_208Pb_7Li_0.05_ImpCook_N5_1.pdf}
+\caption{\label{fig:orgparagraph93}
+Improved Cook Potential applied to 39 MeV lithium-7, lead-208 elastic scattering data. Every 5th point has been plotted. Five percent randomization has been applied. \(\chi^{2}=0.0193\)}
+\end{figure} 
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/39MeV_208Pb_7Li_0.05_ImpCook_N5_2.pdf}
+\caption{\label{fig:orgparagraph94}
+Improved Cook Potential applied to 39 MeV lithium-7, lead-208 elastic scattering data. Every 5th point has been plotted. Five percent randomization has been applied. \(\chi^{2}=0.0075\)}
+\end{figure} 
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/39MeV_208Pb_7Li_0.05_ImpCook_N5_3.pdf}
+\caption{\label{fig:orgparagraph95}
+Improved Cook Potential applied to 39 MeV lithium-7, lead-208 elastic scattering data. Every 5th point has been plotted. Five percent randomization has been applied. \(\chi^{2}=0.0116\)}
+\end{figure} 
+
+Application of the improved Cook potential to the randomized data can
+be seen in Figs \ref{fig:orgparagraph93},\ref{fig:orgparagraph94}, and
+\ref{fig:orgparagraph95}, with corresponding \(\chi^{2}\)
+values of 0.0193, 0.0075, and 0.0116, respectively. Better than the
+base fit, and similarly, roughly constant. It should be noted that
+upon randomization, the dip is not necessarily accurately modeled
+exactly. The margin of error though is quite small. As with the full
+data case, five percent randomization does not negate the validity of
+an improved fit, pertaining to that specific energy.
+\end{enumerate}
+\end{enumerate}
+
+\subsubsection{\(N=6\)}
+\label{sec:orgheadline52}
+It is at this level that we begin to see that the 5\% error is
+non-negligible for the 60 MeV data. There are simply too few points to allow for the
+potential to be unrefined from one randomized set to the other, and
+allow meaningful conclusions to be determined.
+\begin{enumerate}
+\item 60 MeV Lithium-7 Lead-208 Elastic Scattering
+\label{sec:orgheadline49}
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/60MeV_208Pb_7Li_Base_Cook_N6.pdf}
+\caption{\label{fig:orgparagraph96}
+Cook Potential applied to 60 MeV lithium-7, lead-208 elastic scattering data. Every 6th point has been plotted. \(\chi^{2}=0.0114\)}
+\end{figure} 
+
+The initial Cook fit to the unaltered 60 MeV data can be seen in
+\ref{fig:orgparagraph1}, with a \(\chi^{2}\) value of
+0.0771. Plotting every 6th point yields the base Cook fit seen in
+\ref{fig:orgparagraph96}, with a \(\chi^{2}\) value of
+0.0114.  An improvement to the
+base Cook potentials was found based on \(\chi^{2}\) values. The
+improved potential with a corresponding \(\chi^{2}\) of 0.0082 is as
+follows:
+
+\begin{center}
+\begin{tabular}{llllll}
+\hline
+V & R & a & W & R\(_{\text{i}}\) & a\(_{\text{i}}\)\\
+\hline
+114.2 & 1.292 & 0.863 & 10.97 & 1.739 & 0.796\\
+\hline
+0\% & 0.467\% & 1.172\% & 16.208\% & 0\% & 1.607\%\\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/60MeV_208Pb_7Li_Base_ImpCook_N6.pdf}
+\caption{\label{fig:orgparagraph97}
+An improved Cook Potential applied to 60 MeV lithium-7, lead-208 elastic scattering data. Every 6th point has been plotted. \(\chi^{2}=0.0082\)}
+\end{figure} The improved
+fit can be seen in Fig \ref{fig:orgparagraph97}. 
+
+
+\begin{enumerate}
+\item Five Percent Error Propagation
+\label{sec:orgheadline48}
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/60MeV_208Pb_7Li_0.05_Cook_N6_1.pdf}
+\caption{\label{fig:orgparagraph98}
+Cook Potential applied to 60 MeV lithium-7, lead-208 elastic scattering data. Every 6th point has been plotted. Five percent randomization has been applied. \(\chi^{2}=0.0118\)}
+\end{figure} 
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/60MeV_208Pb_7Li_0.05_Cook_N6_2.pdf}
+\caption{\label{fig:orgparagraph99}
+Cook Potential applied to 60 MeV lithium-7, lead-208 elastic scattering data. Every 6th point has been plotted. Five percent randomization has been applied. \(\chi^{2}=0.0130\)}
+\end{figure} 
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/60MeV_208Pb_7Li_0.05_Cook_N6_3.pdf}
+\caption{\label{fig:orgparagraph100}
+Cook Potential applied to 60 MeV lithium-7, lead-208 elastic scattering data. Every 6th point has been plotted. Five percent randomization has been applied. \(\chi^{2}=0.0101\)}
+\end{figure} 
+
+Applying the base Cook potential to three, five percent randomized
+data sets yields Figs
+\ref{fig:orgparagraph98},\ref{fig:orgparagraph99}, and
+\ref{fig:orgparagraph100}, with corresponding \(\chi^{2}\) values of 0.0118,
+0.0130, and 0.0101, respectively. 
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/60MeV_208Pb_7Li_0.05_ImpCook_N6_1.pdf}
+\caption{\label{fig:orgparagraph101}
+Improved Cook Potential applied to 60 MeV lithium-7, lead-208 elastic scattering data. Every 6th point has been plotted. Five percent randomization has been applied. \(\chi^{2}=0.0085\)}
+\end{figure} 
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/60MeV_208Pb_7Li_0.05_ImpCook_N6_2.pdf}
+\caption{\label{fig:orgparagraph102}
+Improved Cook Potential applied to 60 MeV lithium-7, lead-208 elastic scattering data. Every 6th point has been plotted. Five percent randomization has been applied. \(\chi^{2}=0.0124\)}
+\end{figure} 
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/60MeV_208Pb_7Li_0.05_ImpCook_N6_3.pdf}
+\caption{\label{fig:orgparagraph103}
+Improved Cook Potential applied to 60 MeV lithium-7, lead-208 elastic scattering data. Every 6th point has been plotted. Five percent randomization has been applied. \(\chi^{2}=0.0098\)}
+\end{figure} 
+
+Application of the improved Cook potential to the randomized data can
+be seen in Figs \ref{fig:orgparagraph101},\ref{fig:orgparagraph102}, and
+\ref{fig:orgparagraph103}, with corresponding \(\chi^{2}\)
+values of 0.0085, 0.0124, and 0.0098, respectively. Better than the
+base fit, and similarly, roughly constant.
+\end{enumerate}
+\item 39 MeV Lithium-7 Lead-208 Elastic Scattering
+\label{sec:orgheadline51}
+
+An improvement to the base Cook potentials was found based on
+\(\chi^{2}\) values. At this point, the data points that truly define
+the dip have been removed. Despite this, the best fit from the \(N=5\)
+data sets above remains the best fit to the \(N=6\) data set here, in
+terms of \(\chi^2\) minimization. The resulting fit using the
+above/following parameters yields a \(\chi^2\) value of 0.0013.
+
+\begin{center}
+\begin{tabular}{llllll}
+\hline
+V & R & a & W & R\(_{\text{i}}\) & a\(_{\text{i}}\)\\
+\hline
+114.2 & 1.320 & 0.842 & 8.50 & 1.737 & 0.744\\
+\hline
+0\% & 2.644\% & 1.290\% & 9.958\% & 0.115\% & 8.035\%\\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/39MeV_208Pb_7Li_Base_ImpCook_N6.pdf}
+\caption{\label{fig:orgparagraph104}
+An improved Cook Potential applied to 39 MeV lithium-7, lead-208 elastic scattering data. Every 5th point has been plotted. \(\chi^{2}=0.0013\)}
+\end{figure} The improved
+fit can be seen in Fig \ref{fig:orgparagraph104}. This best fit is virtually identical to that of the N=3 case, with only the slightest of changes in the real radius.
+
+\begin{enumerate}
+\item Five Percent Error Propagation
+\label{sec:orgheadline50}
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/39MeV_208Pb_7Li_0.05_ImpCook_N6_1.pdf}
+\caption{\label{fig:orgparagraph105}
+Improved Cook Potential applied to 39 MeV lithium-7, lead-208 elastic scattering data. Every 6th point has been plotted. Five percent randomization has been applied. \(\chi^{2}=0.0069\)}
+\end{figure} 
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/39MeV_208Pb_7Li_0.05_ImpCook_N6_2.pdf}
+\caption{\label{fig:orgparagraph106}
+Improved Cook Potential applied to 39 MeV lithium-7, lead-208 elastic scattering data. Every 6th point has been plotted. Five percent randomization has been applied. \(\chi^{2}=0.0071\)}
+\end{figure} 
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=.9\linewidth]{NotebookFigures/39MeV_208Pb_7Li_0.05_ImpCook_N6_3.pdf}
+\caption{\label{fig:orgparagraph107}
+Improved Cook Potential applied to 39 MeV lithium-7, lead-208 elastic scattering data. Every 6th point has been plotted. Five percent randomization has been applied. \(\chi^{2}=0.0083\)}
+\end{figure} 
+
+Application of the improved Cook potential to the randomized data can
+be seen in Figs \ref{fig:orgparagraph105},\ref{fig:orgparagraph106}, and
+\ref{fig:orgparagraph107}, with corresponding \(\chi^{2}\)
+values of 0.0069, 0.0071, and 0.0083, respectively. Better than the
+base fit, and similarly, roughly constant.
+\end{enumerate}
+\end{enumerate}
+\end{document}

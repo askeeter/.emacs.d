@@ -1,0 +1,104 @@
+# Todo: 
+#       Add in momentum transfer option instead of CM angle
+#       Would still just ask the user for cm file. Calculate q on fly
+#       Would have to convert multiplot data to q on the fly as well...
+#       Would have to update the chi2 program for q as well...
+# This is a configuration file for the interactive, non-search fresco runner
+# Any line beginning with a '#' will be read as a comment
+# The plotting program assumes that all data files have a '.dat' file extension, are located in the directory "~/NuclearAnalysis/Data_Files/"
+# And are in the format [theta_cm, d_sigma/d_omega]
+#
+#
+[System_Config] #Point to your fortran executable
+Sfresco_Dir: /home/austin/NuclearAnalysis/fres/source/x86_64-gfortran
+#
+#
+[Experimental_Parameters]
+Beam: Li
+Beam_A: 7
+Beam_Z: 3
+Tar: Pb
+Tar_A: 208
+Tar_Z: 82
+Potential: WS # WS or M3Y
+Lab_Energy: 29
+Exp_Format: Ratio # Ratio or X-Sec for experimental
+#
+#Initial Potential Settings
+#
+#Woods-Saxon Type
+[Initial_WS]
+Vr: 114.2
+Rr: 1.316
+Ar: 0.905
+Wi: 6.830
+Ri: 1.738
+Ai: 0.691
+#
+#M3Y Type
+[Initial_M3Y]
+Vr: 0.6
+Wi: 34.2
+Ri: 1.582
+Ai: 0.784
+#
+#Slider Settings (min max step)
+#
+#Woods-Saxon Type
+[WS_Slider_Settings]
+Vr_Min: 0.0 
+Vr_Max: 150.0
+Vr_Step: .1
+Ar_Min: 0.0 
+Ar_Max: 2.0
+Ar_Step: 0.001
+Rr_Min: 0.0 
+Rr_Max: 2.0
+Rr_Step: 0.001
+Wi_Min: 0.0 
+Wi_Max: 100.0
+Wi_Step: 0.01
+Ai_Min: 0.0 
+Ai_Max: 2.0
+Ai_Step: 0.001
+Ri_Min: 0.0 
+Ri_Max: 2.0
+Ri_Step: 0.001
+#
+#M3Y Type
+[M3Y_Slider_Settings]
+Vr_Min: 0.0 
+Vr_Max: 3.0
+Vr_Step: 0.001
+Wi_Min: 0.0 
+Wi_Max: 100.0
+Wi_Step: 0.01
+Ai_Min: 0.0 
+Ai_Max: 3.0
+Ai_Step: 0.001
+Ri_Min: 0.0 
+Ri_Max: 2.0
+Ri_Step: 0.001
+#
+#Axis ranges
+[Axis_Ranges]
+Theta_Min: 65
+Theta_Max: 180
+X-Sec_Min: -0.1
+X-Sec_Max: 1.3
+IsLogY:F # T or F
+XS_Or_Ratio: Ratio #XS or Ratio depending on what you want
+#
+#Aesthetic stuff
+#
+#Curve colors
+#Descriptions: red, blue, green, yellow, black, magenta, cyan
+#Config option: r    b      g      y       k      m       c
+[Aesthetic_Properties]
+Dat_Col:     b
+Theory_Col:  r
+#
+#Systematic study stuff
+[Systematic_Studies]
+#Plots every N points from the data set. To plot all, set to 1.
+N: 3

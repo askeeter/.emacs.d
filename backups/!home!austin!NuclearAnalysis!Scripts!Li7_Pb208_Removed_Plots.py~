@@ -1,0 +1,180 @@
+#!/usr/bin/python3.5
+import numpy as np
+from math import pow, sin, pi, sqrt, radians, asin, degrees, exp
+import matplotlib
+import sys
+import matplotlib.pyplot as plt
+import matplotlib.font_manager as fm
+from matplotlib.ticker import MultipleLocator, FormatStrFormatter
+from scipy import optimize
+
+# List of energies whose data needs to be read in
+en_list = ['60','39','35','31','29']
+
+# Target and Beam properties
+A_target = 208.0
+Z_target = 82.0
+A_beam = 7.0
+Z_beam = 3.0
+
+cm_data_5p = {}
+ratio_to_ruth_data_5p = {}
+cm_data_10p = {}
+ratio_to_ruth_data_10p = {}
+
+cm_cook = {}
+xsec_cook = {}
+ratio_to_ruth_cook = {}
+
+cm_theory = {}
+xsec_theory = {}
+ratio_to_ruth_theory = {}
+
+cm_tweaked = {}
+xsec_tweaked = {}
+ratio_to_ruth_tweaked = {}
+
+# Need to change this. This macro needs to make two side by side
+# plots. Left is 5%, right is ten. Should have the randomized data,
+# and my best fit. No cook this time. Keep the zoomed in on each as
+# well.
+# Also need to plot the potentials for each on the same single plot.
+# That is, base improved, tweaked improved for 5 and 10% for each
+# energy.
+for en in en_list:
+    e_cm = float(en) * A_target / (A_beam+A_target) 
+
+    # Open Nick's data file
+    f_name_5p  = "/home/austin/NuclearAnalysis/CsvFiles/Beam/Li7/%s.0Pb208_Li7_Li7_Pb208Elastic_0.05_1.csv" % en
+    f_name_10p = "/home/austin/NuclearAnalysis/CsvFiles/Beam/Li7/%s.0Pb208_Li7_Li7_Pb208Elastic_0.1_1.csv" % en
+    
+    # these data files  have CM angle and are already in ratio to rutherford
+    data_cm_5p, data_ratio_to_ruth_5p = np.loadtxt(f_name_5p, unpack=True, dtype=float, delimiter=',', comments=["http:","#"])
+    cm_data_5p[en] = data_cm_5p
+    ratio_to_ruth_data_5p[en] = data_ratio_to_ruth_5p
+
+    data_cm_10p, data_ratio_to_ruth_10p = np.loadtxt(f_name_10p, unpack=True, dtype=float, delimiter=',', comments=["http:","#"])
+    cm_data_10p[en] = data_cm_10p
+    ratio_to_ruth_data_10p[en] = data_ratio_to_ruth_10p
+
+    # My theory data, which is also in cross section and must be converted.
+    # This is the best fit to the full, non-randomized data set
+    # These will be plotted with the 5% data
+    f_name_the_full = "/home/austin/NuclearAnalysis/Theory_Files/%sMeV.txt" % en
+    
+    theory_cm, theory_xsec = np.loadtxt(f_name_the_full, unpack=True, dtype=float, delimiter=',', comments=["http:","#"])
+    theory_cm_radians = [cm * (pi/180) for cm in theory_cm]
+    theory_ruth_cs = [1.2956 * (float(Z_target) * float(Z_beam) * (1.0/(sin(cm/2)*sin(cm/2)*e_cm)))**2 for cm in theory_cm_radians]
+    theory_ratio_to_ruth = [dcs/cs_ruth for dcs,cs_ruth in zip(theory_xsec,theory_ruth_cs)]
+
+    cm_theory[en] = theory_cm
+    xsec_theory[en] = theory_xsec
+    ratio_to_ruth_theory[en] = theory_ratio_to_ruth
+
+    # The tweaked theory data, which is also in x-sec and must be converted
+    # This is the necessary improvements made on the base best fit
+    # These will be plotted with the 10% data
+    f_name_the_tweaked = "/home/austin/NuclearAnalysis/Theory_Files/Tweaked_%sMeV.txt" % en
+    
+    tweaked_cm, tweaked_xsec = np.loadtxt(f_name_the_tweaked, unpack=True, dtype=float, delimiter=',', comments=["http:","#"])
+    tweaked_cm_radians = [cm * (pi/180) for cm in tweaked_cm]
+    tweaked_ruth_cs = [1.2956 * (float(Z_target) * float(Z_beam) * (1.0/(sin(cm/2)*sin(cm/2)*e_cm)))**2 for cm in tweaked_cm_radians]
+    tweaked_ratio_to_ruth = [dcs/cs_ruth for dcs,cs_ruth in zip(tweaked_xsec,tweaked_ruth_cs)]
+
+    cm_tweaked[en] = tweaked_cm
+    xsec_tweaked[en] = tweaked_xsec
+    ratio_to_ruth_tweaked[en] = tweaked_ratio_to_ruth
+
+    
+# Now all of the data have been read in.
+# Time to configure the plots:
+# Create a figure to contain our plot
+overall_fig = plt.figure(figsize=(8.5,11.0))
+ax_5p  = overall_fig.add_subplot(121) #one row two column first plot
+ax_10p = overall_fig.add_subplot(122) #one row two column first plot
+
+#plot each energy
+# offset each for visual clarity
+offset = 0.0
+markers = ['o', 'v', '^', '<', '>', '8', 's', 'p', '*', 'h', 'H', 'D', 'd']
+marker_counter = 0
+for en in en_list:
+    marker = markers[marker_counter]
+    marker_counter += 1
+    # Plot the randomized data on the respective axis
+    ax_5p.plot(cm_data_5p[en],[dat + (offset) for dat in ratio_to_ruth_data_5p[en]],'ko',markersize=2.5,marker=marker,label="%s MeV" %(en))
+    ax_10p.plot(cm_data_10p[en],[dat + (offset) for dat in ratio_to_ruth_data_10p[en]],'ko',markersize=2.5,marker=marker,label="%s MeV" %(en))
+    # The five percent theory
+    ax_5p.plot(cm_theory[en][:-1:1],[dat + (offset) for dat in ratio_to_ruth_theory[en][:-1:1]],'k-')
+    # The ten percent theory
+    ax_10p.plot(cm_tweaked[en][:-1:1],[dat + (offset) for dat in ratio_to_ruth_tweaked[en][:-1:1]],'k-')
+    offset += 2.0
+handles_5p, labels_5p = ax_5p.get_legend_handles_labels()
+handles_10p, labels_10p = ax_10p.get_legend_handles_labels()
+# sort both labels and handles by labels
+labels_5p, handles_5p = zip(*sorted(zip(labels_5p, handles_5p), key=lambda t: t[0],reverse=False))
+labels_10p, handles_10p = zip(*sorted(zip(labels_10p, handles_10p), key=lambda t: t[0],reverse=False))
+ax_5p.legend(handles_5p, labels_5p,loc='upper left', fontsize='x-small')
+ax_10p.legend(handles_10p, labels_10p,loc='upper left', fontsize='x-small')
+
+# Create a zoomed version of each plot beneath itself on the large one
+font = fm.FontProperties(size=3.5)
+font2 = fm.FontProperties(size=24)
+sub_axes_5p = {}
+sub_axes_10p = {}
+sub_axis_xlimits = {'60':[0,40],'39':[25,70],'35':[25,90],'31':[60,130],'29':[20,160]}
+sub_axis_ylimits = {'60':[0.7,1.25],'39':[0.7,1.15],'35':[0.7,1.10],'31':[0.7,1.15],'29':[0.7,1.10]}
+
+for i, en in enumerate(en_list):
+    sub_axes_5p[en] = plt.axes([.25, .150+(0.185*i), .20, .07], axisbg='w') # left corner lower start x, lower start y, width, heighth
+    sub_axes_10p[en] = plt.axes([.74, .150+(0.185*i), .20, .07], axisbg='w') # left corner lower start x, lower start y, width, heighth
+    sub_axes_5p[en].plot(cm_data_5p[en],ratio_to_ruth_data_5p[en],'ko',markersize=0.4,marker=markers[i])
+    sub_axes_5p[en].plot(cm_theory[en][:-1:1],ratio_to_ruth_theory[en][:-1:1],'k-',linewidth=0.4)
+    sub_axes_10p[en].plot(cm_data_10p[en],ratio_to_ruth_data_10p[en],'ko',markersize=0.4,marker=markers[i])
+    sub_axes_10p[en].plot(cm_tweaked[en][:-1:1],ratio_to_ruth_tweaked[en][:-1:1],'k-',linewidth=0.4)
+    for label in (sub_axes_5p[en].get_xticklabels() + sub_axes_5p[en].get_yticklabels()):
+        label.set_fontproperties(font)
+    for label in (sub_axes_10p[en].get_xticklabels() + sub_axes_10p[en].get_yticklabels()):
+        label.set_fontproperties(font)
+    sub_axes_5p[en].set_ylim(sub_axis_ylimits[en])
+    sub_axes_5p[en].set_xlim(sub_axis_xlimits[en])
+    sub_axes_5p[en].text(0.1,0.2,en+' MeV (Unscaled)',fontsize=3.5,transform=sub_axes_5p[en].transAxes) # The transform part is very important
+    sub_axes_5p[en].set_xlabel('$\\theta_{cm}$ (deg)',fontsize=3.5,labelpad=1)
+    sub_axes_5p[en].set_ylabel('Ratio to Rutherford',fontsize=3.5,labelpad=1.0)
+    sub_axes_10p[en].set_ylim(sub_axis_ylimits[en])
+    sub_axes_10p[en].set_xlim(sub_axis_xlimits[en])
+    sub_axes_10p[en].text(0.1,0.2,en+' MeV (Unscaled)',fontsize=3.5,transform=sub_axes_10p[en].transAxes) # The transform part is very important
+    sub_axes_10p[en].set_xlabel('$\\theta_{cm}$ (deg)',fontsize=3.5,labelpad=1)
+    sub_axes_10p[en].set_ylabel('Ratio to Rutherford',fontsize=3.5,labelpad=1.0)
+#consolidate this into one loop. MAke an array for the changing y coordinates.
+#make an array for the markers. Just need an index.
+#Make an array of axes objects to overwreite when looping with appropriate parameters
+    
+# # Artistic properties and tick mark settings on the main plot
+# #ax_5p.set_yscale('log')
+minorLocator = MultipleLocator(0.2)
+majorLocator = MultipleLocator(1)
+ax_5p.yaxis.set_minor_locator(minorLocator)
+ax_5p.yaxis.set_major_locator(majorLocator)
+ax_10p.yaxis.set_minor_locator(minorLocator)
+ax_10p.yaxis.set_major_locator(majorLocator)
+y_coords =    [0 , 1,  2,  3,  4,  5,  6,  7,  8,  9, 10] # the actual coordinates of the label that we are replacing
+new_labels = ['0','1','0','1','0','1','0','1','0', '1','']
+ax_5p.set_yticks(y_coords,minor=False)
+ax_5p.set_yticklabels(new_labels,fontdict=None,minor=False)
+ax_5p.set_xlim(10,160)
+ax_5p.set_ylim(-0.1,10.5)
+ax_5p.set_xlabel('$\\theta_{cm}$ (deg)')
+ax_5p.set_ylabel('Ratio to Rutherford',labelpad=0.4)
+ax_10p.set_yticks(y_coords,minor=False)
+ax_10p.set_yticklabels(new_labels,fontdict=None,minor=False)
+ax_10p.set_xlim(10,160)
+ax_10p.set_ylim(-0.1,10.5)
+ax_10p.set_xlabel('$\\theta_{cm}$ (deg)')
+ax_10p.set_ylabel('Ratio to Rutherford',labelpad=0.4)
+
+#overall_fig.show()
+plt.tight_layout()
+overall_fig.savefig("randomized_plots.pdf")
+#plt.show(block=True)
+#plt.ion()

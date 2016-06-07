@@ -142,6 +142,8 @@
 
 (setq org-highlight-latex-and-related '(latex script entities))
 
+(setq org-format-latex-options (plist-put org-format-latex-options :scale 2.0))
+
 (setq org-tags-column 45)
 
 (org-babel-do-load-languages
@@ -167,8 +169,6 @@
       org-src-strip-leading-and-trailing-blank-lines t
       org-src-preserve-indentation t
       org-src-tab-acts-natively t)
-
-(setq org-babel-python-command "python3")
 
 (setq org-babel-fortran-compiler "f95")
 
@@ -293,7 +293,8 @@
 (use-package flycheck
   :ensure t
   :defer 10
-  :config (setq flycheck-html-tidy-executable "tidy5"))
+  :config (setq flycheck-html-tidy-executable "tidy5")
+  (add-hook 'elpy-mode-hook 'flycheck-mode))
 
 (use-package macrostep
   :ensure t
@@ -324,9 +325,12 @@
       :commands ag
       :ensure t)))
 
-(use-package python-mode
-  :defer t
-  :ensure t)
+(use-package elpy
+  :ensure t
+  :commands
+  package-initialize
+  elpy-enable
+  )
 
 (use-package smartparens
   :ensure t

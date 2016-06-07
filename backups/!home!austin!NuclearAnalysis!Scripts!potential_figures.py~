@@ -1,0 +1,127 @@
+#!/usr/bin/python3.5
+import numpy as np
+from math import pow, sin, pi, sqrt, radians, asin, degrees, exp
+import matplotlib
+import sys
+import matplotlib.pyplot as plt
+import matplotlib.font_manager as fm
+from matplotlib.ticker import MultipleLocator, FormatStrFormatter
+from scipy import optimize
+
+
+def Woods_Saxon_Standalone(r,target_A,V,A,R):
+#    print (r,target_A,V,A,R)
+    
+    expo = r-(R*pow(target_A,1.0/3.0))
+    expo = expo / float(A)
+    return (float(V)/(1+exp(expo)))
+
+# List of energies whose data needs to be read in
+en_list = ['60','39','35','31','29']
+parameter_list = ['V','Ar','Rr','W','Ai','Ri']
+type_list = ['cook','imp_cook','5p','10p','N2','N3']
+f_dir = "/home/austin/NuclearAnalysis/Theory_Files/"
+f_names = ['Cook_{}MeV.txt','{}MeV.txt','{}MeV.txt','Tweaked_{}MeV.txt','N2_{}MeV.txt','N3_{}MeV.txt']
+# Target and Beam properties
+A_target = 208.0
+Z_target = 82.0
+A_beam = 7.0
+Z_beam = 3.0
+
+# Each one needs a map of maps. [en][parameter][cook,imp_cook,5p,10p,N2,N3]
+parameter_dictionary = {}
+# initialize the list that I want
+for energy in en_list:
+    parameter_dictionary[energy] = {}
+    for parameter in parameter_list:
+        parameter_dictionary[energy][parameter] = {}
+        for kind in type_list:
+            parameter_dictionary[energy][parameter][kind] = 0.0
+# now fill
+for energy in en_list:
+    for ikind,kind in enumerate(type_list):
+        fname = f_dir + (f_names[ikind].format(energy))
+        with open(fname,'r') as the_file:
+            tar_beam_info = the_file.readline().strip()
+            lab_en_info = the_file.readline().strip()
+            chi2_info = the_file.readline().strip()
+            real_pot_info = the_file.readline().strip().split()[1::2] 
+            imag_pot_info = the_file.readline().strip().split()[1::2] # in the form [V,a,r]
+            parameter_dictionary[energy]['V'][kind] = float(real_pot_info[0])
+            parameter_dictionary[energy]['Ar'][kind] = float(real_pot_info[1])
+            parameter_dictionary[energy]['Rr'][kind] = float(real_pot_info[2])
+            parameter_dictionary[energy]['W'][kind] = float(imag_pot_info[0])
+            parameter_dictionary[energy]['Ai'][kind] = float(imag_pot_info[1])
+            parameter_dictionary[energy]['Ri'][kind] = float(imag_pot_info[2])
+# Now the parameters have been filled. Can start to set up the plot
+
+# Create an array of r values to have their potential calculated
+r = np.linspace(0,20,1000)
+# Fill arrays with the potential data for each, and print out the values at 12.40fm
+# Each one needs a map of maps. [en][cook,imp_cook,5p,10p,N2,N3][data array]
+real_data_dictionary = {}
+imag_data_dictionary = {}
+# initialize the dictionary that I want
+for energy in en_list:
+    real_data_dictionary[energy] = {}
+    imag_data_dictionary[energy] = {}
+    for kind in type_list:
+        real_data_dictionary[energy][kind] = []
+        imag_data_dictionary[energy][kind] = []
+# Now fill with the data, and print the value of the potential at 12.4fm
+# Woods_Saxon_Standalone(r,target_A,V,A,R):
+for energy in en_list:
+    print ()
+    print ("{} MeV r=12.4 fm".format(energy))
+    print ("------------------------------")
+    print ("{0:<8s} {1:>10s} {2:>10s}".format(" ","real","imaginary"))
+    for kind in type_list:
+        vreal = parameter_dictionary[energy]['V'][kind]
+        areal = parameter_dictionary[energy]['Ar'][kind]
+        rreal = parameter_dictionary[energy]['Rr'][kind]
+        vimag = parameter_dictionary[energy]['W'][kind]
+        aimag = parameter_dictionary[energy]['Ai'][kind]
+        rimag = parameter_dictionary[energy]['Ri'][kind]
+        real_data_dictionary[energy][kind] = [Woods_Saxon_Standalone(rad,A_target,vreal,areal,rreal) for rad in r]
+        imag_data_dictionary[energy][kind] = [Woods_Saxon_Standalone(rad,A_target,vimag,aimag,rimag) for rad in r]
+        print ("{0:<8s} {1:10.5f} {2:10.5f}".format(kind,Woods_Saxon_Standalone(12.4,A_target,vreal,areal,rreal),Woods_Saxon_Standalone(12.4,A_target,vimag,aimag,rimag)))
+# Now have all of the data for each energy and kind read in. 
+# Need a figure for each potential type.
+# Real on top, imaginary on bottom.
+fig = plt.figure(figsize=(11.0,8.5))
+ax1 = fig.add_subplot(211) # 1 row 2 column 1st plot (top)
+ax2 = fig.add_subplot(212,sharex=ax1) # 1 row 2 column 2nd plot (bottom)
+lines_1 = []
+lines_2 = []
+ax1.set_xlim(12.25,12.60)
+#ax1.set_yscale('log')
+ax1.set_title('Real Potential')
+ax1.set_xlabel('r (fm)')
+ax1.set_ylabel('Potential (MeV)')
+#ax2.set_yscale('log')
+ax2.set_title('Imaginary Potential')
+ax2.set_xlabel('r (fm)')
+ax2.set_ylabel('Potential (MeV)')
+ax1.set_ylim(0.35,0.7)
+ax2.set_ylim(0.20,0.75)
+line_styles = [':','-.','--','-','-'] # can change the width of these if need more variation
+line_widths = [2,2,2,2,0.5]
+for kind in type_list:
+    for line in lines_1:
+        del line
+    for line in lines_2:
+        del line
+    del lines_1
+    del lines_2
+    lines_1 = []
+    lines_2 = []
+    ax1.clear()
+    ax2.clear()
+    for i,energy in enumerate(en_list):
+        lines_1.append(ax1.plot(r,real_data_dictionary[energy][kind],linestyle=line_styles[i],color='k',linewidth=line_widths[i],label=("{} MeV".format(energy))))
+        lines_2.append(ax2.plot(r,imag_data_dictionary[energy][kind],linestyle=line_styles[i],color='k',linewidth=line_widths[i],label=("{} MeV".format(energy))))
+    ax1.legend(fontsize='small')
+    ax2.legend(fontsize='small')
+    plt.tight_layout()
+    fig.savefig("{}_pot_fig.pdf".format(kind),dpi=3000)
+

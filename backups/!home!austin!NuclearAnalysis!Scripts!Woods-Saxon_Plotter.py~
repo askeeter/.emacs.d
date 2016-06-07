@@ -1,0 +1,109 @@
+#!/usr/bin/python
+import sys
+import re
+import os
+import numpy as np
+from scipy import optimize
+import math
+from bs4 import BeautifulSoup
+import requests
+from tabulate import tabulate
+import matplotlib.pyplot as plt
+from matplotlib import animation
+from matplotlib.ticker import AutoMinorLocator, MultipleLocator, LogLocator
+from root_numpy import tree2rec
+import argparse
+
+
+#Setup command line option parser to capture the arguments
+parser = argparse.ArgumentParser(description='Command arguments for sfresco running and plot creation')
+parser.add_argument('-b','--beam', help='Beam (ELEMENT_MASSNUM_ATOMICNUM). Must be separated by underscores. ',required=True)
+parser.add_argument('-t','--target',help='Target (ELEMENT_MASSNUM_ATOMICNUM). Must be separated by underscores.', required=True)
+
+plt.rc('text', usetex=True)
+plt.rc('font', family='serif')
+
+#Table for beam masses
+targetMasses = {
+    'C_12_6' : 11.9999999999999,
+    'Si_28_14' : 27.97692653246,
+    'Ca_40_20' : 39.962590983,
+    'Ni_58_28' : 57.935342907
+}
+#Table for target masses
+beamMasses = {
+    'Li_6_3' : 6.015122794,
+    'Li_7_3' : 7.016004548,
+    'Be_7_4' : 7.016929828 
+}
+
+
+args = parser.parse_args()
+args_dict = vars(parser.parse_args())
+
+target_str_unsplit = args.target
+target_str = target_str_unsplit.split('_')
+beam_str_unsplit = args.beam
+beam_str = beam_str_unsplit.split('_')
+beamZ = float(beam_str[2])
+targetZ = float(target_str[2])
+
+reaction = "${}^{%s}\!%s({}^{%s}\!%s,{}^{%s}\!%s){}^{%s}\!%s$" % ( target_str[1], target_str[0], beam_str[1], beam_str[0], beam_str[1], beam_str[0], target_str[1], target_str[0])
+
+b = beam_str[0]+beam_str[1]
+t = target_str[0]+target_str[1]
+
+def getPotential( W, a, ri, Ap, At, r ) :
+    Ap_pow = pow(Ap,(float)(1/3))
+    At_pow = pow(At,(float)(1/3))
+    R = ri * (Ap_pow + At_pow)
+    return -W * pow( 1 + np.exp((r-R)/a) ,-1 )
+
+imFig = plt.figure()
+imAx = plt.axes(ylim=(-10,1) )
+
+x = np.linspace(0,10,100)
+y24 = [getPotential(5.046, 0.686, 1.429, beamZ, targetZ, aR) for aR in x]
+y30 = [getPotential(7.492, 0.690, 1.300, beamZ, targetZ, aR) for aR in x]
+y123p5 = [getPotential(8.922, 0.853, 1.294, beamZ, targetZ, aR) for aR in x]
+y169 = [getPotential(14.55,0.712,1.102, beamZ, targetZ, aR) for aR in x]
+y210 = [getPotential(16.53,0.878,1.041, beamZ, targetZ, aR) for aR in x]
+y350 = [getPotential(24.29, 2.0, 0.970, beamZ, targetZ, aR) for aR in x]
+
+yNasden318 = [getPotential(29.3, 0.878, 1.695, beamZ, targetZ, aR) for aR in x]
+yNasden210 = [getPotential(34.2, 0.784, 1.682, beamZ, targetZ, aR) for aR in x]
+
+plt.ylabel( '$U(r)_{\text{imag}} [MeV]$' )
+plt.xlabel( '$r [fm]$' )
+plt.title( 'Imaginary Potential' )
+
+
+imAx.plot( x, y24, lw=2, linestyle='-', label="24 MeV" , color = "green")
+imAx.plot( x, y30, lw=2, linestyle='-', label="30 MeV" , color = "blue")
+imAx.plot( x, y123p5, lw=2, linestyle='-', label="123.5 MeV", color = "red" )
+imAx.plot( x, y169, lw=2, linestyle='-', label="169 MeV", color = "black" )
+imAx.plot( x, y210, lw=2, linestyle='-', label="210 MeV", color = "yellow" )
+imAx.plot( x, y350, lw=2, linestyle='-', label="350 MeV", color = "orange" )
+
+#imAx.plot( x, yNasden210, lw=2, linestyle='--', label="Nadasen 210", color="yellow", alpha=0.9 )
+#imAx.plot( x, yNasden318, lw=2, linestyle='--', label="Nadasen 318", color="pink", alpha=0.9 )
+
+plt.grid( True )
+plt.legend(loc="best")
+plt.savefig("Imaginary.pdf")
+
+reAx = plt.axes(ylim=(-140,10))
+yRe = [getPotential(180.0, 0.853, 0.529, beamZ, targetZ, aR) for aR in x]
+yNadasen210Re = [getPotential(113.5, 0.793, 1.305, beamZ, targetZ, aR) for aR in x]
+yNadasen318Re = [getPotential(126.9, 0.897, 1.136, beamZ, targetZ, aR) for aR in x]
+plt.ylabel( '$U(r)_{\text{real}} [MeV]$' )
+plt.xlabel( '$r [fm]$' )
+plt.title( 'Real Potential' )
+reAx.plot( x, yRe, lw=2, linestyle='-', label="OM Empirical", color="black")
+reAx.plot( x, yNadasen210Re, lw=2, linestyle='--', label="Nadasen 210", color="red")
+reAx.plot( x, yNadasen318Re, lw=2, linestyle='--', label="Nadasen 318", color="blue")
+plt.grid( True )
+plt.legend(loc="lower right")
+plt.savefig("Real.pdf")
+
+#plt.show()

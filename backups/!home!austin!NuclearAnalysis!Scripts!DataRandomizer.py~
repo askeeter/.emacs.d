@@ -1,0 +1,39 @@
+#!/usr/bin/python3
+import random
+
+beamstr = "Li6"
+targetstr = "Pb208"
+file_dir = "/home/austin/NuclearAnalysis/CsvFiles/Beam/%s/" % beamstr
+percent = [0.05, 0.10]
+
+# Edit to also create the base file
+def RandomizeData(data_list_x, data_list_y, energy, beam, target):
+    global file_dir, percent
+    for p in percent:
+        error = [p*y for y in data_list_y]
+        # Set a definitive number of data sets to be looked at
+        num_data_sets = 0
+        # Loop through and create this many sets
+        while(num_data_sets < 10):
+            num_data_sets = num_data_sets + 1
+            # Hard coding in the beam directory
+            out_file = open("%s%.1f%s_%s_%s_%sElastic_%s_%s.csv"%(file_dir,energy,target,beam,beam,target,str(p),str(num_data_sets)),'w')
+            for err, data_y, data_x in zip(error, data_list_y, data_list_x):
+                smeared_data = random.uniform(data_y-err, data_y+err)
+                out_file.write("%.4f,%.4f\n" % (data_x, smeared_data))
+            out_file.close()
+        
+files = ["nsf27.dat", "nsf29.dat", "nsf31.dat", "nsf33.dat", "nsf35.dat", "nsf39.dat", "nsf44.dat", "nsf60.dat"]
+energies = ["27.0", "29.0", "31.0", "33.0", "35.0", "39.0", "44.0", "60.0"]
+for f, en in zip(files, energies):
+    x_vals = []
+    y_vals = []
+    with open(str(file_dir+f)) as dat_file:
+        for line in dat_file:
+            x_vals.append(float(line.split()[0]))
+            y_vals.append(float(line.split()[1]))
+    RandomizeData(x_vals, y_vals, float(en), beamstr, "Pb208")
+    outfile = open("%s%.1f%s_%s_%s_%sElastic_base.csv"%(file_dir,float(en),targetstr,beamstr,beamstr,targetstr),'w')
+    for x, y in zip(x_vals, y_vals):
+        outfile.write("%.4f,%.4f\n" % (x, y))
+    outfile.close()

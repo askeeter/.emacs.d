@@ -1,0 +1,653 @@
+#!/usr/bin/python3.5
+import sys
+import re
+import os
+import numpy as np
+from math import pow, sin, pi, sqrt, radians, asin, degrees, exp
+import matplotlib
+matplotlib.use('TkAgg')
+import sys
+import matplotlib.pyplot as plt
+import argparse
+from tkinter import *
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2TkAgg
+#matplotlib.use('TkAgg')
+from scipy import optimize
+import matplotlib.animation as animation
+from backports import configparser2
+import warnings
+warnings.filterwarnings("ignore")
+
+# For future students who look at this code, i know that it's ugly, but i was working under time constraints. Sorry!
+# Read everything from the config file
+parser = configparser2.ConfigParser()
+parser.read('INTERACTIVE_CONFIG.txt')
+
+# Divide the config paremeters into sections
+experimental_parameters = parser['Experimental_Parameters']
+initial_ws = parser['Initial_WS']
+initial_m3y = parser['Initial_M3Y']
+ws_slider_settings = parser['WS_Slider_Settings']
+m3y_slider_settings = parser['M3Y_Slider_Settings']
+axis_ranges = parser['Axis_Ranges']
+aesthetics = parser['Aesthetic_Properties']
+systematics = parser['Systematic_Studies']
+
+
+# within is sfresco and fresco executable
+SFRESCODIR = parser['System_Config']['Sfresco_Dir']
+
+# number of points to skip
+n = int(systematics['N'].split()[0])
+
+lab_energy = experimental_parameters['Lab_Energy'].split()[0]
+
+target_A = experimental_parameters['Tar_A'].split()[0]
+target_Z = experimental_parameters['Tar_Z'].split()[0]
+target_sym = target_A + experimental_parameters['Tar'].split()[0]  # 12C
+target_mass = float(target_A)
+
+beam_A = experimental_parameters['Beam_A'].split()[0]
+beam_Z = experimental_parameters['Beam_Z'].split()[0]
+beam_sym = beam_A + experimental_parameters['Beam'].split()[0]  # 6Li
+beam_mass = float(beam_A)
+
+data_color = aesthetics['Dat_Col'].split()[0]
+theory_color = aesthetics['Theory_Col'].split()[0]
+
+# Arrays to contain theory data. Global so all can see
+curr_dat_CM = []
+curr_dat_dcs_wrt_ruth = []
+curr_dat_dcs = []
+# Arrays to contain current experimental data. Global so all can see
+curr_exp_CM = []
+curr_exp_dcs_wrt_ruth = []
+curr_exp_dcs = []
+
+scats = []
+real_pot_scats = []
+imag_pot_scats = []
+
+multi_scat = []
+multi_real_pot = []
+multi_imag_pot = []
+
+# Setting up tkinter layout for the x-sec window
+N_COLS = 40
+FIRST_ROW = 8
+
+# Create the root, or the x-sec window
+root = Tk()
+root.title("Cross Section Plotter")
+
+is_ratio = False
+is_log_y = False
+
+# Define limits for the x-sec plot, and initialize the figure
+x_min = float(axis_ranges['Theta_Min'].split()[0])
+x_max = float(axis_ranges['Theta_Max'].split()[0])
+y_min = float(axis_ranges['X-Sec_Min'].split()[0])
+y_max = float(axis_ranges['X-Sec_Max'].split()[0])
+xsec_fig = plt.Figure(figsize=(7, 5), dpi=100)
+xsec_ax = xsec_fig.add_subplot(111)
+#pot_fig = plt.Figure(figsize=(7,5),dpi=100)
+pot_fig = plt.Figure(figsize=(7,8),dpi=100)
+pot_imag_ax = pot_fig.add_subplot(212)
+pot_real_ax = pot_fig.add_subplot(211,sharex=pot_imag_ax)
+
+if axis_ranges['IsLogY'].split()[0] == 'T':
+    is_log_y = True
+    xsec_ax.set_yscale('log')
+xsec_ax.plot(0.1, 0.1, 'wo')
+#xsec_ax.set_xlim(x_min, x_max)
+#xsec_ax.set_ylim(y_min, y_max)
+xsec_ax.set_xlabel('$\\theta_{cm}$ (deg)', labelpad=-3)
+if axis_ranges['XS_Or_Ratio'].split()[0] == 'Ratio':
+    xsec_ax.set_ylabel('$d\sigma/d\sigma_{R}$', labelpad=0)
+    is_ratio = True
+else:
+    xsec_ax.set_ylabel('$d\sigma (mb/sr)$', labelpad=0)
+xsec_ax.grid(1)
+
+pot_imag_ax.set_yscale('log')
+pot_imag_ax.plot(0.1, 0.1, 'w-')
+pot_imag_ax.grid(1)
+pot_imag_ax.set_title("Imaginary Potential")
+pot_imag_ax.set_xlabel('r (fm)')
+pot_imag_ax.set_ylabel('W (MeV)')
+pot_imag_ax.set_xlim(0,10)
+
+pot_real_ax.set_yscale('log')
+pot_real_ax.plot(0.1, 0.1, 'w-')
+pot_real_ax.grid(1)
+pot_real_ax.set_title("Real Potential")
+pot_real_ax.set_xlabel('r (fm)')
+pot_real_ax.set_ylabel('V (MeV)')
+
+pot_fig.tight_layout()
+
+#Set up the interactive canvas for the x-sec plot
+xsec_canvas = FigureCanvasTkAgg(xsec_fig, master=root)
+xsec_canvas.show()
+xsec_canvas.get_tk_widget().grid(row=0, column=0, rowspan=FIRST_ROW,columnspan=10)
+
+#Set up the interactive canvas for the x-sec plot
+pot_canvas = FigureCanvasTkAgg(pot_fig, master=root)
+pot_canvas.show()
+#pot_canvas.get_tk_widget().grid(row=0,column=int(N_COLS/2+1)-1, rowspan=FIRST_ROW,columnspan=10)
+pot_canvas.get_tk_widget().grid(row=0,column=int(N_COLS/2+1)-1, rowspan=50,columnspan=10)
+
+# Set up the toolbar for interactivity with matplotlib for the x-sec plot
+xsec_tb_frame = Frame(root)
+xsec_tb_frame.grid(row=FIRST_ROW, column=0, columnspan=10, sticky=W)
+xsec_tb = NavigationToolbar2TkAgg(xsec_canvas, xsec_tb_frame)
+xsec_tb.update()
+xsec_canvas._tkcanvas.grid(row=0, column=0, rowspan=FIRST_ROW,columnspan=10)
+
+pot_tb_frame = Frame(root)
+#pot_tb_frame.grid(row=FIRST_ROW, column=int(N_COLS/2+1)-1, columnspan=10, sticky=W)
+pot_tb_frame.grid(row=50, column=int(N_COLS/2+1), columnspan=10, sticky=W)
+pot_tb = NavigationToolbar2TkAgg(pot_canvas, pot_tb_frame)
+pot_tb.update()
+#pot_canvas._tkcanvas.grid(row=0, column=int(N_COLS/2+1)-1, rowspan=FIRST_ROW,columnspan=10)
+pot_canvas._tkcanvas.grid(row=0, column=int(N_COLS/2+1)-1, rowspan=50,columnspan=10)
+
+# Populate the list of files to choose from in the dropdown on the x-sec menu
+fdir = "/home/kirby/NuclearAnalysis/Data_Files/"
+filenames = next(os.walk(fdir))[2]
+# filenames = [f for f in filenames]
+variable = StringVar(root)
+# default file name
+variable.set(filenames[0])
+
+# initialize the x-sec plot for theory and data
+scat, = xsec_ax.plot(0.1, 0.1, 'w-')
+muti_scat, = xsec_ax.plot(0.1, 0.1, 'w-')
+pts, = xsec_ax.plot(0.1, 0.1, 'w-')
+scat_real, = pot_real_ax.plot(0.1,0.1,'w-')
+scat_imag, = pot_imag_ax.plot(0.1,0.1,'w-')
+############################## Sfresco setup stuff ###########################
+# Create sf.inp. Doesn't change.
+sf_infile_str = """search.in
+min
+migrad
+end
+q
+show
+plot
+"""
+with open("sf.inp", 'w') as sf_infile:
+    sf_infile.write(sf_infile_str)
+
+is_ws = (experimental_parameters['Potential'].split()[0] == 'WS')
+# Create the search file. Just need it to be blank as we are not searching
+# Says to go in steps of 0.5
+# Need two different ones for WS and for M3Y
+search_file_str = ""
+if (is_ws):
+    search_file_str = """'om.fri' 'om.fro' 0 1
+&variable kind=1 name='V' step=0.1 kp=1 pline=2 col=1 valmin=0.0 valmax=300.0 /
+&variable kind=1 name='rV' step=0.1 kp=1 pline=2 col=2 /
+&variable kind=1 name='aV' step=0.1 kp=1 pline=2 col=3 /
+&variable kind=1 name='W' step=0.1 kp=1 pline=3 col=4 valmin=0.0 valmax=300.0 /
+&variable kind=1 name='rW' step=0.1 kp=1 pline=3 col=5 /
+&variable kind=1 name='aW' step=0.1 kp=1 pline=3 col=6 /
+&data type=0 delta=0 iscale=2 idir=1 lab=F abserr=T /
+0 0 0.5
+"""
+else:
+    search_file_str = """'om.fri' 'om.fro' 0 1
+&variable kind=1 name='V' step=0.1 kp=1 pline=2 col=1 valmin=0.0 valmax=300.0 /
+&variable kind=1 name='W' step=0.1 kp=1 pline=3 col=2 valmin=0.0 valmax=300.0 /
+&variable kind=1 name='rW' step=0.1 kp=1 pline=3 col=3 /
+&variable kind=1 name='aW' step=0.1 kp=1 pline=3 col=4 /
+&data type=0 delta=0 iscale=2 idir=1 lab=F abserr=T /
+0 0 0.5
+"""
+with open("search.in", 'w') as search_file:
+    search_file.write(search_file_str)
+
+
+#################### Functions for updating x-sec plot ########################    
+curr_fri = "INIT"
+def getChiSq(theory_cm, theory_xs, exp_cm, exp_xs):
+    # Round the passed in CM values to two decimal
+    theory_cm_rounded = [round(x, 2) for x in theory_cm]
+    exp_cm_rounded = [round(x, 2) for x in exp_cm]
+    # Find the common elements between the two
+    intersection = list(set(theory_cm_rounded).intersection(exp_cm_rounded))
+    # Get the indices of cm angles common between the two
+    exp_ind = []
+    theory_ind = []
+    for x in intersection:
+        exp_ind.append(exp_cm_rounded.index(x))
+        theory_ind.append(theory_cm_rounded.index(x))
+    # Calculate the chi2
+    chi2 = 0
+    for exp, the in zip(exp_ind, theory_ind):
+        chi2 += (exp_xs[exp] - theory_xs[the])**2 / exp_xs[exp]
+    return chi2
+
+def updateTheory(i):
+    # Get access to the sliders
+    global scat, scat_real, scat_imag
+    global scale_vreal, scale_rreal, scale_areal
+    global scale_vimag, scale_rimag, scale_aimag
+    global T, chiT
+    global curr_fri
+    global SFRESCODIR
+    global curr_dat_CM, curr_exp_CM
+    global curr_dat_dcs_wrt_ruth, curr_exp_dcs_wrt_ruth
+    global curr_dat_dcs, curr_exp_dcs
+    global n
+    global beam_A,beam_Z,beam_sym
+    global target_A,target_Z,target_sym
+    global beam_mass,target_mass
+    global data_color,theory_color
+    global lab_energy
+    global is_ratio
+    global xsec_ax
+    at_data = False
+    
+    # Create the relevant om.fri file from the current slider reading
+    om_fri_str = ""
+    if (is_ws):
+        om_fri_str="""TARGS(BEAm,BEAm)TARGS at ENER MeV
+0.03    100.0   0.05
+ 00. 40.  +.00   F F
+3  0.0   -180.   0.05 1
+0.0    0   0 1 0  48
+ 1 1 0 0 2 3 0 0 0 1 0 0 1
+BEAm    BEAMAS  B_Z        1  TARGS   TARMASS T_Z     0.0000
+0.0   +1 0.0               1  0.0   +1 0.0000
+    
+  1 0  0    TARA    0.00     1.3
+  1 1  0   VREAL   RREAL   AREAL
+  1 1  0                           WIMAG   RIMAG  AIMAG
+  1 3  0    0.00    1.12    0.322
+0
+    
+   0   1   1
+ENER
+EOF
+"""
+    else:
+        om_fri_str="""**TARGS(BEAm,BEAm)TARGS at ENER MeV
+0.03    30.0    0.06
+ 00.130.  +.00   F F
+3  0.0    -180.  0.05 1
+0.00       0 1 0  48          .000    0.   0.001
+ 1 1 0 0 1 3 0 0 0 1 0 0 1
+BEAm    BEAMAS  B_Z        1   TARGS  TARMASS T_Z     0.0000
+0.0   +1 0.0000 1.0        1  0.0   +1 0.0000
+    
+  1 0  0    TARA    0.00     1.2
+  1 1  7   VREAL
+  1 1  0                           WIMAG   RIMAG  AIMAG
+0
+   
+   0   1   1
+ENER
+EOF
+"""
+
+    # MAKE THESE 5 CHARACTERS LONG TOTAL
+    # These variables correspond to
+    # the optical model parameters
+    vreal = str(scale_vreal.get())[0:5]
+    if (is_ws):
+        rreal = str(scale_rreal.get())[0:5]
+        areal = str(scale_areal.get())[0:5]
+    wimag = str(scale_vimag.get())[0:5]
+    rimag = str(scale_rimag.get())[0:5]
+    aimag = str(scale_aimag.get())[0:5]
+
+    # Replace the template variables in the om.fri template, producing
+    # an unique file for each run
+    # Use information from the config
+    nums_beam_A = float(beam_A)
+    nums_beam_Z = float(beam_Z)
+    nums_target_A = float(target_A)
+    nums_target_Z = float(target_Z)
+    lab_energy_str = "%4.1f" % float(lab_energy)
+
+    om_fri_str = om_fri_str.replace('ENER', '{:4.4f}'.format(float(lab_energy_str))[0:4])
+    om_fri_str = om_fri_str.replace('TARGS', '{sym:{fill}{align}{width}}'.format(sym=target_sym,fill=' ',align='<',width=5))
+    om_fri_str = om_fri_str.replace('BEAm', '{sym:{fill}{align}{width}}'.format(sym=beam_sym,fill=' ',align='<',width=4))
+    om_fri_str = om_fri_str.replace('TARMASS', '{:7.6f}'.format(nums_target_A)[0:7])
+    om_fri_str = om_fri_str.replace('BEAMAS', '{:6.5f}'.format(nums_beam_A)[0:6])
+    om_fri_str = om_fri_str.replace('T_Z', '{:6.6f}'.format(nums_target_Z)[0:3])
+    om_fri_str = om_fri_str.replace('TARZ', '{:4.3f}'.format(nums_target_Z)[0:4])
+    om_fri_str = om_fri_str.replace('B_Z', '{:3.1f}'.format(nums_beam_Z)[0:3])
+    om_fri_str = om_fri_str.replace('TARA', '{:4.3f}'.format(nums_target_A)[0:4])
+    om_fri_str = om_fri_str.replace('VREAL', '{:4.6f}'.format(float(vreal))[0:5])
+    if (is_ws):
+        om_fri_str = om_fri_str.replace('RREAL', '{:5.4f}'.format(float(rreal))[0:5])
+        om_fri_str = om_fri_str.replace('AREAL', '{:5.4f}'.format(float(areal))[0:5])
+    om_fri_str = om_fri_str.replace('WIMAG', '{:5.4f}'.format(float(wimag))[0:5])
+    om_fri_str = om_fri_str.replace('RIMAG', '{:5.4f}'.format(float(rimag))[0:5])
+    om_fri_str = om_fri_str.replace('AIMAG', '{:5.4f}'.format(float(aimag))[0:5])
+
+    with open("om.fri", 'w') as om_fri_file:
+        om_fri_file.write(om_fri_str)
+    if (om_fri_str != curr_fri):
+        if curr_fri == "INIT":
+            curr_fri = om_fri_str
+            return
+        curr_fri = om_fri_str
+        T.delete(1.0, END)
+        T.insert(END, om_fri_str)
+
+        # Calculate the ratio of beam mass to target mass
+        # beam_target_mass_ratio = float(beam_mass)/float(target_mass)
+        # Calculate k, using the approximation from the equation sheet
+        # wave_number_dat = 0.219 * float(target_mass)
+        # wave_number_dat = wave_number_dat / (float(target_mass) + float(beam_mass))
+        # wave_number_dat *= sqrt(float(lab_energy) * float(beam_mass))
+        # Run sfresco
+        # sfresco < sf.inp > sf.out
+        command = "/home/kirby/NuclearAnalysis/fres/source/sfresco"
+        command += "< sf.inp > sf.out"
+        os.system(command)
+        # Need to blank the global arrays before updating
+        curr_dat_CM = []
+        curr_dat_dcs_wrt_ruth = []
+        curr_dat_dcs = []
+        # with open('search.plot', 'r') as theory_file:
+        with open('om.fro','r') as theory_file:
+            for line in theory_file:
+                if line.isspace(): continue
+                if 'Finished all x' in line: break
+                if at_data:
+                    next_line = next(theory_file)
+                    line = line.split()
+                    next_line = next_line.split()
+                    the_cm = line[0]
+                    the_xs = line[4]
+                    the_wrt_ruth = next_line[3]
+                    #print ("cm: %s X-S: %s /R: %s"%(the_cm,the_xs,the_wrt_ruth))
+                    # Do not want to keep the last two lines. Simply repeats of the first point. Would cause graphical artifacting
+                    curr_dat_CM.append(float(the_cm))
+                    curr_dat_dcs_wrt_ruth.append(float(the_wrt_ruth))
+                    curr_dat_dcs.append(float(the_xs))
+                if 'CROSS SECTIONS FOR OUTGOING' in line:
+                    at_data = True
+        scat.remove()
+        scat_real.remove()
+        scat_imag.remove()
+        col_line_dat = theory_color + '-'
+        # Need the -1 so we don't repeat the first point. Fresco prints it twice
+        if is_ratio:
+            scat, = xsec_ax.plot(curr_dat_CM[:-1:1], curr_dat_dcs_wrt_ruth[:-1:1], col_line_dat)
+        elif not is_ratio:
+            scat, = xsec_ax.plot(curr_dat_CM[:-1:1], curr_dat_dcs[:-1:1], col_line_dat)
+        
+        # Calculate the new chi2 between data and theory
+        chiT.delete(1.0, END)
+        chi2=-1
+        if is_ratio:
+            chi2 = round(getChiSq(curr_dat_CM, curr_dat_dcs_wrt_ruth, curr_exp_CM[::n], curr_exp_dcs_wrt_ruth[::n]), 4)
+        else:
+            chi2 = round(getChiSq(curr_dat_CM, curr_dat_dcs, curr_exp_CM[::n], curr_exp_dcs[::n]), 4)
+        chiT.insert(END, str(chi2))
+        r_imag = np.linspace(0,20,50)
+        # Imaginary is the same every time
+        y_imag = [Woods_Saxon_Imag(r_i) for r_i in r_imag]
+        scat_imag, = pot_imag_ax.plot(r_imag, y_imag, col_line_dat)
+        # real depends on WS or M3Y
+        y_real = []
+        if (is_ws):
+            y_real = [Woods_Saxon_Real(r_i) for r_i in r_imag]
+            scat_real, = pot_real_ax.plot(r_imag, y_real, col_line_dat)
+        else:
+            # Need to read from the fort.4 file
+            # Assume that fort.4 is located in the Scripts directory
+            with open("/home/kirby/NuclearAnalysis/Scripts/fort.4",'r') as fort4_file:
+                reaction_info = fort4_file.readline()
+                step_info = fort4_file.readline().strip().split() # [numpoints, start point, step size]
+                for line in fort4_file.readlines():
+                    line = line.split()
+                    for entry in line:
+                        # Have to multiply by the scalar from the theory file
+                        y_real.append(-1*float(entry)*float(scale_vreal.get()))
+            r_real = np.arange(float(step_info[1]),float(step_info[0])*float(step_info[2])+float(step_info[2]),float(step_info[2]))
+            scat_real, = pot_real_ax.plot(r_real, y_real, col_line_dat)
+        
+        # recompute the ax.dataLim
+        xsec_ax.relim()
+        #pot_imag_ax.relim()
+        # update ax.viewLim using the new dataLim
+        xsec_ax.autoscale_view()
+        #pot_imag_ax.autoscale_view()
+        
+def updateExp():
+    global pts
+    global curr_exp_CM, curr_dat_CM
+    global curr_exp_dcs_wrt_ruth, curr_dat_dcs_wrt_ruth
+    global curr_exp_dcs,curr_dat_dcs
+    global target_A, target_Z
+    global beam_A, beam_Z
+    global chiT
+    global n
+    global data_color
+    global lab_energy
+    in_file = filedialog.askopenfilename(initialdir="/home/kirby/NuclearAnalysis/Data_Files")
+    # NOTE: This program assumes that the data files have cm angle and dcs, not ratio to rutherford. Have to calculate ratio on the fly
+    # Assume that the data file being read has cm angle and x-sec, not ratio. Need to calculate the ratio on the fly
+    curr_exp_CM, curr_exp_dcs = np.loadtxt(in_file, unpack=True, dtype=float, delimiter=',', comments=["http:","#"] )
+    radians_CM = [cm * (pi/180) for cm in curr_exp_CM]
+    E_CM = float(lab_energy) * float(target_A) / (float(beam_A)+float(target_A))
+    exp_ruth_cs = [1.2956 * (float(target_Z) * float(beam_Z) * (1.0/(sin(cm/2)*sin(cm/2)*E_CM)))**2 for cm in radians_CM]
+    curr_exp_dcs_wrt_ruth = [dcs/cs_ruth for dcs,cs_ruth in zip(curr_exp_dcs,exp_ruth_cs)]
+    
+    pts.remove()
+    # only use every nth point
+    col_line_exp = data_color + 'o'
+    
+    if is_ratio:
+        pts, = xsec_ax.plot(curr_exp_CM[::n], curr_exp_dcs_wrt_ruth[::n], col_line_exp)
+    else:
+        pts, = xsec_ax.plot(curr_exp_CM[::n], curr_exp_dcs[::n], col_line_exp)
+    chiT.delete(1.0, END)
+    chi2=-1
+    if is_ratio:
+        chi2 = round(getChiSq(curr_dat_CM, curr_dat_dcs_wrt_ruth, curr_exp_CM[::n], curr_exp_dcs_wrt_ruth[::n]), 4)
+    else:
+        chi2 = round(getChiSq(curr_dat_CM, curr_dat_dcs, curr_exp_CM[::n], curr_exp_dcs[::n]), 4)
+    chiT.insert(END, str(chi2))
+
+def DumpTheory():
+    # Dump the dcs and cm angle
+    """Returns an opened file in write mode."""
+    out_file = filedialog.asksaveasfile(mode='w')
+    global curr_dat_CM
+    global curr_dat_dcs
+    global scale_vreal, scale_rreal, scale_areal
+    global scale_vimag, scale_rimag, scale_aimag
+    global beam_sym, target_sym, beam_A, target_A
+    global chiT  # chi2 text from get
+    global lab_energy
+    beam_string = beam_sym
+    target_string = target_sym
+    out_file.write("#Target: %s\tBeam: %s\n"%(target_string,beam_string))
+    out_file.write("#Lab Energy: %s MeV\n"%lab_energy)
+    out_file.write("#Chi2: %s\n"%chiT.get("1.0",'end-1c'))
+    if (is_ws):
+        out_file.write("#V: %s Ar: %s Rr: %s\n"%(scale_vreal.get(),scale_areal.get(),scale_rreal.get()))
+    else:
+        out_file.write("#V: %s\n"%(scale_vreal.get()))
+        
+    out_file.write("#W: %s Ai: %s Ri: %s\n"%(scale_vimag.get(),scale_aimag.get(),scale_rimag.get()))
+    
+    for x,y in zip(curr_dat_CM,curr_dat_dcs):
+        out_file.write("%f,%f\n"%(x,y))
+    
+    out_file.close()
+    print ("Dumped Theory")
+
+def MultiPlot():
+    global multi_scat,multi_real_pot,multi_imag_pot
+    global scats, real_pot_scats,imag_pot_scats
+    global target_Z, beam_Z
+    global target_A, beam_A
+    global lab_energy
+    global is_ratio
+    global is_ws
+    colors = ['k','b','g','y','c','m']
+#    if len(scats)>1:
+#        for plot in scats:
+#            plot.remove()
+    scats = [] #Clear each time you do a new mutiplot
+    real_pot_scats = [] #Clear each time you do a new mutiplot
+    imag_pot_scats = []
+    theory_files = filedialog.askopenfilenames(initialdir="/home/kirby/NuclearAnalysis/Theory_Files")
+    file_list = root.tk.splitlist(theory_files)
+    c=0
+    # Always reading in x-sec. Have to calculate ratio on the fly
+    for f in file_list:
+        # Read the potential information from the dumped theory file
+        with open(f,'r') as the_file:
+            tar_beam_info = the_file.readline().strip()
+            lab_en_info = the_file.readline().strip()
+            chi2_info = the_file.readline().strip()
+            real_pot_info = the_file.readline().strip().split()[1::2] # strips out only the numbers of the parameters
+            imag_pot_info = the_file.readline().strip().split()[1::2] # in the form [V,a,r]
+        # We have to calculate the imaginary potential for both M3Y and WS type. Do that now:
+        r = np.linspace(0,20,50)
+        ws_imag = [Woods_Saxon_Standalone(rad,target_A,imag_pot_info[0],imag_pot_info[1],imag_pot_info[2]) for rad in r]
+        opt = colors[c]+'-'
+        multi_imag_pot, = pot_imag_ax.plot(r,ws_imag,opt,label=f.split("/")[-1][0:-4])
+        imag_pot_scats.append(multi_imag_pot) #Now when do clear theory, just clear these
+        # If we are using WS type, we have to calculate the real potential as well.
+        ws_real = []
+        if (is_ws):
+            ws_real = [Woods_Saxon_Standalone(rad,target_A,real_pot_info[0],real_pot_info[1],real_pot_info[2]) for rad in r]
+            multi_real_pot, = pot_real_ax.plot(r,ws_real,opt,label=f.split("/")[-1][0:-4])
+            real_pot_scats.append(multi_real_pot)
+        else: # if not, we read the real potentia from fort.4, which is assumed to be formatted correctly
+            # Assume that fort.4 is located in the Scripts directory
+            with open("/home/kirby/NuclearAnalysis/Scripts/fort.4",'r') as fort4_file:
+                reaction_info = fort4_file.readline()
+                step_info = fort4_file.readline().strip().split() # [numpoints, start point, step size]
+                for line in fort4_file.readlines():
+                    line = line.split()
+                    for entry in line:
+                        # Have to multiply by the scalar from the theory file
+                        ws_real.append(float(entry)*float(real_pot_info[0]))
+            r = np.arange(float(step_info[1]),float(step_info[0])*float(step_info[2])+float(step_info[2]),float(step_info[2]))
+            multi_real_pot, = pot_real_ax.plot(r,ws_real,opt,label=f.split("/")[-1][0:-4])
+            real_pot_scats.append(multi_real_pot)
+            # intersection between data sets:
+            # idx = np.argwhere(np.isclose(f, g, atol=10)).reshape(-1) # gives index of x val of matching points
+        # Read the cross-section information from the dumped theory file, calculating ratio to Rutherford on the fly
+        the_CM, the_dcs = np.loadtxt(f, unpack=True, dtype=float, delimiter=',', comments="#" )
+        radians_CM = [cm * (pi/180) for cm in the_CM]
+        E_CM = float(lab_energy) * float(target_A) / (float(beam_A)+float(target_A))
+        the_ruth_cs = [1.2956 * (float(target_Z) * float(beam_Z) * (1.0/(sin(cm/2)*sin(cm/2)*E_CM)))**2 for cm in radians_CM]
+        the_dcs_wrt_ruth = [dcs/cs_ruth for dcs,cs_ruth in zip(the_dcs,the_ruth_cs)]
+        opt = colors[c]+'-'
+        if is_ratio:
+            multi_scat, = xsec_ax.plot(the_CM[:-1:1], the_dcs_wrt_ruth[:-1:1], opt,label=f.split("/")[-1][0:-4])
+        else:
+            multi_scat, = xsec_ax.plot(the_CM[:-1:1], the_dcs[:-1:1], opt,label=f.split("/")[-1][0:-4])
+        scats.append(multi_scat) #Now when do clear theory, just clear these
+        c+=1
+    xsec_ax.legend(loc='best')
+    pot_real_ax.legend(loc='best',fontsize = 'x-small')
+    pot_imag_ax.legend(loc='best',fontsize = 'x-small')
+
+def ClearMulti():
+    global scats, real_pot_scats, imag_pot_scats
+    legend = xsec_ax.legend()
+    legend.remove()
+    legend = pot_real_ax.legend()
+    legend.remove()
+    legend = pot_imag_ax.legend()
+    legend.remove()
+    for plot in scats:
+        plot.remove()
+    for plot in real_pot_scats:
+        plot.remove()
+    for plot in imag_pot_scats:
+        plot.remove()
+
+def Woods_Saxon_Real(r):
+    global target_A, scale_areal, scale_rreal, scale_vreal
+    expo = float(r)-float(scale_rreal.get())*pow(float(target_A),1.0/3.0)
+    expo = expo / float(scale_areal.get())
+    return float(scale_vreal.get())/(1+exp(expo))
+def Woods_Saxon_Imag(r):
+    global target_A, scale_aimag, scale_rimag, scale_vimag
+    expo = float(r)-float(scale_rimag.get())*pow(float(target_A),1.0/3.0)
+    expo = expo / float(scale_aimag.get())
+    return float(scale_vimag.get())/(1+exp(expo))
+def Woods_Saxon_Standalone(r,target_A,V,A,R):
+    expo = float(r)-float(R)*pow(float(target_A),1.0/3.0)
+    expo = expo / float(A)
+    return float(V)/(1+exp(expo))
+######################### x-sec slider setup and update stuff #################################3        
+# Set up labels and sliders for OM parameters
+label_vreal = Label(root, text="V= (MeV)")
+label_rreal = Label(root, text="Rr= (fm)")
+label_areal = Label(root, text="ar= (fm)")
+label_vimag = Label(root, text="W= (MeV)")
+label_rimag = Label(root, text="Ri= (fm)")
+label_aimag = Label(root, text="ai= (fm)")
+label_chi2 = Label(root, text="CHI2=")
+scale_vreal = scale_areal = scale_rreal = scale_vimag = scale_aimag = scale_rimag = Scale(root)
+button_dump_theory = Button(root, text="Dump Theory", command=DumpTheory)
+button_read_data = Button(root, text="Plot Data", command=updateExp)
+button_multiplot = Button(root, text="Multi Plot", command=MultiPlot)
+button_clear_multi = Button(root, text="Clear Multi", command=ClearMulti)
+
+if (is_ws):
+    scale_vreal = Scale(root, from_=ws_slider_settings['Vr_Min'], to=ws_slider_settings['Vr_Max'], resolution=ws_slider_settings['Vr_Step'], orient=HORIZONTAL)
+    scale_vreal.set(initial_ws['Vr'])
+    scale_rreal = Scale(root, from_=ws_slider_settings['Rr_Min'], to=ws_slider_settings['Rr_Max'], resolution=ws_slider_settings['Rr_Step'], orient=HORIZONTAL)
+    scale_rreal.set(initial_ws['Rr'])
+    scale_areal = Scale(root, from_=ws_slider_settings['Ar_Min'],to=ws_slider_settings['Ar_Max'],resolution=ws_slider_settings['Ar_Step'],orient=HORIZONTAL)
+    scale_areal.set(initial_ws['Ar'])
+    scale_vimag = Scale(root, from_=ws_slider_settings['Wi_Min'],to=ws_slider_settings['Wi_Max'],resolution=ws_slider_settings['Wi_Step'],orient=HORIZONTAL)
+    scale_vimag.set(initial_ws['Wi'])
+    scale_rimag = Scale(root , from_=ws_slider_settings['Ri_Min'],to=ws_slider_settings['Ri_Max'],resolution=ws_slider_settings['Ri_Step'],orient=HORIZONTAL)
+    scale_rimag.set(initial_ws['Ri'])
+    scale_aimag = Scale(root, from_=ws_slider_settings['Ai_Min'],to=ws_slider_settings['Ai_Max'],resolution=ws_slider_settings['Ai_Step'],orient=HORIZONTAL)
+    scale_aimag.set(initial_ws['Ai'])
+else:
+    scale_vreal = Scale(root, from_=m3y_slider_settings['Vr_Min'], to=m3y_slider_settings['Vr_Max'], resolution=m3y_slider_settings['Vr_Step'], orient=HORIZONTAL)
+    scale_vreal.set(initial_m3y['Vr'])
+    scale_vimag = Scale(root, from_=m3y_slider_settings['Wi_Min'],to=m3y_slider_settings['Wi_Max'],resolution=m3y_slider_settings['Wi_Step'],orient=HORIZONTAL)
+    scale_vimag.set(initial_m3y['Wi'])
+    scale_rimag = Scale(root , from_=m3y_slider_settings['Ri_Min'],to=m3y_slider_settings['Ri_Max'],resolution=m3y_slider_settings['Ri_Step'],orient=HORIZONTAL)
+    scale_rimag.set(initial_m3y['Ri'])
+    scale_aimag = Scale(root, from_=m3y_slider_settings['Ai_Min'],to=m3y_slider_settings['Ai_Max'],resolution=m3y_slider_settings['Ai_Step'],orient=HORIZONTAL)
+    scale_aimag.set(initial_m3y['Ai'])
+    
+label_vreal.grid(sticky=W, column=0, row=FIRST_ROW+2,columnspan=1)
+if (is_ws):
+    label_rreal.grid(sticky=W, column=0, row=FIRST_ROW+3,columnspan=1)
+    label_areal.grid(sticky=W, column=0, row=FIRST_ROW+4,columnspan=1)
+label_vimag.grid(sticky=W, column=0, row=FIRST_ROW+5,columnspan=1)
+label_rimag.grid(sticky=W, column=0, row=FIRST_ROW+6,columnspan=1)
+label_aimag.grid(sticky=W, column=0, row=FIRST_ROW+7,columnspan=1)
+label_chi2.grid(sticky=W+E, column=7, row=FIRST_ROW+2,columnspan=1)
+button_dump_theory.grid(sticky=W+E, column=8, row=FIRST_ROW+3,rowspan=2,columnspan=4)
+button_read_data.grid(row=FIRST_ROW+4, column=8, sticky=W+E,rowspan=2,columnspan=4)
+button_multiplot.grid(sticky=W+E, column=8, row=FIRST_ROW+5,rowspan=2,columnspan=4)
+button_clear_multi.grid(row=FIRST_ROW+6, column=8, sticky=W+E,rowspan=2,columnspan=4)
+
+scale_vreal.grid(column=1,row=FIRST_ROW+2,sticky=N+S+W,columnspan=4)
+if (is_ws):
+    scale_rreal.grid(column=1,row=FIRST_ROW+3, sticky=N+S+W,columnspan=4)
+    scale_areal.grid(column=1,row=FIRST_ROW+4, sticky=N+S+W,columnspan=4)
+scale_vimag.grid(column=1,row=FIRST_ROW+5, sticky=N+S+W,columnspan=4)
+scale_rimag.grid(column=1,row=FIRST_ROW+6, sticky=N+S+W,columnspan=4)
+scale_aimag.grid(column=1,row=FIRST_ROW+7, sticky=N+S+W,columnspan=4)
+T = Text(root, height=18, width=65)
+T.grid(sticky=N+S+E+W, column=6,row=FIRST_ROW+2,rowspan=8)
+chiT = Text(root, height=1, width=8)
+chiT.grid(sticky=W+E, column=8,row=FIRST_ROW+2,rowspan=1,columnspan=4)
+
+ani = animation.FuncAnimation(xsec_fig, updateTheory, interval=1500)
+ani2 = animation.FuncAnimation(pot_fig, updateTheory, interval=1520)
+root.mainloop()

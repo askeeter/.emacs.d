@@ -357,10 +357,10 @@ consistent as it doesn't pad source blocks with leading spaces.
       org-src-tab-acts-natively t)
 #+end_src
 
-Want to use python3 instead of the default python2
-#+BEGIN_SRC emacs-lisp
-(setq org-babel-python-command "python3")
-#+END_SRC
+# Want to use python3 instead of the default python2
+# #+BEGIN_SRC emacs-lisp
+# (setq org-babel-python-command "python3")
+# #+END_SRC
 
 Want to use f95 instead of gfortran for fortran
 #+BEGIN_SRC emacs-lisp
@@ -627,7 +627,8 @@ it.
 (use-package flycheck
   :ensure t
   :defer 10
-  :config (setq flycheck-html-tidy-executable "tidy5"))
+  :config (setq flycheck-html-tidy-executable "tidy5")
+  (add-hook 'elpy-mode-hook 'flycheck-mode))
 #+end_src
 
 ** Macrostep
@@ -703,10 +704,73 @@ http://batsov.com/projectile/
 
 Integrates with IPython.
 
+# #+begin_src emacs-lisp
+# (use-package python-mode
+#   :defer t
+#   :ensure t)
+# #+end_src
+Have to make sure that flake8 and jedi are installed
+#+BEGIN_SRC sh :output none
+pip install --user flake8
+pip install --user jedi
+pip2 install --user flake8
+pip2 install --user jedi
+pip3 install --user flake8
+pip3 install --user jedi
+#+END_SRC
+
+#+RESULTS:
+| Collecting   | flake8                              |                                     |              |            |                |        |
+| Using        | cached                              | flake8-2.5.4-py2.py3-none-any.whl   |              |            |                |        |
+| Collecting   | mccabe<0.5,>=0.2.1                  | (from                               | flake8)      |            |                |        |
+| Using        | cached                              | mccabe-0.4.0-py2.py3-none-any.whl   |              |            |                |        |
+| Collecting   | pyflakes<1.1,>=0.8.1                | (from                               | flake8)      |            |                |        |
+| Using        | cached                              | pyflakes-1.0.0-py2.py3-none-any.whl |              |            |                |        |
+| Collecting   | pep8!=1.6.0,!=1.6.1,!=1.6.2,>=1.5.7 | (from                               | flake8)      |            |                |        |
+| Using        | cached                              | pep8-1.7.0-py2.py3-none-any.whl     |              |            |                |        |
+| Installing   | collected                           | packages:                           | mccabe,      | pyflakes,  | pep8,          | flake8 |
+| Successfully | installed                           | flake8-2.5.1                        | mccabe-0.4.0 | pep8-1.7.0 | pyflakes-1.0.0 |        |
+| Collecting   | jedi                                |                                     |              |            |                |        |
+| Using        | cached                              | jedi-0.9.0-py2.py3-none-any.whl     |              |            |                |        |
+| Installing   | collected                           | packages:                           | jedi         |            |                |        |
+| Successfully | installed                           | jedi-0.9.0                          |              |            |                |        |
+| Collecting   | flake8                              |                                     |              |            |                |        |
+| Using        | cached                              | flake8-2.5.4-py2.py3-none-any.whl   |              |            |                |        |
+| Collecting   | mccabe<0.5,>=0.2.1                  | (from                               | flake8)      |            |                |        |
+| Using        | cached                              | mccabe-0.4.0-py2.py3-none-any.whl   |              |            |                |        |
+| Collecting   | pep8!=1.6.0,!=1.6.1,!=1.6.2,>=1.5.7 | (from                               | flake8)      |            |                |        |
+| Using        | cached                              | pep8-1.7.0-py2.py3-none-any.whl     |              |            |                |        |
+| Collecting   | pyflakes<1.1,>=0.8.1                | (from                               | flake8)      |            |                |        |
+| Using        | cached                              | pyflakes-1.0.0-py2.py3-none-any.whl |              |            |                |        |
+| Installing   | collected                           | packages:                           | mccabe,      | pep8,      | pyflakes,      | flake8 |
+| Successfully | installed                           | flake8-2.5.1                        | mccabe-0.4.0 | pep8-1.7.0 | pyflakes-1.0.0 |        |
+| Collecting   | jedi                                |                                     |              |            |                |        |
+| Using        | cached                              | jedi-0.9.0-py2.py3-none-any.whl     |              |            |                |        |
+| Installing   | collected                           | packages:                           | jedi         |            |                |        |
+| Successfully | installed                           | jedi-0.9.0                          |              |            |                |        |
+| Collecting   | flake8                              |                                     |              |            |                |        |
+| Using        | cached                              | flake8-2.5.4-py2.py3-none-any.whl   |              |            |                |        |
+| Collecting   | pep8!=1.6.0,!=1.6.1,!=1.6.2,>=1.5.7 | (from                               | flake8)      |            |                |        |
+| Using        | cached                              | pep8-1.7.0-py2.py3-none-any.whl     |              |            |                |        |
+| Collecting   | pyflakes<1.1,>=0.8.1                | (from                               | flake8)      |            |                |        |
+| Using        | cached                              | pyflakes-1.0.0-py2.py3-none-any.whl |              |            |                |        |
+| Collecting   | mccabe<0.5,>=0.2.1                  | (from                               | flake8)      |            |                |        |
+| Using        | cached                              | mccabe-0.4.0-py2.py3-none-any.whl   |              |            |                |        |
+| Installing   | collected                           | packages:                           | pep8,        | pyflakes,  | mccabe,        | flake8 |
+| Successfully | installed                           | flake8-2.5.4                        | mccabe-0.4.0 | pep8-1.7.0 | pyflakes-1.0.0 |        |
+| Collecting   | jedi                                |                                     |              |            |                |        |
+| Using        | cached                              | jedi-0.9.0-py2.py3-none-any.whl     |              |            |                |        |
+| Installing   | collected                           | packages:                           | jedi         |            |                |        |
+| Successfully | installed                           | jedi-0.9.0                          |              |            |                |        |
+
+Want to use elpy mode
 #+begin_src emacs-lisp
-(use-package python-mode
-  :defer t
-  :ensure t)
+(use-package elpy
+  :ensure t
+  :commands
+  package-initialize
+  elpy-enable
+  )
 #+end_src
 
 ** Smartparens mode

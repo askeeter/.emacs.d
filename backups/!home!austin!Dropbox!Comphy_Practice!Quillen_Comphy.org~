@@ -1,3 +1,6 @@
+The problems below are from Alice Quillen's computational physics course:
+http://astro.pas.rochester.edu/~aquillen/phy256/problems.html
+
 In order to keep my coding chops up to par, I will write three versions of each of these assignments. A Python, C++, and Fortran version. 
 
 These org-mode cookbooks should prove useful as well:
@@ -92,14 +95,16 @@ seq_file_create('test5','txt',934,5)
 : test5_00934.txt
 
 *** C++
-#+BEGIN_SRC C++
+#+BEGIN_SRC C++  :results output replace :type verbatim
 #include <stdio.h>
+#include <stdlib.h>
 #include <string>
 #include <cstdlib>
 #include <string.h>
-#include <sstream>
 
 using namespace std;
+
+string seq_file_create(const string &f_prefix, const string &f_suffix, const int &f_index, const int &f_max_digits);
 
 int main(void){
   /*
@@ -111,25 +116,6 @@ int main(void){
     outputs:
        A string combining the three        
    ,*/
-  string seq_file_create(const string &f_prefix, const string &f_suffix, const int &f_index, const int &f_max_digits){
-    string init_str = f_prefix;
-    // convert the input integer into a string
-    char ind_str[f_max_digits];
-    itoa(f_index,ind_str,10);
-    // Count the number of digits in the index
-    // Add preceding zeros to fill in the difference
-    int num_digits = (int)strlen(ind_str);
-    int num_zeros = f_max_digits - num_digits;
-    // Add this many zeros to the index
-    char padded_ind_str[f_max_digits];
-    stringstream format_string;
-    format_string << "%0" << f_max_digits << "d";
-    snprintf(padded_ind_str,sizeof(padde_ind_str),format_string.str().c_str(),ind_str);
-    stringstream final_string;
-    final_string << f_prefix << "_" << padded_ind_str << "." << f_suffix;
-    printf(final_string.str().c_str());
-    return final_string.str();
-  }
 
   // Two test cases
   string test_1 = seq_file_create("test10","txt",101101,10);
@@ -137,7 +123,693 @@ int main(void){
 
   return 0;
 }
+
+  string seq_file_create(const string &f_prefix, const string &f_suffix, const int &f_index, const int &f_max_digits){
+    char output_num[f_max_digits+1];
+    char format_str[10];
+    snprintf(format_str,sizeof(format_str),"%%0%dd",f_max_digits);
+    snprintf(output_num,f_max_digits+1,format_str,f_index);
+    string output = f_prefix + string("_") + string(output_num) + string(".") + f_suffix;
+    printf("%s\n",output.c_str());
+    return output;
+  }
 #+END_SRC
 
 #+RESULTS:
+: test10_0000101101.txt
+: test5_00934.txt
+
+
+*** C++
+#+BEGIN_SRC fortran :results output replace :type verbatim
+program index_file
+
+implicit none 
+
+character(len=100) :: test,test2
+test = seq_file_create("test1","txt",1095,9)
+test2 = seq_file_create("test2","csv",1011,18)
+
+contains
+      character function seq_file_create( f_prefix, f_suffix, f_index, f_max_digits )
+      implicit none
+      integer                            :: f_index
+      integer                            :: f_max_digits
+      character(len=f_max_digits) :: total_format_str*20, formatted_num, format_str*20
+      character(len=*) :: f_prefix, f_suffix, output_num*(f_max_digits+64)
+
+      total_format_str = "(A,"
+      write(format_str,"(A,I0,A,I0,A)") "(I",f_max_digits,".",f_max_digits,")"
+      write(formatted_num,format_str) f_index 
+      output_num = f_prefix // "_" // formatted_num // "." // f_suffix
+      seq_file_create = output_num
+      print *, output_num
+      end function seq_file_create
+
+end program index_file
+#+END_SRC
+
+#+RESULTS:
+: test1_000001095.txt                                                      
+: test2_000000000000001011.csv
+
+** Problem 4
+Write a subroutine that computes f(x)=μx2(1−x2) in the unit interval
+[0,1]. Make a plot showing f(x) and f^2(x)=f(f(x)) and y=x. For what
+values of parameter μ does f^2(x) have two maxima rather than 1? Where
+f(x) crosses the line y=x you have a fixed point. Where f^2(x) crosses
+y=x you have a period 2 fixed point.
+
+This function is similar to the logistic function. When f^2(x) has two
+maxima a period doubling occurs. This means that there are attracting
+period two fixed points. For μ below this value there is only a single
+attracting fixed point. The function here has similar behavior to the
+logistic function. There is a universality in behavior, with interates
+of both functions showing period doubling leading to chaos and
+appearance of period 3 islands after the onset of chaos.
+
+*** Python
+#+BEGIN_SRC python :results file
+import numpy as np
+from matplotlib import pyplot as plt
+
+def func(mu,x):
+    return mu*(x**2)*(1.0-x**2)
+
+# Get x values between 0 and 1 inclusive
+mu = 3.3
+x = np.linspace(0,1,201)
+y_base = [func(mu,x_i) for x_i in x]
+y_sq = [func(mu,y) for y in y_base]
+
+plt.plot(x,y_base,'k-',label="$f(x)$")
+plt.plot(x,y_sq,'b-',label="$f^{2}(x)$")
+plt.legend(loc='best')
+plt.xlabel('x')
+plt.ylabel('$f(x), f^{2}(x)$')
+plt.savefig("Images/ps1_4_python.png")
+return 'Images/ps1_4_python.png'
+#+END_SRC
+
+#+RESULTS:
+[[file:Images/ps1_4.png]]
+
+
+*** C++ 
+#+NAME: func-outputs
+#+BEGIN_SRC C++ :results value table silent
+# include <stdio.h>
+# include <cmath>
+using namespace std;
+
+float func( const float &mu, const float &x ){
+  return mu*pow(x,2)*(1.0-pow(x,2));
+}
+
+int main(void){
+  // Generate x-values in desired range
+  const int N = 400;
+  const float MAX = 1.0;
+  const float MIN = 0.0;
+  const float MU = 3.3;
+
+  float x[N];
+  float y_base[N];
+  float y_sq[N];
+  
+  float step = (MAX - MIN) / N;
+  int j=0;
+  for(float i=MIN; i<MAX; i+=step, j+=1){
+    x[j] = i;
+    y_base[j] = func(MU,i);
+    y_sq[j] = func(MU,y_base[j]);
+    printf("%10.9f\t%10.9f\t%10.9f\n",x[j],y_base[j],y_sq[j]);
+  }
+  
+  return 0;
+}
+
+#+END_SRC
+
+
+#+BEGIN_SRC python :var values=func-outputs :results file
+import matplotlib.pyplot as plt
+import numpy as np
+
+x,y_base,y_sq = zip(*values)
+
+plt.plot(x,y_base,'k-',label='$f(x)$')
+plt.plot(x,y_sq,'b-',label='$f^{2}(x)$')
+plt.legend(loc='best')
+plt.xlabel('x')
+plt.ylabel('$f(x), f^{2}(x)$')
+plt.savefig("Images/ps1_4_cpp.png")
+return 'Images/ps1_4_cpp.png'
+#+END_SRC
+
+#+RESULTS:
+[[file:Images/ps1_4_cpp.png]]
+
+
+*** Fortran
+#+NAME: func-outputs-2
+#+BEGIN_SRC fortran :results output table silent
+program func_practice
+integer, parameter     :: N = 400
+real, parameter        :: MIN = 0.0, MAX = 1.0, MU = 3.3
+real, dimension(0:N-1) :: x, y_base, y_sq ! To get c-style counting
+real                   :: step = (MAX - MIN) / real(N)
+integer                :: i=0
+real                   :: j=0
+
+do i=0, N-1
+      x(i) = MIN + i * step
+      y_base(i) = func(MU,x(i))
+      y_sq(i) = func(MU,y_base(i))
+      print "(3f10.5)", x(i),y_base(i),y_sq(i)
+end do
+
+contains
+      real function func(amu,ax)
+      func = amu*ax**2*(1.0-ax**2)
+      end function func
+end program func_practice
+#+END_SRC
+
+#+RESULTS: func-outputs-2
+
+#+BEGIN_SRC python :var values=func-outputs-2 :results file
+import matplotlib.pyplot as plt
+import numpy as np
+
+x,y_base,y_sq = zip(*values)
+
+plt.plot(x,y_base,'k-',label='$f(x)$')
+plt.plot(x,y_sq,'b-',label='$f^{2}(x)$')
+plt.legend(loc='best')
+plt.xlabel('x')
+plt.ylabel('$f(x), f^{2}(x)$')
+plt.savefig("Images/ps1_4_f95.png")
+return 'Images/ps1_4_f95.png'
+#+END_SRC
+
+#+RESULTS:
+[[file:Images/ps1_4_f95.png]]
+
+** Problem 5
+   Passing functions to functions. Write a routine that returns
+   f(g(x)) that takes as arguments f,g, that are both functions
+   f(x),g(x). Then use it to plot something like sin(10x^2exp(−x)).
+   
+*** Python
+    #+BEGIN_SRC python :results file
+import matplotlib.pyplot as plt
+import numpy as np
+
+def composite_func( x, outter_func, inner_func ):
+    return outter_func(inner_func(x))
+
+def func(x):
+    return 10*x**2*np.exp(-x)
+
+x_vals = np.linspace(0,10,600)
+y_vals = composite_func( x_vals, np.sin, func )
+
+plt.plot(x_vals,y_vals,'k-')
+plt.xlabel('x')
+plt.ylabel('$\\sin(10x^{2}\\exp(-x))$')
+plt.savefig("Images/ps1_5_py.png")
+return 'Images/ps1_5_py.png'
+    #+END_SRC
+
+    #+RESULTS:
+    [[file:Images/ps1_5_py.png]]
+
+*** C++
+#+NAME: ps_1_5_cpp_out
+#+BEGIN_SRC C++ :results output table silent
+#include <stdio.h>
+#include <cmath>
+
+using namespace std;
+
+// Function that returns compsite of two
+double fg( double x, double (*f)(double), double (*g)(double) ){
+  return f(g(x));
+}
+
+double func( double x ){
+  return 10*pow(x,2)*exp(-x);
+}
+
+int main(void){
+  const int N = 400; // Number of points to use
+  const double MIN = 0.0;
+  const double MAX = 10.0;
+  double step = (MAX-MIN)/double(N);
+  double x[N],y[N];
+  for( int i = 0; i < N; i++ ){
+    x[i] = MIN + (i * step);
+    y[i] = fg( x[i], sin, func );
+    printf("%10.5f\t%10.5f\n",x[i],y[i]);
+    }
+  return 0;
+}
+#+END_SRC
+
+#+BEGIN_SRC python :var values=ps_1_5_cpp_out :results file
+import matplotlib.pyplot as plt
+import numpy as np
+
+x,y = zip(*values)
+
+plt.plot(x,y,'k-',label='$f(x)$')
+plt.xlabel('x')
+plt.ylabel('$\\sin(10x^{2}\\exp(-x))$')
+plt.savefig("Images/ps1_5_cpp.png")
+return 'Images/ps1_5_cpp.png'
+#+END_SRC
+
+#+RESULTS:
+[[file:Images/ps1_5_cpp.png]]
+
+*** Fortran
+#+NAME: ps_1_5_f95_out
+#+BEGIN_SRC fortran :results output silent table
+program composite_func
+implicit none
+
+real, parameter          :: MIN=0.0, MAX=10.0, N=400.0
+integer, parameter       :: N_I = 400
+real                     :: step = (MAX-MIN)/N
+integer                  :: i
+real, dimension(0:N_I-1) :: x, y
+intrinsic                :: sin
+
+do i=0, N_I-1
+      x(i) = MIN + step*i
+      y(i) = composite(x(i),sin,func)
+      print "(2f10.5)",x(i),y(i)
+end do
+
+contains
+      real function composite( x, f, g )
+      real :: x,f,g
+      composite = f(g(x))
+      end function composite
+      
+      real function func(x)
+      real :: x
+      func = 10*x**2*exp(-x)
+      end function func
+
+end program composite_func
+#+END_SRC
+
+#+BEGIN_SRC python :var values=ps_1_5_f95_out :results file
+import matplotlib.pyplot as plt
+import numpy as np
+
+x,y = zip(*values)
+
+plt.plot(x,y,'k-',label='$f(x)$')
+plt.xlabel('x')
+plt.ylabel('$\\sin(10x^{2}\\exp(-x))$')
+plt.savefig("Images/ps1_5_f95.png")
+return 'Images/ps1_5_f95.png'
+#+END_SRC
+
+#+RESULTS:
+[[file:Images/ps1_5_f95.png]]
+
+* Problem Set 2
+** Problem 1
+   For the function f(x)=μx2(1−x2), as a function of μ (on the x axis) plot as points fj(x0),fj+1(x0),.....fj+n(x0) for j=50,n=50 and for initial condition x0=0.5. In other words for each value of μ:
+
+plot 50 points, but after discarding the first 50 iterates. After you get a decent plot you can increase the number of iterates and make the plot look prettier!
+
+Here we are applying the function over and over again. There are three different types of orbits.
+
+1) The value settles down to a fixed number and stays there. This is
+   called a fixed point. For instance, x=0 is a fixed point where
+   f(x)=x.
+2) The value doesn’t converge to a single value, but it moves into a
+   periodic pattern, rotating around a set of values, such as four
+   values, repeating them in sequence over and over. This is a
+   periodic orbit. 
+3) It goes crazy. It generates a seemingly random
+   sequence of numbers. This is deterministic chaos. “Chaos” because
+   it really does look chaotic, and “deterministic” because even
+   though the values look random, they’re not. They’re predictable,
+   because they are given to you by one equation.
+
+Some isues with the code: I found I had to cut the function off for μ>3.8.
+(send it to zero if its absolute value is too large). I found that if I plotted each point separately the routine took much longer than if I appended points to an array and plotted arrays. 
+What values of μ show the period doubling? 
+What value of μ do you see period 3 attracting periodic orbits?
+
+*** Python
+    #+NAME: ps_2_1_py
+    #+BEGIN_SRC python results: file
+import matplotlib.pyplot as plt
+import numpy as np
+
+def logistic(x,mu):
+    res = mu*(x**2)*(1.0-(x**2))
+    return res
+
+MIN_MU = 3.1
+MAX_MU = 3.8
+N_MU = 800# num mu points to consider
+MU = np.linspace(MIN_MU,MAX_MU,N_MU)
+X0 = 0.5
+N = 800 # number of iterations to consider at each mu. Will only plot this # - MIN_LEVEL
+MIN_LEVEL = 50
+# erasing at each mu, so only want to index the function level and data array
+
+# Set up the figure
+fig = plt.figure(figsize=(10,10))
+ax1 = fig.add_subplot(111)
+
+mu=[]
+data=[]
+# Loop through each MU
+for i in range(0,N_MU):
+    mu = []
+    data = []
+    data.append(logistic(X0,MU[i]))
+    mu.append(MU[i])
+    for j in range(0,N+MIN_LEVEL): # Loop the iterations
+        mu.append(MU[i])
+        data.append(logistic(data[j],MU[i]))
+    ax1.scatter(mu[MIN_LEVEL-1:],data[MIN_LEVEL-1:],c='b', s=0.5, alpha=0.5)
+ax1.set_xlim(MIN_MU,MAX_MU)
+plt.savefig("Images/ps2_1_py.png",dpi=500)
+return 'Images/ps2_1_py.png'
+    #+END_SRC
+
+    #+RESULTS: ps_2_1_py
+    : Images/test.png
+
+*** C++
+Had to output an actual file for this as the stdout overloaded the org-mode buffer
+#+NAME: ps_2_1_cpp_out
+#+BEGIN_SRC C++ :results none
+#include <math.h>
+#include <stdio.h>
+
+using namespace std;
+
+float func(const float &mu, const float &x){
+  double res = mu * pow(x,2) * (1.0 - pow(x,2)) ;
+  // if (fabs(res) > 10.0) res = 0;
+  return res;
+}
+
+int main(void){
+  const float X0 = 0.5;
+  const float MIN_MU = 3.1;
+  const float MAX_MU = 3.8;
+  const int   N = 800; // Number of iterations per mu. Will be plotting this minus 50 many
+  const int   N_MU = 800; // Total number of mu (x) values to go through
+  const int   MIN_LVL = 50; // First iteration that we want to begin plotting
+  double      STEP = ( double(MAX_MU) - double(MIN_MU) ) / double(N_MU);
+  double      mu = 0;
+  double     *data = new double[N+MIN_LVL]; // This will contain all of the iterations for each mu. 
+  FILE       *out_file = fopen("ps_2_1_cpp.txt", "w");
+
+  for( int i = 0; i < N_MU; i++ ){ // Loop the number of mus
+    mu = MIN_MU + i * STEP;
+    for( int i = 0; i < N+MIN_LVL; i++ ) data[i] = 0; // clear the data each time
+    data[0] = func(mu,X0);
+    for( int j = 1; j < N+MIN_LVL; j++ ){ // Loop the iterations
+      data[j] = func(mu,data[j-1]);
+      if (j>=MIN_LVL) fprintf(out_file,"%d\t%20.10f\t%20.10f\n",j,mu,data[j]);
+    }
+  }
+  delete [] data;
+  fclose(out_file);
+  return 0;
+}
+#+END_SRC
+
+#+RESULTS: ps_2_1_cpp_out
+
+
+#+BEGIN_SRC python :results file
+import matplotlib.pyplot as plt
+import numpy as np
+
+# x,y = zip(*values)
+discard,x,y = np.loadtxt("ps_2_1_cpp.txt",unpack=True,delimiter='\t')
+
+fig = plt.figure(figsize=(10,10))
+ax1 = fig.add_subplot(111)
+
+ax1.scatter(x,y,c='b', s=0.5, alpha=0.5)
+ax1.set_xlim(3.1,3.8)
+plt.xlabel('x')
+plt.savefig("Images/ps2_1_cpp.png")
+return 'Images/ps2_1_cpp.png'
+#+END_SRC
+
+#+RESULTS:
+[[file:Images/ps2_1_cpp.png]]
+
+ for( int i = 0; i < N_MU; i++ ){ // Loop the number of mus
+    mu = MIN_MU + i * STEP;
+    for( int k = 0; k < N+MIN_LVL; k++ ) data[k] = 0; // clear the data each time
+    data[0] = func(mu,X0);
+    for( int j = 1; j < N+MIN_LVL; j++ ){ // Loop the iterations
+      data[j] = func(mu,data[j-1]);
+      if (j>=MIN_LVL) fprintf(out_file,"%d\t%20.10f\t%20.10f\n",j,mu,data[j]);
+    }
+  }
+  delete [] data;
+  fclose(out_file);
+*** Fortran
+#+BEGIN_SRC fortran :results none
+program bifurcation
+implicit none
+
+integer, parameter       :: dp = selected_real_kind(15, 307) !double precision !with 15 sig. digits and 307 exponent places
+integer, parameter       :: N=800, N_MU=800, MIN_LVL=50
+real(kind=dp), parameter :: X0=0.5, MIN_MU=3.1, MAX_MU=3.8, STEP = (MAX_MU-MIN_MU)/N_MU
+real(kind=dp), dimension(0:N+MIN_LVL) :: data !will contain each iteration. Starts at 0
+real(kind=dp)            :: it_mu=0.0
+integer                  :: i,j,k
+open(unit=1,file="ps_2_1_f95.txt")
+
+do i=0,N_MU
+      it_mu = MIN_MU + i * STEP
+      data(0) = func(X0,it_mu)
+      do k=1,N+MIN_LVL
+         data(k)=0.0 ! zero the data
+      end do
+      do j=1,N+MIN_LVL
+         data(j) = func(data(j-1),it_mu)
+         if (j>=MIN_LVL) write (1,"(i0,TR4,2f15.10)") j,it_mu,data(j)
+      end do
+end do
+close(1)
+
+contains
+      real(kind=dp) function func( x, mu )
+      implicit none
+      real(kind=dp), intent(in) :: x, mu
+      real(kind=dp)             :: res
+      res = mu * x**2 * (1.0 - x**2)
+      if (res > 10.0) then
+         func = 0.0
+      else 
+         func = res
+      end if
+      end function func
+end program bifurcation
+#+END_SRC
+
+#+BEGIN_SRC python :results file
+import matplotlib.pyplot as plt
+import numpy as np
+
+# x,y = zip(*values)
+discard,x,y = np.loadtxt("ps_2_1_f95.txt",unpack=True)
+
+fig = plt.figure(figsize=(10,10))
+ax1 = fig.add_subplot(111)
+
+ax1.scatter(x,y,c='b', s=0.5, alpha=0.5)
+ax1.set_xlim(3.1,3.8)
+plt.xlabel('x')
+plt.savefig("Images/ps2_1_f95.png")
+return 'Images/ps2_1_f95.png'
+#+END_SRC
+
+#+RESULTS:
+[[file:Images/ps2_1_f95.png]]
+
+** Problem 2
+Consider these two series $S^{up}=\sum_{n=1}^N\frac{1}{n}\qquad S^{down}=\sum_{n=N}^1\frac{1}{n}$
+As long as N is finite, the sums are finite and both summations
+analytically give the same answer. However, because of round-off
+error, the order that the sum is computed affects the precision of the
+numerically computed sum.
+
+a. Write subroutines to calculate Sup and Sdown as a function of N.
+
+b. Make a log-log plot of
+$\left|\frac{S^{up}-S^{down}}{S^{up}+S^{down}}\right|$
+In other words plot
+$\log\left|\frac{S^{up}-S^{down}}{S^{up}+S^{down}}\right|$ versus $\log{N}$
+You need maximum N to be of order 10,000, but check first that you get a plot with N being something smaller.
+I actually had to do just a log log plot because i was getting some zeros.
+c. Explain why $S^{down}$ is generally more precise.
+Answer: During each step of summation, the ratio between the sum and the next term in the down sum is smaller than going the other way. Thus, the relative error each time is smaller.
+
+Note: if i is an integer 1.0/i is a float whereas 1/i is an integer.
+
+*** Python
+#+BEGIN_SRC python :results file
+import matplotlib.pyplot as plt
+import numpy as np
+
+def sum_up_down(N):
+    n_up = [n for n in range(1,N+1)]
+    sum_up = 0
+    sum_down = 0
+    for n in n_up:
+        sum_up += 1.0/float(n)
+    for n in reversed(n_up):
+        sum_down += 1.0/float(n)
+    return sum_up,sum_down # now the indexes are the same
+
+def error(up,down):
+    diff = up - down
+    sm = up + down
+    return np.log10(np.fabs(diff / sm))
+
+N = 10000
+up,down = sum_up_down(N)
+x = [n for n in range(1,N+1)]
+err = [error(*sum_up_down(n)) for n in x]
+fig = plt.figure(figsize=(10,10))
+ax1 = fig.add_subplot(111)
+ax1.plot(np.log10(x),err)
+plt.savefig('ps_2_2_py.png')
+return 'ps_2_2_py.png'
+# Should make more efficient by storing the sum at each n rather
+# than recalculating each time. Will do that in the C++/FORTRAN versions
+#+END_SRC
+
+#+RESULTS:
+[[file:ps_2_2_py.png]]
+
+*** C++
+#+NAME: ps_2_2_cpp
+#+BEGIN_SRC C++ :results none
+#include <math.h>
+#include <stdio.h>
+
+using namespace std;
+
+void Sum( const int &N, float &up_sum, float &down_sum) {
+  up_sum = down_sum = 0.0;  
+  // up sum
+  for( int up = 1; up <=N; up++ )     up_sum += 1.0/float(up);
+  // down sum
+  for( int down = N; down >=1; down-- ) down_sum += 1.0/float(down);
+}
+
+int main(void){
+  const int N = 10000;
+  float    down_sum, up_sum = 0.0;
+  FILE     *out_file = fopen("ps_2_2_cpp.txt", "w");
+  float rel_error = 0.0;
+  for( int i=1; i<N+1; i++ ){
+    Sum(i,up_sum,down_sum);
+    rel_error = fabs((up_sum-down_sum)/(up_sum+down_sum));
+    fprintf(out_file,"%d\t%3.30f\n",i,rel_error);
+  }  
+  return 0;
+}
+#+END_SRC
+
+#+BEGIN_SRC python :results file
+import matplotlib.pyplot as plt
+import numpy as np
+
+x,y = np.loadtxt("ps_2_2_cpp.txt",unpack=True)
+fig = plt.figure(figsize=(10,10))
+ax1 = fig.add_subplot(111)
+ax1.plot(x,y)
+ax1.set_yscale('log')
+ax1.set_xscale('log')
+plt.savefig('ps_2_2_cpp.png')
+return 'ps_2_2_cpp.png'
+#+END_SRC
+
+#+RESULTS:
+[[file:ps_2_2_cpp.png]]
+
+*** Fortran
+#+NAME:ps_2_2_f95
+#+BEGIN_SRC fortran :results output 
+!double precision with 15 sig. digits and 307 exponent places
+program summer
+implicit none
+integer, parameter :: N=50000
+real               :: down_sum=0.0,up_sum=0.0,rel_error=0.0
+integer            :: i=1
+open(unit=1,file="ps_2_2_f95.txt")
+down_sum=0.0
+up_sum=0.0
+do i=1, N
+      call Sum(i,up_sum,down_sum)
+      rel_error = abs((up_sum-down_sum)/(up_sum+down_sum))
+      write(1,"(I0,TR4,F30.27)") i,rel_error
+end do
+
+close(1)
+
+contains
+      subroutine Sum(N,up_sum,down_sum)
+      implicit none
+      integer, intent(in)  :: N
+      real                 :: up_sum,down_sum
+      integer              :: up_n, down_n
+      
+      ! up sum
+      up_sum = 0.0
+      do up_n=1, N
+         up_sum   = up_sum + (1.0/real(up_n))
+      end do
+      ! down sum
+      down_sum = 0.0
+      do down_n=N, 1, -1
+         down_sum = down_sum + (1.0/real(down_n))
+      end do
+      end subroutine Sum
+end program summer
+#+END_SRC
+
+#+RESULTS: ps_2_2_f95
+
+#+BEGIN_SRC python :results file
+import matplotlib.pyplot as plt
+import numpy as np
+
+x,y = np.loadtxt("ps_2_2_f95.txt",unpack=True)
+fig = plt.figure(figsize=(10,10))
+ax1 = fig.add_subplot(111)
+ax1.plot(x,y)
+ax1.set_yscale('log')
+ax1.set_xscale('log')
+plt.savefig('ps_2_2_f95.png')
+return 'ps_2_2_f95.png'
+#+END_SRC
+
+#+RESULTS:
+[[file:ps_2_2_f95.png]]
+
+
 
